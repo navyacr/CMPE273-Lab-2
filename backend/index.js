@@ -42,7 +42,6 @@ app.use("/", restaurantsRouter);
 module.exports = app;
 app.listen(3001);
 console.log("Server Listening on port 3001");
-app.get("/", (req, res) => res.send("Hello World !"));
 
 const db = require("./models");
 // TODO: Remove force: true and change to sync() in production
