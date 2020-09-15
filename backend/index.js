@@ -36,7 +36,10 @@ app.use(function(req, res, next) {
 
 // Router variables 
 var restaurantsRouter = require("./routes/restaurants");
-app.use("/", restaurantsRouter);
+app.use("/restaurants", restaurantsRouter);
+
+var customersRouter = require("./routes/customers");
+app.use("/customers", customersRouter);
 
 //start your server on port 3001
 module.exports = app;
