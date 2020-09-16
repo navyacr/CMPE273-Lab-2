@@ -21,5 +21,8 @@ db.sequelize = sequelize;
 
 db.restaurants = require("./restaurants.model.js")(sequelize, Sequelize);
 db.customers = require("./customers.model.js")(sequelize, Sequelize);
+db.dishes = require("./dishes.model.js")(sequelize, Sequelize);
+
+db.dishes.belongsTo(db.restaurants);
 
 module.exports = db;
