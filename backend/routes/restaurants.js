@@ -3,6 +3,7 @@ const app = express.Router();
 
 const restaurants = require("../controllers/restaurants.controller.js");
 const dishes = require("../controllers/dishes.controller.js");
+const reviews = require("../controllers/reviews.controller.js");
 
 app.get("/", (req, res) => res.send("Hello World !"));
 
@@ -14,18 +15,14 @@ app.get('/info', restaurants.findAll)
 //Route to get restaurants by name
 app.get('/info/:name', restaurants.findByName)
 
-app.post('/create', function(req, res){
-    console.log("Inside createBook")
-    console.log(req.body)
-    books.push(req.body)
-    console.log(books)
-    res.redirect('/home');
-    res.end(JSON.stringify({ success: "book id: "+ req.bosy.BookID+" added successfully!!!", error: "" }));
-
-})
-
+//Route to get menu in a selected restaurant
 app.get('/:restaurantName/dishes', dishes.findAll)
+
+app.post('/:restaurantName/dishes', dishes.create)
 // app.get('/:restaurantName/dishes/:dishName', dishes.findByName)
+
+// Get reviews of the restaurant
+// app.get('/:restaurantId/reviews', reviews.findAll)
 
 
 module.exports = app;
