@@ -14,7 +14,7 @@
   background: #ffffff none repeat scroll 0 0;
   border-radius: 2px;
   margin: 10px auto 30px;
-  max-width: 38%;
+  max-width: 80%;
   padding: 50px 70px 70px 71px;
   border: 2px solid black;
 }
@@ -48,3 +48,13 @@
 }
 .back { text-align: left; margin-top:10px;}
 .back a {color: #444444; font-size: 13px;text-decoration: none;}
+
+.customer-form {
+  float:left;
+  width:50%;
+}
+
+.restaurant-form {
+  float: right;;
+  width:50%;
+}
