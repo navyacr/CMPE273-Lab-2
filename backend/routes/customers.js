@@ -8,6 +8,8 @@ const reviews = require("../controllers/reviews.controller.js");
 //Route to handle Post Request Call
 app.post('/info', customers.create)
 
+app.post('/validate', customers.validate)
+
 
 //Route to get orders of a customer
 app.get('/:customerId/orders', orders.findAll)

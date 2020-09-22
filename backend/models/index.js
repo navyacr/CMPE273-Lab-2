@@ -36,7 +36,4 @@ db.reviews.belongsTo(db.restaurants);
 db.eventAttendees.belongsTo(db.events);
 db.eventAttendees.belongsTo(db.customers);
 
-
-
-
 module.exports = db;

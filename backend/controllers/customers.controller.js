@@ -31,3 +31,29 @@ exports.create = (req, res) => {
         });
       });
   };
+
+exports.validate = (req, res) => {
+    const username = req.body.username;
+    const pwd = req.body.password;
+    var condition = username ? { email: { [Op.eq]: `${username}` } } : null;
+  
+    customers.findAll({ where: condition })
+      .then(data => {
+        res.send(data);
+        if (data[0].dataValues.password === pwd){
+          res.status(200).send()
+        }
+        else{
+          res.status(401).send({
+            message:
+              err.message || "Invalid credentials"
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while logging in."
+        });
+      });
+  };
