@@ -1,9 +1,28 @@
 import React, {Component} from 'react';
 import '../../App.css';
-import axios from 'axios';
 // import cookie from 'react-cookies';
 import {Redirect} from 'react-router';
 import { Link } from 'react-router-dom';
+import RestaurantsLogin from './restaurantsLogin';
+// import customersLogin from './customersLogin';
+import axios from 'axios';
+
+// class Login extends Component {
+//   render() {
+//     return (            
+//             <div class="login-comp" >
+//                 {/* < customersLogin /> */}
+//                 < RestaurantsLogin />
+                
+//             </div>
+//     );
+//   }
+
+// }
+
+// export default Login;
+
+
 
 //Define a Login Component
 class Login extends Component{
@@ -85,6 +104,7 @@ class Login extends Component{
             <div class="container">
                 <div class="customer-form">
 
+
                     <div class="main-div">
                         <div class="panel">
                             <h2>Customer Login</h2>
@@ -100,50 +120,20 @@ class Login extends Component{
                             </div>
                             <button type="submit" class="btn btn-primary">Login</button>                 
                             <div class="signup-section">
-                                <br/>
                                 
                                 <div>
-                                    <p>New customer?
+                                    <p>Don't have an account?
                                     <Link to='/CustomersSignup'>   Signup here</Link>
                                     </p>
-                                    </div><br />
+                                    </div>
                                 </div>
                         </form>
 
                     </div>
                     
                 </div>
-                <div class="restaurant-form">
-                    <div class="main-div">
-                        <div class="panel">
-                            <h2>Restaurant Login</h2>
-                            <p>Please enter your username and password</p>
-                            {/* <h4><font color='red'>{this.state.err}</font></h4> */}
-                        </div>
-                        <form onSubmit={this.submitLogin}>  
-                        
-                        <div class="form-group">
-                            <input onChange = {this.usernameChangeHandler} type="text" class="form-control" name="username" placeholder="Username" required={required}/>
-                        </div>
-                        <div class="form-group">
-                            <input onChange = {this.passwordChangeHandler} type="password" class="form-control" name="password" placeholder="Password" required={required}/>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Login</button>                 
-                        
-                        <div class="signup-section">
-                            <br/>
-                            <div>
-                                <p>New Restaurant?
-                                <Link to='/restaurantsSignup'>   Signup here</Link>
-                                </p>
-                            </div><br />
-                          
-                        </div>
-                        </form>
-                    </div>
-                    
-                </div>
-
+                
+                <div class="restaurant-form"> <RestaurantsLogin /></div>
             </div>
             </div>
         )

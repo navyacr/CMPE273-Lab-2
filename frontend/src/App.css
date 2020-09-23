@@ -55,6 +55,11 @@
 }
 
 .restaurant-form {
-  float: right;;
+  float: right;
   width:50%;
+}
+
+
+.login-comp{
+  display:flex; flex-direction:row;
 }
