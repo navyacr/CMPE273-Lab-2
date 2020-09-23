@@ -19,6 +19,6 @@ console.log("Server Listening on port 3001");
 const db = require("./models");
 // TODO: Remove force: true and change to sync() in production
 // force: true drops table and resyncs db 
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
     console.log("Drop and re-sync db.");
 });

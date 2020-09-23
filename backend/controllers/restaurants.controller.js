@@ -23,7 +23,9 @@ exports.create = (req, res) => {
     // Save Tutorial in the database
     restaurants.create(r)
       .then(data => {
-        res.send(data);
+        data.message = "SUCCESS";
+        value = {message: "SUCCESS"}
+        res.send({message: "SUCCESS"});
       })
       .catch(err => {
         res.status(500).send({

@@ -9,14 +9,14 @@ import { Link } from 'react-router-dom';
 class Login extends Component{
     //call the constructor method
     constructor(props){
-        //Call the constrictor of Super class i.e The Component
+        //Call the constructor of Super class i.e The Component
         super(props);
         //maintain the state required for this component
         this.state = {
-            username : "",
-            password : "",
-            authFlag : false,
-            err: ""
+            cust_username : "",
+            cust_password : "",
+            cust_authFlag : false,
+            cust_err: ""
         }
         //Bind the handlers to this class
         this.cust_usernameChangeHandler = this.cust_usernameChangeHandler.bind(this);
@@ -83,7 +83,6 @@ class Login extends Component{
             <div>
                 {redirectVar}
             <div class="container">
-                
                 <div class="customer-form">
 
                     <div class="main-div">
@@ -135,7 +134,7 @@ class Login extends Component{
                             <br/>
                             <div>
                                 <p>New Restaurant?
-                                <Link to='/restautantsSignup'>   Signup here</Link>
+                                <Link to='/restaurantsSignup'>   Signup here</Link>
                                 </p>
                             </div><br />
                           

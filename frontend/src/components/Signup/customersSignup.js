@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
 // import cookie from 'react-cookies';
@@ -108,7 +108,7 @@ class customersSignup extends Component{
                                 <input onChange = {this.passwordChangeHandler} type="password" class="form-control" name="password" placeholder="Password" required/>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary">Login</button>  
+                            <button type="submit" class="btn btn-primary">Signup</button>  
                         </form>               
                     </div>
                     
