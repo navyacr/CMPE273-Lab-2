@@ -21,10 +21,20 @@ export const updateRestaurant = (restaurantProfileData) => dispatch => {
     axios.post(`${backendServer}/restaurants/${id}/profile`, restaurantProfileData)
         .then(response => response.data)
         .then(data => {
-            alert("Profile Updated Successfully!");
+            
             return dispatch({
                 type: UPDATE_RESTAURANT,
                 payload: data
+            })
+        })
+        .then(data => {
+            axios.post(`${backendServer}/restaurants/${id}/infoUpdate`, restaurantProfileData)
+            .then(data => {
+                alert("Profile Updated Successfully!");
+                return dispatch({
+                    type: UPDATE_RESTAURANT,
+                    payload: data
+                })
             })
         })
         .catch(error => {

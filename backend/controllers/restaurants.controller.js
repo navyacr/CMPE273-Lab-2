@@ -16,8 +16,7 @@ exports.create = (req, res) => {
     const r = {
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password,
-      location: req.body.location
+      password: req.body.password
     };
   
     // Save Tutorial in the database
@@ -35,11 +34,11 @@ exports.create = (req, res) => {
       });
   };
 
-  exports.findByName = (req, res) => {
-    const name = req.params.name;
-    var condition = name ? { name: { [Op.eq]: `${name}` } } : null;
+  exports.findById = (req, res) => {
+    const id = req.params.restaurantId;
+    var condition = id ? { id: { [Op.eq]: `${id}` } } : null;
   
-    restaurants.findAll({ where: condition })
+    restaurants.findOne({ where: condition })
       .then(data => {
         res.send(data);
       })
@@ -91,6 +90,27 @@ exports.create = (req, res) => {
         res.status(500).send({
           message:
             err.message || "Some error occurred while logging in."
+        });
+      });
+  };
+
+  exports.update = (req, res) => {
+    const id = req.params.restaurantId;
+    var condition = id ? { id: { [Op.eq]: `${id}` } } : null;
+    const newDetails = {
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    };
+
+    restaurants.update(newDetails, { where: condition })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while updating restaurants."
         });
       });
   };

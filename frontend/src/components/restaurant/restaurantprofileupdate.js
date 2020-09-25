@@ -42,12 +42,44 @@ class RestaurantProfileUpdate extends Component {
             <h2> Update Restaurant: </h2>
            <Form onSubmit={this.onUpdate} >
                 <Form.Row>
+                    <Form.Group as={Col} controlId="name">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control name="name"
+                            type="text"
+                            onChange={this.onChange}
+                            value={this.state.name}
+                             />
+                    </Form.Group>
+                </Form.Row>
+
+                <Form.Row>
                     <Form.Group as={Col} controlId="description">
-                        <Form.Label>description</Form.Label>
+                        <Form.Label>Description</Form.Label>
                         <Form.Control name="description"
                             type="text"
                             onChange={this.onChange}
                             value={this.state.description}
+                             />
+                    </Form.Group>
+                </Form.Row>
+                <Form.Row>
+                    <Form.Group as={Col} controlId="email">
+                        <Form.Label>Email ID</Form.Label>
+                        <Form.Control name="email"
+                            type="email"
+                            onChange={this.onChange}
+                            value={this.state.email}
+                             />
+                    </Form.Group>
+                </Form.Row>
+
+                <Form.Row>
+                    <Form.Group as={Col} controlId="password">
+                        <Form.Label>Change Password</Form.Label>
+                        <Form.Control name="password"
+                            type="password"
+                            onChange={this.onChange}
+                            value={this.state.password}
                              />
                     </Form.Group>
                 </Form.Row>

@@ -11,12 +11,14 @@ app.get("/", (req, res) => res.send("Hello World !"));
 //Route to handle Post Request Call
 app.post('/info', restaurants.create)
 
+app.post('/:restaurantId/infoUpdate', restaurants.update)
+
 app.post('/validate', restaurants.validate)
 
 app.get('/info', restaurants.findAll)
 
 //Route to get restaurants by name
-app.get('/info/:name', restaurants.findByName)
+app.get('/:restaurantId/info', restaurants.findById)
 
 //Route to get menu in a selected restaurant
 app.get('/:restaurantName/dishes', dishes.findAll)

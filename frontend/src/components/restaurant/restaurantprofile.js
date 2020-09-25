@@ -20,14 +20,12 @@ class RestaurantProfile extends Component {
   getRestaurantInfo = () => {
      
     const id = localStorage.getItem('restaurant_id')
-    const name = localStorage.getItem('restaurant_name')
-    axios.get(`${backendServer}/restaurants/info/${name}`)
+    axios.get(`${backendServer}/restaurants/${id}/info`)
     .then(response => {
         this.setState({
-            name: response.data[0].name,
-            email: response.data[0].email,
-            restaurantId: response.data[0].id,
-            zipcode: response.data[0].location
+            name: response.data.name,
+            email: response.data.email,
+            restaurantId: response.data.id
         });
     });
 
@@ -35,11 +33,10 @@ class RestaurantProfile extends Component {
     .then(response => {
         this.setState({
             // console.log(response.data);
-            email: response.data.location,
             description: response.data.description,
             contact: response.data.contact,
             timings: response.data.timings,
-            address: response.data.location
+            location: response.data.location
             // restaurantId: response.data[0].id
         });
     });
@@ -52,11 +49,13 @@ class RestaurantProfile extends Component {
             {/* {redirectVar} */}
                 <div class="restaurantHome">
                     <h2> <b>{ this.state.name } </b></h2>
-                    <div><Link to='/restaurantprofileupdate'>Update Profile</Link></div>
-                    <p> {this.state.description}</p>
-                    <p> Reviews: ***** </p>
-                    <p> Contact: {this.state.contact} <br/> {this.state.email} </p>
-                    <p> Timings: {this.state.timings} </p>
+                    <div> <Link to='/restaurantprofileupdate'>Update Profile</Link></div>
+                    <p> <b>Description:</b> {this.state.description}</p>
+                    <p> <b>Reviews:</b> ***** </p>
+                    <p> <b>Phone:</b> {this.state.contact} </p>
+                    <p> <b>Email:</b> {this.state.email} </p>
+                    <p> <b>Our Address:</b> {this.state.location}</p>
+                    <p> <b>Timings:</b> {this.state.timings} </p>
                 </div>
             </div>
     )
