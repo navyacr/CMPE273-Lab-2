@@ -1,0 +1,19 @@
+module.exports = (sequelize, Sequelize) => {
+    const restaurantsProfile = sequelize.define("restaurantsProfile", {
+      description: {
+        type: Sequelize.STRING
+      },
+      contact: {
+        type: Sequelize.STRING,
+        unique: true
+      },
+      timings: {
+        type: Sequelize.STRING
+      },
+      location: {
+        type: Sequelize.STRING
+      }
+    });
+  
+    return restaurantsProfile;
+  };

@@ -3,7 +3,7 @@ import '../../App.css';
 import axios from 'axios';
 // import cookie from 'react-cookies';
 import {Redirect} from 'react-router';
-
+import { Link } from 'react-router-dom';
 //Define a Login Component
 class customersSignup extends Component{
     //call the constructor method
@@ -108,7 +108,8 @@ class customersSignup extends Component{
                                 <input onChange = {this.passwordChangeHandler} type="password" class="form-control" name="password" placeholder="Password" required/>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary">Signup</button>  
+                            <button type="submit" class="btn btn-primary">Signup</button>
+                            <div>Already have an account? <Link to='/login'>Login</Link></div>
                         </form>               
                     </div>
                     

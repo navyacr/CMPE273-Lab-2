@@ -69,16 +69,21 @@ exports.create = (req, res) => {
     const pwd = req.body.password;
     var condition = username ? { email: { [Op.eq]: `${username}` } } : null;
   
-    restaurants.findAll({ where: condition })
+    restaurants.findOne({ where: condition })
       .then(data => {
-        res.send(data);
-        if (data[0].dataValues.password === pwd){
-          res.status(200).send()
+        if (!data) {
+          res.status(401).send({
+            message: "INVALID_CREDENTIALS"
+          });
+        }
+        else if (data.dataValues.password === pwd){
+          message = {message: "SUCCESS"}
+          returnVal = Object.assign(message, data.dataValues)
+          res.status(200).send(returnVal)
         }
         else{
           res.status(401).send({
-            message:
-              err.message || "Invalid credentials"
+            message: "INVALID_CREDENTIALS"
           });
         }
       })

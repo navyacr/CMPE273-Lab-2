@@ -7,8 +7,8 @@ import Login from './Login/Login';
 import Navbar from './LandingPage/Navbar';
 import customersSignup from './Signup/customersSignup';
 import restaurantsSignup from './Signup/restaurantsSignup';
-import restaurantsLogin from './Login/restaurantsLogin';
-import customersLogin from './Login/customersLogin';
+import restaurantProfile from './restaurant/restaurantprofile';
+import restaurantProfileUpdate from './restaurant/restaurantprofileupdate';
 // Create a Main Component
 
 class Main extends Component {
@@ -20,6 +20,8 @@ class Main extends Component {
         <Route path="/login" component={Login} />
         <Route path="/customersSignup" component={customersSignup} />
         <Route path="/restaurantsSignup" component={restaurantsSignup} />
+        <Route path="/restaurantProfile" component={restaurantProfile} />
+        <Route path="/restaurantProfileUpdate" component={restaurantProfileUpdate} />
         {/* <Route path="/restaurantsLogin" component={restaurantsLogin} /> */}
         {/* <Route path="/home" component={Home}/>
                 <Route path="/delete" component={Delete}/>

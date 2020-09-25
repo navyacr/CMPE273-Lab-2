@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import '../../App.css';
 import {Redirect} from 'react-router';
 import { Link } from 'react-router-dom';
-import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {restaurantsLogin} from '../../actions/loginActions'
-import customersLogin from './customersLogin';
+import {restaurantsLogin} from '../../actions/loginActions';
 
 //Define a Login Component
 class RestaurantsLogin extends Component{
@@ -27,6 +25,7 @@ class RestaurantsLogin extends Component{
             password: this.state.password
         }
     
+        console.log("data:", data)
         this.props.restaurantsLogin(data);
     
         this.setState({
@@ -38,12 +37,15 @@ class RestaurantsLogin extends Component{
         let redirectVar = null;
         let message = "";
         console.log("Props user value")
-        console.log(this.props.user.message)
-        if (this.props.user.message === "SUCCESS" && this.state.signupFlag) {
+        console.log(this.props)
+        if (this.props.user && this.props.user.message === "SUCCESS" && this.state.signupFlag) {
+            localStorage.setItem('restaurant_id', this.props.user.id)
+            localStorage.setItem('restaurant_name', this.props.user.name)
+            
             alert("Logged in successfully");
-            redirectVar = <Redirect to="/Login" />
+            redirectVar = <Redirect to="/restaurantProfile" />
         }
-        else if (this.props.user.message === "Validation error" && this.state.signupFlag){
+        else if (this.props.user.message === "INVALID_CREDENTIALS" && this.state.signupFlag){
             message = "Invalid username or password"
         }
         return (
@@ -81,7 +83,7 @@ RestaurantsLogin.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    user: state.signup.user
+    user: state.restaurantsLogin.user
 });
 //export Login Component
 export default connect(mapStateToProps, { restaurantsLogin })(RestaurantsLogin);

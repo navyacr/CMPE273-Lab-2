@@ -11,16 +11,16 @@ class Navbar extends Component {
     }
     //handle logout to destroy the cookie
     handleLogout = () => {
-        cookie.remove('cookie', { path: '/' })
+        localStorage.removeItem('restaurant_id')
     }
     render(){
         //if Cookie is set render Logout Button
         let navLogin = null;
-        if(cookie.load('cookie')){
+        if(localStorage.getItem('restaurant_id')){
             console.log("Able to read cookie");
             navLogin = (
                 <ul class="nav navbar-nav navbar-right">
-                        <li><Link to="/" onClick = {this.handleLogout}><span class="glyphicon glyphicon-user"></span>Logout</Link></li>
+                        <li><Link to="/login" onClick = {this.handleLogout}><span class="glyphicon glyphicon-user"></span>Logout</Link></li>
                 </ul>
             );
         }else{
