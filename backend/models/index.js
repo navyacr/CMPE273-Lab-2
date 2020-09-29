@@ -27,6 +27,7 @@ db.reviews = require("./reviews.model.js")(sequelize, Sequelize);
 db.events = require("./events.model.js")(sequelize, Sequelize);
 db.eventAttendees = require("./eventAttendees.model.js")(sequelize, Sequelize);
 db.restaurantsProfile = require("./restaurantsProfile.model")(sequelize, Sequelize);
+db.customersProfile = require("./customersProfile.model")(sequelize, Sequelize);
 
 // Adding foreign keys to the tables
 db.dishes.belongsTo(db.restaurants);
@@ -37,5 +38,6 @@ db.reviews.belongsTo(db.restaurants);
 db.eventAttendees.belongsTo(db.events);
 db.eventAttendees.belongsTo(db.customers);
 db.restaurantsProfile.belongsTo(db.restaurants);
+db.customersProfile.belongsTo(db.customers);
 
 module.exports = db;

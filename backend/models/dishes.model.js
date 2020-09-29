@@ -1,7 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
     const dishes = sequelize.define("dishes", {
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true        
       },
       ingredients: {
         type: Sequelize.STRING

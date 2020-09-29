@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import cookie from 'react-cookies';
 import {Redirect} from 'react-router';
+import RestaurantNavbar from './RestaurantNavbar'
+import CustomerNavbar from './CustomerNavbar'
 
 //create the Navbar Component
 class Navbar extends Component {
@@ -12,11 +14,13 @@ class Navbar extends Component {
     //handle logout to destroy the cookie
     handleLogout = () => {
         localStorage.removeItem('restaurant_id')
+        localStorage.removeItem('customer_id')
+        localStorage.removeItem('type')
     }
     render(){
         //if Cookie is set render Logout Button
         let navLogin = null;
-        if(localStorage.getItem('restaurant_id')){
+        if(localStorage.getItem('type')){
             console.log("Able to read cookie");
             navLogin = (
                 <ul class="nav navbar-nav navbar-right">
@@ -33,22 +37,21 @@ class Navbar extends Component {
             )
         }
         let redirectVar = null;
-        if(cookie.load('cookie')){
-            redirectVar = <Redirect to="/home"/>
+        var component = ""
+        if(localStorage.getItem('type') == "restaurant"){
+            component = <RestaurantNavbar />
+        } else if (localStorage.getItem('type') == "customer") {
+            component = <CustomerNavbar />
         }
         return(
             <div>
-                {redirectVar}
+                
             <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <a class="navbar-brand">Yelp</a>
                     </div>
-                    <ul class="nav navbar-nav">
-                        {/* <li class="active"><Link to="/home">Home</Link></li>
-                        <li><Link to="/create">Add a Book</Link></li>
-                        <li><Link to="/delete">Delete a Book</Link></li> */}
-                    </ul>
+                    {component}
                     {navLogin}
                 </div>
             </nav>

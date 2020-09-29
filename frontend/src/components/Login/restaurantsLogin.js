@@ -41,6 +41,7 @@ class RestaurantsLogin extends Component{
         if (this.props.user && this.props.user.message === "SUCCESS" && this.state.signupFlag) {
             localStorage.setItem('restaurant_id', this.props.user.id)
             localStorage.setItem('restaurant_name', this.props.user.name)
+            localStorage.setItem('type', "restaurant")
             
             alert("Logged in successfully");
             redirectVar = <Redirect to="/restaurantProfile" />

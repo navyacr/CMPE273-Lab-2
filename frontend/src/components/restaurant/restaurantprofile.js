@@ -9,6 +9,7 @@ import backendServer from '../../config';
 // import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
 // import {restaurantsSignup} from '../../actions/signupActions'
+import RestaurantMenu from './menu'
 
 class RestaurantProfile extends Component {
   constructor(props) {
@@ -48,14 +49,20 @@ class RestaurantProfile extends Component {
         <div>
             {/* {redirectVar} */}
                 <div class="restaurantHome">
-                    <h2> <b>{ this.state.name } </b></h2>
-                    <div> <Link to='/restaurantprofileupdate'>Update Profile</Link></div>
+                    <h2 style={{color: "maroon"}}> <b>{ this.state.name } </b></h2>
+                    {/* <div> <Link to='/restaurantprofileupdate'>Update Profile</Link></div> */}
                     <p> <b>Description:</b> {this.state.description}</p>
                     <p> <b>Reviews:</b> ***** </p>
                     <p> <b>Phone:</b> {this.state.contact} </p>
                     <p> <b>Email:</b> {this.state.email} </p>
                     <p> <b>Our Address:</b> {this.state.location}</p>
                     <p> <b>Timings:</b> {this.state.timings} </p>
+                </div>
+                <div>
+                  <h4><b> Menu: </b></h4>
+                </div>
+                <div>
+                  < RestaurantMenu />
                 </div>
             </div>
     )

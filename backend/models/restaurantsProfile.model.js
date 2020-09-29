@@ -12,6 +12,9 @@ module.exports = (sequelize, Sequelize) => {
       },
       location: {
         type: Sequelize.STRING
+      }, 
+      filename: {
+        type: Sequelize.STRING
       }
     });
   

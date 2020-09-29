@@ -78,6 +78,9 @@ class Login extends Component{
                 console.log(response.data)
                 console.log("Status Code : ",response.status);
                 if(response.status === 200){
+                    localStorage.setItem('customer_id', response.data.id)
+                    localStorage.setItem('customer_name', response.data.name)
+                    localStorage.setItem('type', "customer")
                     this.setState({
                         authFlag : true,
                         err: response.data                       
@@ -95,17 +98,16 @@ class Login extends Component{
         //redirect based on successful login
         let redirectVar = null;    
         if(this.state.authFlag){
-            redirectVar = <Redirect to= "/customersSignup"/>
+            redirectVar = <Redirect to= "/customerProfile"/>
         }
         return(
             <div>
                 {redirectVar}
             <div class="container">
                 <div class="customer-form">
-
-
                     <div class="main-div">
                         <div class="panel">
+                        
                             <h2>Customer Login</h2>
                             <p>Please enter your username and password</p>
                             {/* <h4><font color='red'>{this.state.err}</font></h4> */}

@@ -4,7 +4,7 @@ const app = express.Router();
 const restaurants = require("../controllers/restaurants.controller.js");
 const dishes = require("../controllers/dishes.controller.js");
 const reviews = require("../controllers/reviews.controller.js");
-const restaurantsProfile  = require("../controllers/restaurantsProfile.controllers.js");
+const restaurantsProfile  = require("../controllers/restaurantsProfile.controller.js");
 
 app.get("/", (req, res) => res.send("Hello World !"));
 
@@ -21,12 +21,14 @@ app.get('/info', restaurants.findAll)
 app.get('/:restaurantId/info', restaurants.findById)
 
 //Route to get menu in a selected restaurant
-app.get('/:restaurantName/dishes', dishes.findAll)
+app.get('/:restaurantId/dishes', dishes.findAll)
 
-app.post('/:restaurantName/dishes', dishes.create)
+app.post('/:dishName/dishes', dishes.createOrUpdate)
 // app.get('/:restaurantName/dishes/:dishName', dishes.findByName)
 
 app.post('/:restaurantId/profile', restaurantsProfile.createOrUpdate)
+
+app.post('/:restaurantId/uploadImage', restaurantsProfile.uploadImage)
 // Get reviews of the restaurant
 // app.get('/:restaurantId/reviews', reviews.findAll)
 app.get('/:restaurantId/profile', restaurantsProfile.findOne)

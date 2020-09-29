@@ -8,7 +8,10 @@ import Navbar from './LandingPage/Navbar';
 import customersSignup from './Signup/customersSignup';
 import restaurantsSignup from './Signup/restaurantsSignup';
 import restaurantProfile from './restaurant/restaurantprofile';
+import customerProfile from './customer/customerprofile';
 import restaurantProfileUpdate from './restaurant/restaurantprofileupdate';
+import restaurantMenu from './restaurant/menu';
+import menuUpdate from './restaurant/menuUpdate'
 // Create a Main Component
 
 class Main extends Component {
@@ -22,6 +25,9 @@ class Main extends Component {
         <Route path="/restaurantsSignup" component={restaurantsSignup} />
         <Route path="/restaurantProfile" component={restaurantProfile} />
         <Route path="/restaurantProfileUpdate" component={restaurantProfileUpdate} />
+        <Route path="/restaurantMenu" component={restaurantMenu} />
+        <Route path="/menuUpdate" component={menuUpdate} />
+        <Route path="/customerProfile" component={customerProfile} />
         {/* <Route path="/restaurantsLogin" component={restaurantsLogin} /> */}
         {/* <Route path="/home" component={Home}/>
                 <Route path="/delete" component={Delete}/>

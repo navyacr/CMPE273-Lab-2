@@ -120,7 +120,7 @@ class RestaurantProfileUpdate extends Component {
                     <Button type="submit" variant="success">Update Details</Button>
                 </ButtonGroup>
             </Form>
-            <center><Button href="/restaurantProfile">Home</Button></center>
+            {/* <center><Button href="/restaurantProfile">Home</Button></center> */}
         </div>
     )
   }
