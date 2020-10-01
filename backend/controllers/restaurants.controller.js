@@ -1,5 +1,6 @@
 const db = require("../models");
 const restaurants = db.restaurants;
+const restaurantsProfile = db.restaurantsProfile;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
@@ -51,16 +52,16 @@ exports.create = (req, res) => {
   };
 
   exports.findAll = (req, res) => {
-    restaurants.findAll()
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving all restaurants."
-        });
-      });
+    restaurantsProfile.findAll({
+      where: {},
+      include: [{
+          model: restaurants,
+          where: {}
+      }]
+    }).then((data) => {
+          res.send(data)
+          console.log("*********************\n\n\n\n\n",data);
+    });
   };
 
   exports.validate = (req, res) => {

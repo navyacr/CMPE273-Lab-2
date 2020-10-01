@@ -63,3 +63,9 @@
 .login-comp{
   display:flex; flex-direction:row;
 }
+
+.review-form{
+  height: 70px;
+  width: 200px;
+  
+}

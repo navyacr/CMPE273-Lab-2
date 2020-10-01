@@ -13,8 +13,9 @@ class CustomerNavbar extends Component {
         return(
             <div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><Link to="/customerProfile">Profile</Link></li>
-                    <li><Link to="/restaurantprofileupdate">Update Profile</Link></li>
+                    <li class="active"><Link to="/customerHome">Home</Link></li>
+                    <li><Link to="/customerProfile">Profile</Link></li>
+                    {/* <li><Link to="/restaurantprofileupdate">Update Profile</Link></li> */}
                     {/* <li><Link to="/delete">Delete a Book</Link></li> */}
                 </ul>   
         </div>

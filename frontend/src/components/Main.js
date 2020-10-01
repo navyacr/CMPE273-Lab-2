@@ -11,13 +11,17 @@ import restaurantProfile from './restaurant/restaurantprofile';
 import customerProfile from './customer/customerprofile';
 import restaurantProfileUpdate from './restaurant/restaurantprofileupdate';
 import restaurantMenu from './restaurant/menu';
-import menuUpdate from './restaurant/menuUpdate'
+import menuUpdate from './restaurant/menuUpdate';
+import customerHome from './customer/customerHome';
+import OneRestaurantView from './customer/oneRestaurantView';
+// import OneRestaurantMenuView from './customer/oneRestaurantMenuView';
 // Create a Main Component
 
 class Main extends Component {
   render() {
     return (
       <div>
+        <customerLoginCheck />
         {/* Render Different Component based on Route */}
         <Route path="/" component={Navbar} />
         <Route path="/login" component={Login} />
@@ -28,6 +32,9 @@ class Main extends Component {
         <Route path="/restaurantMenu" component={restaurantMenu} />
         <Route path="/menuUpdate" component={menuUpdate} />
         <Route path="/customerProfile" component={customerProfile} />
+        <Route path="/customerHome" component={customerHome} />
+        <Route path="/oneRestaurantView/:resid" component={OneRestaurantView} />
+        {/* <Route path="/oneRestaurantMenuView/:resid" component={OneRestaurantMenuView} /> */}
         {/* <Route path="/restaurantsLogin" component={restaurantsLogin} /> */}
         {/* <Route path="/home" component={Home}/>
                 <Route path="/delete" component={Delete}/>

@@ -98,7 +98,7 @@ class Login extends Component{
         //redirect based on successful login
         let redirectVar = null;    
         if(this.state.authFlag){
-            redirectVar = <Redirect to= "/customerProfile"/>
+            redirectVar = <Redirect to= "/customerHome"/>
         }
         return(
             <div>
