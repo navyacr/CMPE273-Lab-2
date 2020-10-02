@@ -12,6 +12,4 @@ app.get('/info', events.findAll)
 app.post('/:eventId/attendees', eventAttendees.create)
 app.get('/:eventId/attendees', eventAttendees.findAll)
 
-
-
 module.exports = app;

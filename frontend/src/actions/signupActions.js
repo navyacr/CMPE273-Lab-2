@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import { RESTAURANT_SIGNUP } from './types';
 import backendServer from '../config'

@@ -1,6 +1,8 @@
 const db = require("../models");
+const customers = db.customers;
 const reviews = db.reviews;
 const Op = db.Sequelize.Op;
+const Sequelize = require("sequelize");
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
@@ -54,3 +56,43 @@ exports.create = (req, res) => {
 //         });
 //       });
 //   };
+exports.findAll = (req, res) => {
+  const restaurantId = req.params.restaurantId;
+  // var condition = restaurantId ? { restaurantId: { [Op.eq]: `${restaurantId}` } } : null;
+  var condition = restaurantId ? { restaurantId: { [Op.eq]: `${restaurantId}` } } : null;
+  reviews.findAll({
+    where: condition,
+    include: [{
+        model: customers,
+        where: {}
+    }]
+  }).then(data => {
+          res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+          message:
+          err.message || "Some error occurred while retrieving orders."
+      });
+    })
+  
+};
+
+exports.aggReview = (req, res) => {
+  const restaurantId = req.params.restaurantId;
+  // var condition = restaurantId ? { restaurantId: { [Op.eq]: `${restaurantId}` } } : null;
+  var condition = restaurantId ? { restaurantId: { [Op.eq]: `${restaurantId}` } } : null;
+  reviews.findAll({
+    where: condition,
+    attributes: [[Sequelize.fn('count', Sequelize.col('rating')), 'count'],[Sequelize.fn('sum', Sequelize.col('rating')), 'total']],
+  }).then(data => {
+          res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+          message:
+          err.message || "Some error occurred while retrieving orders."
+      });
+    })
+  
+};

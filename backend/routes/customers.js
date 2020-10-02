@@ -19,7 +19,8 @@ app.post('/:customerId/orders', orders.create)
 
 // Customer review for a restaurant
 app.post('/:customerId/reviews', reviews.create)
-
+app.get('/:restaurantId/reviews', reviews.findAll)
+app.get('/:restaurantId/aggreviews', reviews.aggReview)
 app.get('/:customerId/profile', customersProfile.findOne)
 app.post('/:customerId/profile', customersProfile.createOrUpdate)
 

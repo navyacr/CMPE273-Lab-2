@@ -12,6 +12,7 @@ import { Card, Row, Col } from 'react-bootstrap';
 import ReactFlexyTable from "react-flexy-table"
 import "react-flexy-table/dist/index.css";
 import CustomerLoginCheck from './customerLoginCheck';
+import AggregateReview from './aggregateReview'
 
 class CustomerHome extends Component {
   constructor(props) {
@@ -41,6 +42,7 @@ class CustomerHome extends Component {
                 data.push(<a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i].restaurant.id}>
                             <Card border="primary" style={{ width: '18rem' }}><Card.Body> 
                             <Card.Title><b>{this.state.restaurants[i].restaurant.name}</b></Card.Title>
+                            <AggregateReview resid={this.state.restaurants[i].restaurant.id}/>
                             <Card.Text><b> Description: </b> {this.state.restaurants[i].description}</Card.Text>
                             <Card.Link>Check</Card.Link>
                         </Card.Body></Card></a>)
@@ -55,8 +57,7 @@ class CustomerHome extends Component {
         {data}
       </div>
        
-    // <div><table ><th>Name</th><th>Ingredients</th><th>Description</th><th>Category</th><th>Price</th>{data}</table></div>
-    )
+     )
   }
 }
 
