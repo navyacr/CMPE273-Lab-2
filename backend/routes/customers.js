@@ -1,5 +1,6 @@
 const express = require("express");
 const customersProfile = require("../controllers/customersProfile.controller.js");
+const restaurantsProfile = require("../controllers/restaurantsProfile.controller.js");
 const app = express.Router();
 
 const customers = require("../controllers/customers.controller.js");
@@ -23,5 +24,6 @@ app.get('/:restaurantId/reviews', reviews.findAll)
 app.get('/:restaurantId/aggreviews', reviews.aggReview)
 app.get('/:customerId/profile', customersProfile.findOne)
 app.post('/:customerId/profile', customersProfile.createOrUpdate)
+app.post('/restaurantsearch', restaurantsProfile.search)
 
 module.exports = app;

@@ -15,6 +15,12 @@ module.exports = (sequelize, Sequelize) => {
       }, 
       filename: {
         type: Sequelize.STRING
+      },
+      cuisine: {
+        type: Sequelize.STRING
+      },
+      deliverymode: {
+        type: Sequelize.STRING
       }
     });
   

@@ -2,6 +2,7 @@ const db = require("../models");
 const multer = require('multer');
 const path = require('path');
 const restaurantsProfile = db.restaurantsProfile;
+const restaurants = db.restaurants;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new profile table
@@ -15,6 +16,8 @@ exports.createOrUpdate = (req, res) => {
             contact: req.body.contact,
             timings: req.body.timings,
             location: req.body.location,
+            cuisine: req.body.cuisine,
+            deliverymode: req.body.deliverymode,
             restaurantId: restaurantId
         };
 
@@ -69,6 +72,23 @@ exports.createOrUpdate = (req, res) => {
         cb(null, 'restaurant' + req.params.restaurantId + "-" + Date.now() + path.extname(file.originalname));
     }
   });
+
+  exports.search = (req, res) => {
+    var type = req.body.type
+    var value = req.body.value
+    var condition =  { [type] : { [Op.eq]: `${value}` } }
+    restaurantsProfile.findAll({
+      where: condition,
+      include: [{
+          model: restaurants,
+          where: {}
+      }]
+    }).then((data) => {
+          res.send(data)
+          console.log("*********************\n\n\n\n\n",data);
+    });
+  };
+
 
   const resuploads = multer({
     storage: resstorage,
