@@ -12,12 +12,12 @@ import { getRestaurant, updateRestaurant } from '../../actions/restaurantProfile
 import { Container, Col, Row, Form, Button, ButtonGroup, Card } from 'react-bootstrap';
 import backendServer from '../../config'
 
-class menuUpdate extends Component {
+class CustomerProfileUpdate extends Component {
   constructor(props) {
     super(props);
     this.state = {
         name : "",
-        category: "",
+        email: "",
         description : "",
         ingredients : "",
         price: ""
@@ -161,4 +161,4 @@ submitUpdate = (e) => {
 }
 
 
-export default menuUpdate;
+export default CustomerProfileUpdate;

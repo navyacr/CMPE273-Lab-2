@@ -72,8 +72,8 @@ class OneRestaurantView extends Component {
                 <div>
                   <h4><b> Menu: </b></h4>
                   < OneRestaurantMenuView resid={this.props.match.params.resid}/>
-                  <CustomerViewReview resid={this.props.match.params.resid}/>
                   < CustomerAddReview resid={this.props.match.params.resid}/>
+                  <CustomerViewReview resid={this.props.match.params.resid}/>
                 </div>
             </div>
     )

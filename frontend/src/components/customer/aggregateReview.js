@@ -49,7 +49,7 @@ class AggregateReview extends Component {
                 starSpacing='2px'
                 numberOfStars={5}
                 changeRating=""
-                name='rating' />  {this.state.aggreviews.count} reviews
+                name='rating' />  {this.state.aggreviews.count} review(s)
                 </div>
 
     }
