@@ -29,8 +29,17 @@ app.post('/:dishName/dishes', dishes.createOrUpdate)
 app.post('/:restaurantId/profile', restaurantsProfile.createOrUpdate)
 
 app.post('/:restaurantId/uploadImage', restaurantsProfile.uploadImage)
+app.get('/:restaurantId/viewProfileImage', restaurantsProfile.viewProfileImage)
+
+
+app.post('/:dishId/dishImage', dishes.dishUploadImage)
+app.get('/:dishId/dishImage', dishes.viewDishImage)
+
+
 // Get reviews of the restaurant
 // app.get('/:restaurantId/reviews', reviews.findAll)
 app.get('/:restaurantId/profile', restaurantsProfile.findOne)
+
+
 
 module.exports = app;

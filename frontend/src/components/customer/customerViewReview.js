@@ -62,8 +62,6 @@ class CustomerViewReview extends Component {
         <CustomerLoginCheck />
         {data}
       </div>
-       
-    // <div><table ><th>Name</th><th>Ingredients</th><th>Description</th><th>Category</th><th>Price</th>{data}</table></div>
     )
   }
 }

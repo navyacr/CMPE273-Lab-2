@@ -44,12 +44,14 @@ class RestaurantProfile extends Component {
 
   }
   render(name) {
+    var imgsrc = `${backendServer}/restaurants/${this.state.restaurantId}/viewProfileImage`;
 
     return (
         <div>
             {/* {redirectVar} */}
                 <div class="restaurantHome">
                     <h2 style={{color: "maroon"}}> <b>{ this.state.name } </b></h2>
+                    <img class="profile-photo" src={imgsrc}></img>
                     {/* <div> <Link to='/restaurantprofileupdate'>Update Profile</Link></div> */}
                     <p> <b>Description:</b> {this.state.description}</p>
                     <p> <b>Reviews:</b> ***** </p>

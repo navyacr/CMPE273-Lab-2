@@ -56,7 +56,6 @@ this.setState({
     type: e.value
 });
  console.log("Priting e: ", e)
-//  this.state.data = <Dropdown options={'check'} placeholder="Select" />
  if (e && e.value === 'deliverymode'){
     this.setState({  
         secondoptions: [
@@ -80,7 +79,7 @@ this.setState({
     });
 } else if (e && e.value === 'location') {
     this.setState({
-      textbox: <input type="text" value={this.state.value} onChange={this._onInputChange}/>,
+      textbox: <input type="text" onChange={this._onInputChange}/>,
         
     });
     this.setState({
@@ -90,7 +89,6 @@ this.setState({
 }
   getRestaurants = () => {
      
-    // const id = localStorage.getItem('restaurant_id')
     axios.get(`${backendServer}/restaurants/info`)
     .then(response => {
         this.setState({
@@ -127,18 +125,35 @@ this.setState({
     return (
       <div>
         <CustomerLoginCheck />
-        <div>
-        <Dropdown options={options} onChange={this._onSelect}  placeholder="Search by" />
-        <div class disabled={this.state.disabled}>
-            <Dropdown options={this.state.secondoptions} onChange={this._onValueSelect} placeholder="Select" />
-        </div>
-        
-        <div>
-            {this.state.textbox}
-        </div>
-        <button class="icon" onClick={this.search}><i class="glyphicon glyphicon-search"></i></button>
-      </div>
-        {/* <CustomerSearch /> */}
+        <table class="searchtable">
+          <tr>
+            <td>
+            <Dropdown options={options} onChange={this._onSelect}  placeholder="Search by" />
+            </td>
+            <td>
+              <div disabled={this.state.disabled}>
+                <Dropdown options={this.state.secondoptions} onChange={this._onValueSelect} placeholder="Select" />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {this.state.textbox}
+            </td>
+            <td>
+            <button class="icon" onClick={this.search}><i class="glyphicon glyphicon-search"></i></button>
+            </td>
+          </tr>
+        </table>
+        {/* <div class="filter">
+          
+          
+          
+          <div class="text-box">
+              
+          </div> */}
+          
+      {/* </div> */}
         {data}
       </div>
        

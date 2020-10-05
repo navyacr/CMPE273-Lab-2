@@ -74,9 +74,27 @@ div[disabled]
 {
   pointer-events: none;
   opacity: 0;
-  height: 0px;
 }
 
+.profile-photo{
+  height: 150px;
+  width: 130px;
+}
+.dish-image{
+  height: 80px;
+  width: 80px;
+}
+/* 
+.Dropdown-root {
+  width: 30%;
+  float: left;
+  padding: 20px;
+} 
+.text-box{
+  width : 40%;
+  padding: 20px; 
+  float: right;
+} */
 /* button {
   display: inline-block;
   height: 134px;

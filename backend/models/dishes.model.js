@@ -15,6 +15,9 @@ module.exports = (sequelize, Sequelize) => {
       },
       category:{
         type: Sequelize.STRING
+      },
+      filename:{
+        type: Sequelize.STRING
       }
     });
     
