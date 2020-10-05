@@ -35,13 +35,15 @@ class OneRestaurantMenuView extends Component {
 
       if (this.state && this.state.dishes && this.state.dishes.length > 0) {
         for (let i = 0; i < this.state.dishes.length; i++) {
-            data.push(<Card.Body> 
-                          <Card.Title><b>{this.state.dishes[i].name}</b></Card.Title>
-                          <Card.Text><b> Category: </b> {this.state.dishes[i].category}</Card.Text>
-                          <Card.Text><b> Ingredients: </b>  {this.state.dishes[i].ingredients}</Card.Text>
-                          <Card.Text><b> Description: </b> {this.state.dishes[i].description}</Card.Text>
-                          <Card.Text><b> Price: </b> {this.state.dishes[i].price}</Card.Text>
-                      </Card.Body>)
+            data.push(<Card>
+                        <Card.Body> 
+                            <Card.Title><b>{this.state.dishes[i].name}</b></Card.Title>
+                            <Card.Text><b> Category: </b> {this.state.dishes[i].category}</Card.Text>
+                            <Card.Text><b> Ingredients: </b>  {this.state.dishes[i].ingredients}</Card.Text>
+                            <Card.Text><b> Description: </b> {this.state.dishes[i].description}</Card.Text>
+                            <Card.Text><b> Price: </b> {this.state.dishes[i].price}</Card.Text>
+                        </Card.Body>
+                      </Card>)
         }
     }
 

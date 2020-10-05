@@ -5,6 +5,7 @@ const restaurantsProfile = db.restaurantsProfile;
 const restaurants = db.restaurants;
 const Op = db.Sequelize.Op;
 const fs = require('fs');
+const dishes = db.dishes;
 
 // Create and Save a new profile table
 exports.createOrUpdate = (req, res) => {
@@ -77,6 +78,27 @@ exports.createOrUpdate = (req, res) => {
   exports.search = (req, res) => {
     var type = req.body.type
     var value = req.body.value
+    if (type === 'dishname'){
+      var condition =  { name : { [Op.like]: `%${value}%` } }
+      dishes.findAll({
+      where: condition,
+      include: [{
+          model: restaurants,
+          where: {}
+      }]
+    }).then((data) => {
+          res.send(data)
+          console.log("*********************\n\n\n\n\n",data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while updating the restaurantProfile."
+      });
+    });
+
+
+    }
     var condition =  { [type] : { [Op.eq]: `${value}` } }
     restaurantsProfile.findAll({
       where: condition,
@@ -87,6 +109,12 @@ exports.createOrUpdate = (req, res) => {
     }).then((data) => {
           res.send(data)
           console.log("*********************\n\n\n\n\n",data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while updating the restaurantProfile."
+      });
     });
   };
   

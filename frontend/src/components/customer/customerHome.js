@@ -20,10 +20,12 @@ import 'react-dropdown/style.css';
 class CustomerHome extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      qty: 0
+    };
     this.getRestaurants();
     this.search = this.search.bind(this);
-    // this.setRestaurantShow = this.setRestaurantShow.bind(this);
+    this.setCount = this.setCount.bind(this);
   } 
 
   search = () => {
@@ -77,7 +79,7 @@ this.setState({
         
         
     });
-} else if (e && e.value === 'location') {
+} else if (e && (e.value === 'location' || e.value === 'dishname')) {
     this.setState({
       textbox: <input type="text" onChange={this._onInputChange}/>,
         
@@ -97,11 +99,18 @@ this.setState({
     });
   }
 
+  setCount = (count) => {
+    this.setState({
+      qty: count
+    })
+  }
   render(name) {
     const options = [
       {value: 'cuisine', label: 'Cuisine'},
       {value: 'deliverymode', label: 'Mode of Delivery'},
       {value: 'location', label: 'Location'},
+      {value: 'dishname', label: 'Dish Name'}
+
     ]
     const defaultOption = options[2]
 
@@ -109,14 +118,38 @@ this.setState({
 
       if (this.state && this.state.restaurants && this.state.restaurants.length > 0) {
         for (let i = 0; i < this.state.restaurants.length; i++) {
+          
             if (this.state.restaurants[i] && this.state.restaurants[i].restaurant) {
-                data.push(<a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i].restaurant.id}>
-                            <Card border="primary" style={{ width: '18rem' }}><Card.Body> 
-                            <Card.Title><b>{this.state.restaurants[i].restaurant.name}</b></Card.Title>
+                // this.state.restaurants[i].qty = 0;
+                if (!this.state.restaurants[i].qty) {
+                  this.state.restaurants[i].qty = 0
+                }
+                data.push(
+                            <Card border="basic" style={{ width: '18rem' }}><Card.Body> 
+                              <a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i].restaurant.id}>
+                                <Card.Title><b>{this.state.restaurants[i].restaurant.name}</b></Card.Title>
+                              </a>
                             <AggregateReview resid={this.state.restaurants[i].restaurant.id}/>
                             <Card.Text><b> Description: </b> {this.state.restaurants[i].description}</Card.Text>
-                            <Card.Link>Check</Card.Link>
-                        </Card.Body></Card></a>)
+                            <Card.Text> <div>
+                                          <span>Quantity</span>
+                                          <button onClick={() => {
+                                            console.log("+", this.state.restaurants[i].qty)
+                                            this.state.restaurants[i].qty += 1;
+                                            }}>
+                                              +
+                                          </button>
+                                          {/* {(this.state.restaurants[i].qty? this.state.restaurants[i].qty: this.state.restaurants[i].qty=0)} */}
+                                          <input type="text" value={this.state.restaurants[i].qty} />
+                                          <button
+                                            onClick={() => {
+                                              this.state.restaurants[i].qty > 0 ? this.state.restaurants[i].qty -= 1: this.state.restaurants[i].qty = 0;
+                                            }}
+                                            >
+                                            -
+                                          </button>
+                                        </div></Card.Text>
+                        </Card.Body></Card>)
             }
         }
     }
@@ -124,6 +157,7 @@ this.setState({
 
     return (
       <div>
+        
         <CustomerLoginCheck />
         <table class="searchtable">
           <tr>
@@ -145,15 +179,6 @@ this.setState({
             </td>
           </tr>
         </table>
-        {/* <div class="filter">
-          
-          
-          
-          <div class="text-box">
-              
-          </div> */}
-          
-      {/* </div> */}
         {data}
       </div>
        

@@ -11,13 +11,15 @@ class CustomerNavbar extends Component {
    
     render(){
         return(
-            <div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><Link to="/customerHome">Home</Link></li>
-                    <li><Link to="/customerProfile">Profile</Link></li>
-                    {/* <li><Link to="/restaurantprofileupdate">Update Profile</Link></li> */}
-                    {/* <li><Link to="/delete">Delete a Book</Link></li> */}
-                </ul>   
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <Link class="nav-link" to="/customerHome">Home </Link>
+                </li>
+                <li class="nav-item">
+                    <Link class="nav-link" to="/customerProfile">Profile</Link>
+                </li>
+            </ul>
         </div>
         )
     }
