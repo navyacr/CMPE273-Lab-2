@@ -5,7 +5,7 @@ import axios from 'axios';
 // import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import backendServer from '../../config';
-// import { Row, Col } from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 // import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
 // import {restaurantsSignup} from '../../actions/signupActions'
@@ -14,10 +14,40 @@ import RestaurantMenu from './menu';
 class RestaurantProfile extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      fileText : "ChooseImage.."
+    };
     this.getRestaurantInfo();
   } 
 
+  onImageUpload = (e) => {
+    this.setState({
+        filename: e.target.files[0],
+        fileText: e.target.files[0].name
+    });
+}
+
+onUserUpload = (e) => {
+  // e.preventDefault();
+  const formData = new FormData();
+  formData.append("resimage", this.state.filename);
+  const uploadConfig = {
+      headers: {
+          "content-type": "multipart/form-data"
+      }
+  };
+  axios.post(`${backendServer}/restaurants/${this.state.restaurantId}/uploadImage`, formData, uploadConfig)
+      .then(response => {
+          alert("Image uploaded successfully!");
+          this.setState({
+              userFileText: "Choose file...",
+              user_image: response.data
+          });
+      })
+      .catch(err => {
+          console.log("Error");
+      });
+}
   getRestaurantInfo = () => {
      
     const id = localStorage.getItem('restaurant_id')
@@ -48,10 +78,16 @@ class RestaurantProfile extends Component {
 
     return (
         <div>
-            {/* {redirectVar} */}
                 <div class="restaurantHome">
                     <h2 style={{color: "maroon"}}> <b>{ this.state.name } </b></h2>
                     <img class="profile-photo" src={imgsrc}></img>
+                    <form onSubmit={this.onUserUpload}><br /><br /><br />
+                      <div class="custom-file" style={{ width: "80%" }}>
+                          <input type="file" class="custom-file-input" name="filename" accept="image/*" onChange={this.onImageUpload} required/>
+                          <label class="custom-file-label" for="user-file">{this.state.fileText}</label>
+                      </div><br /><br />
+                      <Button type="submit" variant="primary">Upload</Button>
+                    </form>
                     {/* <div> <Link to='/restaurantprofileupdate'>Update Profile</Link></div> */}
                     <p> <b>Description:</b> {this.state.description}</p>
                     <p> <b>Reviews:</b> ***** </p>

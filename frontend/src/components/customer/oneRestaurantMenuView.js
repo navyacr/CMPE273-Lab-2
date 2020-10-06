@@ -31,7 +31,7 @@ class OneRestaurantMenuView extends Component {
   placeOrder = () => {
     let customerId = localStorage.getItem("customer_id")
     console.log(this.state.dishes)
-    axios.post(`${backendServer}/customers/${customerId}/orders`, {dishes: this.state.dishes})
+    axios.post(`${backendServer}/customers/${customerId}/orders`, {dishes: this.state.dishes, dm: this.props.dm})
     .then(response => {
       console.log(response)
       console.log(this.props.dm)

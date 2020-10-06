@@ -1,3 +1,4 @@
+const { restaurants } = require("../models");
 const db = require("../models");
 const orders = db.orders;
 const dishes = db.dishes;
@@ -13,10 +14,13 @@ exports.create = (req, res) => {
       continue
     }
     // Create a Order
+    var status = "Order Received"
     const o = {
       customerId: req.params.customerId,
       dishId: dish.id,
-      qty: dish.qty
+      qty: dish.qty,
+      dm: req.body.dm,
+      status: status
     };
   
     // Save Order in the database
@@ -37,8 +41,17 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     const customerId = req.params.customerId;
     var condition = customerId ? { customerId: { [Op.eq]: `${customerId}` } } : null;
-    orders.findAll({where: condition})
-        .then(data => {
+    orders.findAll({
+      where: condition,
+      include: [{
+          model: dishes,
+          where: {},
+          include: [{
+            model: restaurants,
+            where: {}
+          }]
+      }]
+    }).then(data => {
             res.send(data);
       })
       .catch(err => {
