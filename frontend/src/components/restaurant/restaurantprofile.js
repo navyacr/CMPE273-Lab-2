@@ -9,7 +9,7 @@ import backendServer from '../../config';
 // import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
 // import {restaurantsSignup} from '../../actions/signupActions'
-import RestaurantMenu from './menu'
+import RestaurantMenu from './menu';
 
 class RestaurantProfile extends Component {
   constructor(props) {
@@ -66,6 +66,8 @@ class RestaurantProfile extends Component {
                 <div>
                   < RestaurantMenu />
                 </div>
+                
+                
             </div>
     )
   }

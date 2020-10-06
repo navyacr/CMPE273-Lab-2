@@ -21,7 +21,8 @@ class CustomerHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      qty: 0
+      qty: 0,
+      count: 0
     };
     this.getRestaurants();
     this.search = this.search.bind(this);
@@ -121,9 +122,6 @@ this.setState({
           
             if (this.state.restaurants[i] && this.state.restaurants[i].restaurant) {
                 // this.state.restaurants[i].qty = 0;
-                if (!this.state.restaurants[i].qty) {
-                  this.state.restaurants[i].qty = 0
-                }
                 data.push(
                             <Card border="basic" style={{ width: '18rem' }}><Card.Body> 
                               <a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i].restaurant.id}>
@@ -131,25 +129,7 @@ this.setState({
                               </a>
                             <AggregateReview resid={this.state.restaurants[i].restaurant.id}/>
                             <Card.Text><b> Description: </b> {this.state.restaurants[i].description}</Card.Text>
-                            <Card.Text> <div>
-                                          <span>Quantity</span>
-                                          <button onClick={() => {
-                                            console.log("+", this.state.restaurants[i].qty)
-                                            this.state.restaurants[i].qty += 1;
-                                            }}>
-                                              +
-                                          </button>
-                                          {/* {(this.state.restaurants[i].qty? this.state.restaurants[i].qty: this.state.restaurants[i].qty=0)} */}
-                                          <input type="text" value={this.state.restaurants[i].qty} />
-                                          <button
-                                            onClick={() => {
-                                              this.state.restaurants[i].qty > 0 ? this.state.restaurants[i].qty -= 1: this.state.restaurants[i].qty = 0;
-                                            }}
-                                            >
-                                            -
-                                          </button>
-                                        </div></Card.Text>
-                        </Card.Body></Card>)
+                            </Card.Body></Card>)
             }
         }
     }

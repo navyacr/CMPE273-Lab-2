@@ -15,6 +15,7 @@ import CustomerLoginCheck from './customerLoginCheck';
 import OneRestaurantMenuView from './oneRestaurantMenuView';
 import CustomerAddReview from './customerAddReview';
 import CustomerViewReview from './customerViewReview';
+import Dropdown from 'react-dropdown';
 
 
 class OneRestaurantView extends Component {
@@ -43,14 +44,25 @@ class OneRestaurantView extends Component {
             description: response.data.description,
             contact: response.data.contact,
             timings: response.data.timings,
-            location: response.data.location
+            location: response.data.location,
+            deliverymode: response.data.deliverymode
             // restaurantId: response.data[0].id
         });
     });
 
   }
+  _onSelect = (val) => {
+    this.setState({
+      selectedDm : val
+    })
+  }
   render(name) {
-
+    console.log("DM: ", this.state.deliverymode)
+    if (this.state.deliverymode) {
+      var options = this.state.deliverymode.split(" ");
+      this.state.selectedDm = options[0]
+    }
+    
     return (
         <div>
           <CustomerLoginCheck/>
@@ -71,7 +83,8 @@ class OneRestaurantView extends Component {
                 </div>
                 <div>
                   <h4><b> Menu: </b></h4>
-                  < OneRestaurantMenuView resid={this.props.match.params.resid}/>
+                  <Dropdown options={options} value={this.state.selectedDm} onChange={this._onSelect}  placeholder="Delivery mode" />
+                  < OneRestaurantMenuView dm={this.state.selectedDm} resid={this.props.match.params.resid}/>
                   < CustomerAddReview resid={this.props.match.params.resid}/>
                   <CustomerViewReview resid={this.props.match.params.resid}/>
                 </div>

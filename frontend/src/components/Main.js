@@ -14,6 +14,8 @@ import restaurantMenu from './restaurant/menu';
 import menuUpdate from './restaurant/menuUpdate';
 import customerHome from './customer/customerHome';
 import OneRestaurantView from './customer/oneRestaurantView';
+import EventView from './restaurant/eventView';
+import PostEvent from './restaurant/postEvent'
 // import OneRestaurantMenuView from './customer/oneRestaurantMenuView';
 // Create a Main Component
 
@@ -34,6 +36,9 @@ class Main extends Component {
         <Route path="/customerProfile" component={customerProfile} />
         <Route path="/customerHome" component={customerHome} />
         <Route path="/oneRestaurantView/:resid" component={OneRestaurantView} />
+        <Route path="/eventView" component={EventView} />
+        <Route path="/postEvent" component={PostEvent} />
+
         {/* <Route path="/oneRestaurantMenuView/:resid" component={OneRestaurantMenuView} /> */}
         {/* <Route path="/restaurantsLogin" component={restaurantsLogin} /> */}
         {/* <Route path="/home" component={Home}/>
