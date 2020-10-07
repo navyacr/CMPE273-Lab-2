@@ -20,7 +20,9 @@ class menuUpdate extends Component {
         category: "",
         description : "",
         ingredients : "",
-        price: ""
+        price: "",
+        fileText : "ChooseImage..",
+        id:""
     }
     //Bind the handlers to this class
     this.nameChangeHandler = this.nameChangeHandler.bind(this);
@@ -32,6 +34,34 @@ class menuUpdate extends Component {
     this.submitUpdate = this.submitUpdate.bind(this);
     
   } 
+
+  onImageUpload = (e) => {
+    this.setState({
+        filename: e.target.files[0],
+        fileText: e.target.files[0].name
+    });
+  }
+
+  onUserUpload = (e) => {
+    const formData = new FormData();
+    formData.append("image", this.state.filename);
+    const uploadConfig = {
+        headers: {
+            "content-type": "multipart/form-data"
+        }
+    };
+    axios.post(`${backendServer}/restaurants/${this.state.id}/dishImage`, formData, uploadConfig)
+        .then(response => {
+            alert("Image uploaded successfully!");
+            this.setState({
+                userFileText: "Choose file...",
+                user_image: response.data
+            });
+        })
+        .catch(err => {
+            console.log("Error");
+        });
+  }
  //username change handler to update state variable with the text entered by the user
  nameChangeHandler = (e) => {
     this.setState({
@@ -60,10 +90,8 @@ priceChangeHandler = (e) =>{
         price : e.target.value
     })
 }
-//submit Login handler to send a request to the node backend
+
 submitUpdate = (e) => {
-    // var headers = new Headers();
-    //prevent page from refresh
     e.preventDefault();
     const data = {
         name : this.state.name,
@@ -73,10 +101,7 @@ submitUpdate = (e) => {
         price : this.state.price,
         restaurantId: localStorage.getItem("restaurant_id")
     }
-    let dishname = this.state.name
-    //set the with credentials to true
-    // axios.defaults.withCredentials = true;
-    //make a post request with the user data
+    let dishname = this.state.name;
     console.log(this.state.name)
     axios.post(`${backendServer}/restaurants/${this.state.name}/dishes`, data)
         .then(response => {
@@ -84,6 +109,7 @@ submitUpdate = (e) => {
             console.log("Status Code : ",response.status);
             if(response.status === 200){
                 this.setState({
+                    id: response.data.id,
                     authFlag : true,
                     err: response.data                       
                 })
@@ -101,6 +127,7 @@ submitUpdate = (e) => {
     return (
         <div>
             <h2> Update Restaurant Menu: </h2>
+
            <Form onSubmit={this.submitUpdate} >
                 <Form.Row>
                     <Form.Group as={Col} controlId="name">
@@ -154,6 +181,13 @@ submitUpdate = (e) => {
                     <Button type="submit" variant="success">Update Menu</Button>
                 </ButtonGroup>
             </Form>
+            <form onSubmit={this.onUserUpload}><br /><br /><br />
+                      <div class="custom-file" style={{ width: "80%" }}>
+                          <input type="file" class="custom-file-input" name="filename" accept="image/*" onChange={this.onImageUpload} required/>
+                          <label class="custom-file-label" for="user-file">{this.state.fileText}</label>
+                      </div><br /><br />
+                      <Button type="submit" variant="primary">Upload</Button>
+            </form>
             {/* <center><Button href="/restaurantProfile">Home</Button></center> */}
         </div>
     )

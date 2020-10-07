@@ -100,7 +100,7 @@ const dishstorage = multer.diskStorage({
 
 const dishuploads = multer({
     storage: dishstorage,
-    // limits: { fileSize: 1000000 },
+    limits: { fileSize: 1000000 },
   }).single("image");
 
   exports.dishUploadImage = (req, res) => {
@@ -110,7 +110,6 @@ const dishuploads = multer({
           // res.status(200).send()
           const dishId = req.params.dishId;
           var condition = dishId ? { id: { [Op.eq]: `${dishId}` } } : null;
-          // Create a Tutorial
           const newProfile = {
             filename: req.file.filename
           };

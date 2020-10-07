@@ -1,34 +1,15 @@
 import React, {Component} from 'react';
 import '../../App.css';
-// import cookie from 'react-cookies';
 import {Redirect} from 'react-router';
 import { Link } from 'react-router-dom';
 import RestaurantsLogin from './restaurantsLogin';
-// import customersLogin from './customersLogin';
 import axios from 'axios';
-
-// class Login extends Component {
-//   render() {
-//     return (            
-//             <div class="login-comp" >
-//                 {/* < customersLogin /> */}
-//                 < RestaurantsLogin />
-                
-//             </div>
-//     );
-//   }
-
-// }
-
-// export default Login;
-
-
+import backendServer from '../../config'
 
 //Define a Login Component
 class Login extends Component{
     //call the constructor method
     constructor(props){
-        //Call the constructor of Super class i.e The Component
         super(props);
         //maintain the state required for this component
         this.state = {
@@ -63,8 +44,6 @@ class Login extends Component{
     }
     //submit Login handler to send a request to the node backend
     submitLogin = (e) => {
-        // var headers = new Headers();
-        //prevent page from refresh
         e.preventDefault();
         const data = {
             username : this.state.username,
@@ -73,7 +52,7 @@ class Login extends Component{
         //set the with credentials to true
         axios.defaults.withCredentials = true;
         //make a post request with the user data
-        axios.post('http://localhost:3001/customers/validate',data)
+        axios.post(`${backendServer}/customers/validate`,data)
             .then(response => {
                 console.log(response.data)
                 console.log("Status Code : ",response.status);

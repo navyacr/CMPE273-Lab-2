@@ -1,5 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
     const customersProfile = sequelize.define("customersProfile", {
+      dob: {
+        type: Sequelize.STRING
+      },
       city: {
         type: Sequelize.STRING
       },
@@ -29,7 +32,10 @@ module.exports = (sequelize, Sequelize) => {
       },  
       headline: {
         type: Sequelize.STRING
-      }
+      },
+      filename: {
+        type: Sequelize.STRING
+      },
     });
   
     return customersProfile;

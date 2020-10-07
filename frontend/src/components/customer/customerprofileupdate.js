@@ -10,152 +10,130 @@ import { connect } from 'react-redux';
 import { getRestaurant, updateRestaurant } from '../../actions/restaurantProfileActions'
 // import {restaurantsSignup} from '../../actions/signupActions'
 import { Container, Col, Row, Form, Button, ButtonGroup, Card } from 'react-bootstrap';
-import backendServer from '../../config'
+import backendServer from '../../config';
+import DetailsUpdate from './detailsUpdate'
 
 class CustomerProfileUpdate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        name : "",
-        email: "",
-        description : "",
-        ingredients : "",
-        price: ""
+        fileText : "ChooseImage..",
+        customerId: localStorage.getItem('customer_id')
     }
     //Bind the handlers to this class
-    this.nameChangeHandler = this.nameChangeHandler.bind(this);
-    this.categoryChangeHandler = this.categoryChangeHandler.bind(this);
-    this.descriptionChangeHandler = this.descriptionChangeHandler.bind(this);
-    this.ingredientsChangeHandler = this.ingredientsChangeHandler.bind(this);
-    this.priceChangeHandler = this.priceChangeHandler.bind(this);
+    this.changeHandler = this.changeHandler.bind(this);
 
-    this.submitUpdate = this.submitUpdate.bind(this);
+    this.update = this.update.bind(this);
     
   } 
- //username change handler to update state variable with the text entered by the user
- nameChangeHandler = (e) => {
+  onImageUpload = (e) => {
     this.setState({
-        name : e.target.value
-    })
-}
-categoryChangeHandler = (e) =>{
-    this.setState({
-        category : e.target.value
-    })
-}
+        filename: e.target.files[0],
+        fileText: e.target.files[0].name
+    });
+  }
 
-ingredientsChangeHandler = (e) =>{
+  onUserUpload = (e) => {
+    const formData = new FormData();
+    formData.append("image", this.state.filename);
+    const uploadConfig = {
+        headers: {
+            "content-type": "multipart/form-data"
+        }
+    };
+    axios.post(`${backendServer}/customers/${this.state.customerId}/uploadImage`, formData, uploadConfig)
+        .then(response => {
+            alert("Image uploaded successfully!");
+            this.setState({
+                userFileText: "Choose file...",
+                user_image: response.data
+            });
+        })
+        .catch(err => {
+            console.log("Error");
+        });
+  }
+ //username change handler to update state variable with the text entered by the user
+   changeHandler = (e) => {
     this.setState({
-        ingredients : e.target.value
+        [e.target.name]: e.target.value
     })
 }
-//password change handler to update state variable with the text entered by the user
-descriptionChangeHandler = (e) => {
-    this.setState({
-        description : e.target.value
-    })
-}
-priceChangeHandler = (e) =>{
-    this.setState({
-        price : e.target.value
-    })
-}
-//submit Login handler to send a request to the node backend
-submitUpdate = (e) => {
-    // var headers = new Headers();
-    //prevent page from refresh
+update = (e) => {
     e.preventDefault();
-    const data = {
-        name : this.state.name,
-        category : this.state.category,
-        description : this.state.description,
-        ingredients: this.state.ingredients,
-        price : this.state.price,
-        restaurantId: localStorage.getItem("restaurant_id")
-    }
-    let dishname = this.state.name
-    //set the with credentials to true
-    // axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    console.log(this.state.name)
-    axios.post(`${backendServer}/restaurants/${this.state.name}/dishes`, data)
+    let data = Object.assign({}, this.state);
+    const id = localStorage.getItem('customer_id')
+    axios.post(`${backendServer}/customers/${id}/infoUpdate`, data)
         .then(response => {
             console.log(response.data)
             console.log("Status Code : ",response.status);
             if(response.status === 200){
+                alert("Information updated successfully")
                 this.setState({
                     authFlag : true,
                     err: response.data                       
                 })
             }else{
+                alert("Some error occured. Try again..")
                 this.setState({
                     authFlag : false
                 })
             }
-            
         });
 }
 
   render() {
-
+    var imgsrc = `${backendServer}/customers/${this.state.customerId}/viewProfileImage`;
     return (
         <div>
-            <h2> Update Restaurant Menu: </h2>
-           <Form onSubmit={this.submitUpdate} >
-                <Form.Row>
+            <h2> Update basic details: </h2>
+            <img class="profile-photo" src={imgsrc}></img>
+                    <form onSubmit={this.onUserUpload}><br /><br /><br />
+                      <div class="custom-file" style={{ width: "80%" }}>
+                          <input type="file" class="custom-file-input" name="filename" accept="image/*" onChange={this.onImageUpload} required/>
+                          <label class="custom-file-label" for="user-file">{this.state.fileText}</label>
+                      </div><br /><br />
+                      <Button type="submit" variant="primary">Upload</Button>
+            </form>
+            <Form onSubmit={this.update} >
+               <Form.Row>
                     <Form.Group as={Col} controlId="name">
-                        <Form.Label>Dish Name</Form.Label>
+                        <Form.Label>Name</Form.Label>
                         <Form.Control name="name"
                             type="text"
-                            onChange={this.nameChangeHandler}
+                            onChange={this.changeHandler}
                              />
                     </Form.Group>
                 </Form.Row>
-
+              
                 <Form.Row>
-                    <Form.Group as={Col} controlId="description">
-                        <Form.Label>Description</Form.Label>
-                        <Form.Control name="description"
+                    <Form.Group as={Col} controlId="email">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control name="email"
                             type="text"
-                            onChange={this.descriptionChangeHandler}
+                            onChange={this.changeHandler}
                              />
                     </Form.Group>
                 </Form.Row>
+                
                 <Form.Row>
-                    <Form.Group as={Col} controlId="ingredients">
-                        <Form.Label>Ingredients</Form.Label>
-                        <Form.Control name="ingredients"
+                    <Form.Group as={Col} controlId="password">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control name="password"
                             type="text"
-                            onChange={this.ingredientsChangeHandler}
-                             />
-                    </Form.Group>
-                </Form.Row>
-
-                <Form.Row>
-                    <Form.Group as={Col} controlId="category">
-                        <Form.Label>Category</Form.Label>
-                        <Form.Control name="category"
-                            type="text"
-                            onChange={this.categoryChangeHandler}
-                             />
-                    </Form.Group>
-                </Form.Row>
-
-                <Form.Row>
-                    <Form.Group as={Col} controlId="price">
-                        <Form.Label>Price</Form.Label>
-                        <Form.Control name="price"
-                            type="text"
-                            onChange={this.priceChangeHandler}
+                            onChange={this.changeHandler}
                              />
                     </Form.Group>
                 </Form.Row>
                 <ButtonGroup aria-label="Third group">
-                    <Button type="submit" variant="success">Update Menu</Button>
+                    <Button type="submit" variant="success">Update</Button>
                 </ButtonGroup>
-            </Form>
-            {/* <center><Button href="/restaurantProfile">Home</Button></center> */}
-        </div>
+            </Form> 
+            <div>
+                <DetailsUpdate/>
+            </div>
+        </div> 
+       
     )
   }
 }

@@ -5,6 +5,7 @@ const restaurants = require("../controllers/restaurants.controller.js");
 const dishes = require("../controllers/dishes.controller.js");
 const reviews = require("../controllers/reviews.controller.js");
 const restaurantsProfile  = require("../controllers/restaurantsProfile.controller.js");
+const orders  = require("../controllers/orders.controller.js");
 
 app.get("/", (req, res) => res.send("Hello World !"));
 
@@ -39,6 +40,10 @@ app.get('/:dishId/dishImage', dishes.viewDishImage)
 // Get reviews of the restaurant
 // app.get('/:restaurantId/reviews', reviews.findAll)
 app.get('/:restaurantId/profile', restaurantsProfile.findOne)
+
+app.get('/:restaurantId/orders', orders.findRestaurantOrders)
+app.post('/:restaurantId/orders', orders.updateOrderStatus)
+
 
 
 

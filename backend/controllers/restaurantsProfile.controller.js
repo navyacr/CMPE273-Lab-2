@@ -130,7 +130,7 @@ exports.createOrUpdate = (req, res) => {
           // res.status(200).send()
           const restaurantId = req.params.restaurantId;
           var condition = restaurantId ? { restaurantId: { [Op.eq]: `${restaurantId}` } } : null;
-          // Create a Tutorial
+          
           const newProfile = {
             filename: req.file.filename
           };

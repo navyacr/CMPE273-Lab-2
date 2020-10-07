@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
-// // import cookie from 'react-cookies';
-// import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
 import backendServer from '../../config';
 import {Button} from 'react-bootstrap';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import {restaurantsSignup} from '../../actions/signupActions'
 import RestaurantMenu from './menu';
 
 class RestaurantProfile extends Component {
@@ -28,7 +22,6 @@ class RestaurantProfile extends Component {
 }
 
 onUserUpload = (e) => {
-  // e.preventDefault();
   const formData = new FormData();
   formData.append("resimage", this.state.filename);
   const uploadConfig = {

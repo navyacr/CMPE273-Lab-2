@@ -3,6 +3,8 @@ const multer = require('multer');
 const path = require('path');
 const customersProfile = db.customersProfile;
 const Op = db.Sequelize.Op;
+const fs = require('fs');
+
 
 // Create and Save a new profile table
 exports.createOrUpdate = (req, res) => {
@@ -70,37 +72,56 @@ exports.createOrUpdate = (req, res) => {
       });
   };
 
-  // const resstorage = multer.diskStorage({
-  //   destination: path.join(__dirname, '..') + '/public/uploads/restaurants',
-  //   filename: (req, file, cb) => {
-  //       cb(null, 'restaurant' + req.params.restaurantId + "-" + Date.now() + path.extname(file.originalname));
-  //   }
-  // });
+  const cusstorage = multer.diskStorage({
+    destination: path.join(__dirname, '..') + '/public/uploads/customers',
+    filename: (req, file, cb) => {
+        cb(null, 'customer' + "-" + Date.now() + path.extname(file.originalname));
+    }
+  });
 
-  // const resuploads = multer({
-  //   storage: resstorage,
-  //   limits: { fileSize: 1000000 },
-  // }).single("resimage");
+  const cusuploads = multer({
+    storage: cusstorage,
+    limits: { fileSize: 1000000 },
+  }).single("image");
 
-  // exports.uploadImage = (req, res) => {
-  //   resuploads(req, res, function (err) {
-  //       if (!err) {
-  //         // const restaurantId = req.params.restaurantId;
-  //         // var condition = restaurantId ? { restaurantId: { [Op.eq]: `${restaurantId}` } } : null;
-  //         // // Create a Tutorial
-  //         // const newProfile = {
-  //         //   filename: req.file.filename
-  //         // };
-  //         // restaurantsProfile.update(newProfile, {where: condition})
-  //         // .then(data => {
-  //         //     res.send(data)
-  //         // })
-  //         // .catch(err => {
-  //         //     res.status(500).send({
-  //         //       message:
-  //         //         err.message || "Some error occurred while updating the restaurantProfile."
-  //         //     });
-  //         //   });
-  //       }   
-  //   })
-// };
+  exports.uploadImage = (req, res) => {
+    cusuploads(req, res, function (err) {
+        if (!err) {
+          const customerId = req.params.customerId;
+          var condition = customerId ? { customerId: { [Op.eq]: `${customerId}` } } : null;
+          // Create a Tutorial
+          const newProfile = {
+            filename: req.file.filename
+          };
+          customersProfile.update(newProfile, {where: condition})
+          .then(data => {
+              res.send(data)
+          })
+          .catch(err => {
+              res.status(500).send({
+                message:
+                  err.message || "Some error occurred while updating the customersProfile."
+              });
+            });
+        }   
+    })
+};
+
+exports.viewProfileImage = (req, res) =>{
+  const customerId = req.params.customerId;
+    var condition = customerId ? { customerId: { [Op.eq]: `${customerId}` } } : null;
+  
+    customersProfile.findOne({ where: condition })
+      .then(data => {
+        var image = path.join(__dirname, '..') + '/public/uploads/customers/' + data.filename;
+        if (fs.existsSync(image)) {
+            res.sendFile(image);
+        }
+        else {
+            res.sendFile(path.join(__dirname, '..') + '/public/uploads/restaurants/restaurant-1601843772667.jpg')
+        }
+      })
+      .catch(err => {
+        res.sendFile(path.join(__dirname, '..') + '/public/uploads/restaurants/restaurant-1601843772667.jpg')
+      });
+};

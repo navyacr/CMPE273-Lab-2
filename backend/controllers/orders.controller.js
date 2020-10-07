@@ -63,3 +63,44 @@ exports.findAll = (req, res) => {
     
   };
 
+  exports.findRestaurantOrders = (req, res) => {
+    const restaurantId = req.params.restaurantId;
+    var condition = restaurantId ? { restaurantId: { [Op.eq]: `${restaurantId}` } } : null;
+    orders.findAll({
+      where: {},
+      include: [{
+          model: dishes,
+          where: condition,
+          include: [{
+            model: restaurants,
+            where: {}
+          }]
+      }, {
+        model: customers
+      }]
+    }).then(data => {
+            res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+            message:
+            err.message || "Some error occurred while retrieving orders."
+        });
+      })
+    
+  };
+
+  exports.updateOrderStatus = (req, res) => {
+    const restaurantId = req.params.restaurantId;
+    const values = req.body.orders
+    for (o of values) {
+      var condition = o.id ? { id: { [Op.eq]: `${o.id}` } } : null;
+      const newProfile = {
+        status: o.status
+      };
+      orders.update(newProfile, {
+        where: condition
+      })
+    }
+    res.send({"status": "OK"})
+  };

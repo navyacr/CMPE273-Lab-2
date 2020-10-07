@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import Login from './Login/Login';
-// import Home from './Home/Home';
-// import Delete from './Delete/Delete';
-// import Create from './Create/Create';
+// import CustomerPage from './Login/Login';
+// import restaurantsPage from './Login/restaurantsPage'
 import Navbar from './LandingPage/Navbar';
 import customersSignup from './Signup/customersSignup';
 import restaurantsSignup from './Signup/restaurantsSignup';
@@ -17,17 +16,19 @@ import OneRestaurantView from './customer/oneRestaurantView';
 import EventView from './restaurant/eventView';
 import PostEvent from './restaurant/postEvent'
 import ViewOrders from './customer/viewOrders';
-// import OneRestaurantMenuView from './customer/oneRestaurantMenuView';
-// Create a Main Component
+import CustomerProfileUpdate from './customer/customerprofileupdate';
+import EventRegister from './customer/eventRegister'
+import RestaurantViewOrders from './restaurant/restaurantViewOrders';
 
 class Main extends Component {
   render() {
     return (
       <div>
         <customerLoginCheck />
-        {/* Render Different Component based on Route */}
         <Route path="/" component={Navbar} />
         <Route path="/login" component={Login} />
+        {/* <Route path="/customerPage" component={CustomerPage} />
+        <Route path="/restaurantsPage" component={restaurantsPage} /> */}
         <Route path="/customersSignup" component={customersSignup} />
         <Route path="/restaurantsSignup" component={restaurantsSignup} />
         <Route path="/restaurantProfile" component={restaurantProfile} />
@@ -40,15 +41,11 @@ class Main extends Component {
         <Route path="/eventView" component={EventView} />
         <Route path="/postEvent" component={PostEvent} />
         <Route path="/viewOrders" component={ViewOrders} />
-
-        {/* <Route path="/oneRestaurantMenuView/:resid" component={OneRestaurantMenuView} /> */}
-        {/* <Route path="/restaurantsLogin" component={restaurantsLogin} /> */}
-        {/* <Route path="/home" component={Home}/>
-                <Route path="/delete" component={Delete}/>
-                <Route path="/create" component={Create}/> */}
+        <Route path="/profileUpdate" component={CustomerProfileUpdate} />
+        <Route path="/eventRegister" component={EventRegister} />
+        <Route path="/restaurantViewOrders" component={RestaurantViewOrders} />
       </div>
     );
   }
 }
-// Export The Main Component
 export default Main;

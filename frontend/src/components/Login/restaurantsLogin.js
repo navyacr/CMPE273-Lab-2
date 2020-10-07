@@ -86,5 +86,4 @@ RestaurantsLogin.propTypes = {
 const mapStateToProps = state => ({
     user: state.restaurantsLogin.user
 });
-//export Login Component
 export default connect(mapStateToProps, { restaurantsLogin })(RestaurantsLogin);

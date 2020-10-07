@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
-// // import cookie from 'react-cookies';
-// import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
 import backendServer from '../../config';
-import { Card, Row, Col } from 'react-bootstrap';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import {restaurantsSignup} from '../../actions/signupActions'
+import { Card } from 'react-bootstrap';
 import ReactFlexyTable from "react-flexy-table"
 import "react-flexy-table/dist/index.css";
 import CustomerLoginCheck from './customerLoginCheck';
@@ -73,7 +67,7 @@ this.setState({
     this.setState({
 
         secondoptions: [
-            {value: 'Random', label: 'French'},
+            {value: 'french', label: 'French'},
             {value: 'mexican', label: 'Mexican'},
             {value: 'mediterranean', label: 'Mediterranean'}
         ],
@@ -122,8 +116,10 @@ this.setState({
           
             if (this.state.restaurants[i] && this.state.restaurants[i].restaurant) {
                 // this.state.restaurants[i].qty = 0;
+                var imgsrc = `${backendServer}/restaurants/${this.state.restaurants[i].restaurant.id}/viewProfileImage`;
                 data.push(
                             <Card border="basic" style={{ width: '18rem' }}><Card.Body> 
+                              <img class="profile-photo" src={imgsrc}></img>
                               <a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i].restaurant.id}>
                                 <Card.Title><b>{this.state.restaurants[i].restaurant.name}</b></Card.Title>
                               </a>
@@ -133,8 +129,6 @@ this.setState({
             }
         }
     }
-
-
     return (
       <div>
         

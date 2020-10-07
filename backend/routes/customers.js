@@ -9,6 +9,8 @@ const reviews = require("../controllers/reviews.controller.js");
 
 //Route to handle Post Request Call
 app.post('/info', customers.create)
+app.post('/:customerId/infoUpdate', customers.update)
+
 app.get('/:customerId/info', customers.findOne)
 
 app.post('/validate', customers.validate)
@@ -25,5 +27,7 @@ app.get('/:restaurantId/aggreviews', reviews.aggReview)
 app.get('/:customerId/profile', customersProfile.findOne)
 app.post('/:customerId/profile', customersProfile.createOrUpdate)
 app.post('/restaurantsearch', restaurantsProfile.search)
+app.post('/:customerId/uploadImage', customersProfile.uploadImage)
+app.get('/:customerId/viewProfileImage', customersProfile.viewProfileImage)
 
 module.exports = app;

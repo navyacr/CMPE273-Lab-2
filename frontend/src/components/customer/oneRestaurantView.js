@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
-// // import cookie from 'react-cookies';
-// import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
 import backendServer from '../../config';
-import { Card, Row, Col } from 'react-bootstrap';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import {restaurantsSignup} from '../../actions/signupActions'
 import ReactFlexyTable from "react-flexy-table"
 import "react-flexy-table/dist/index.css";
 import CustomerLoginCheck from './customerLoginCheck';
@@ -23,7 +16,6 @@ class OneRestaurantView extends Component {
     super(props);
     this.state = {};
     this.getRestaurantInfo();
-    // this.setRestaurantShow = this.setRestaurantShow.bind(this);
   } 
 
   getRestaurantInfo = () => {
@@ -40,13 +32,11 @@ class OneRestaurantView extends Component {
     axios.get(`${backendServer}/restaurants/${this.props.match.params.resid}/profile`)
     .then(response => {
         this.setState({
-            // console.log(response.data);
             description: response.data.description,
             contact: response.data.contact,
             timings: response.data.timings,
             location: response.data.location,
             deliverymode: response.data.deliverymode
-            // restaurantId: response.data[0].id
         });
     });
 
@@ -62,13 +52,13 @@ class OneRestaurantView extends Component {
       var options = this.state.deliverymode.split(" ");
       this.state.selectedDm = options[0]
     }
-    
+    var imgsrc = `${backendServer}/restaurants/${this.props.match.params.resid}/viewProfileImage`;
     return (
         <div>
           <CustomerLoginCheck/>
-            {/* {redirectVar} */}
                 <div class="restaurantHome">
                     <h2 style={{color: "maroon"}}> <b>{ this.state.name } </b></h2>
+                    <img class="profile-photo" src={imgsrc}></img>
                     {/* <div> <Link to='/restaurantprofileupdate'>Update Profile</Link></div> */}
                     <p> <b>Description:</b> {this.state.description}</p>
                     <form>

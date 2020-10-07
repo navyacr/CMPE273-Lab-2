@@ -17,24 +17,21 @@ exports.findOne = (req, res) => {
         });
     }
 
-// Create and Save a new Tutorial
 exports.create = (req, res) => {
     // Validate request
     if (!req.body.name) {
       res.status(400).send({
-        message: "Content can not be empty!"
+        message: "Content cannot be empty!"
       });
       return;
     }
   
-    // Create a Tutorial
     const c = {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password
     };
   
-    // Save Tutorial in the database
     customers.create(c)
       .then(data => {
         res.send(data);
@@ -74,6 +71,27 @@ exports.create = (req, res) => {
         res.status(500).send({
           message:
             err.message || "Some error occurred while logging in."
+        });
+      });
+  };
+
+  exports.update = (req, res) => {
+    const id = req.params.customerId;
+    var condition = id ? { id: { [Op.eq]: `${id}` } } : null;
+    const newDetails = {
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    };
+
+    customers.update(newDetails, { where: condition })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while updating restaurants."
         });
       });
   };

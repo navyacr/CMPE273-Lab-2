@@ -20,8 +20,16 @@ class CustomerNavbar extends Component {
                     <Link class="nav-link" to="/customerProfile">Profile</Link>
                 </li>
                 <li class="nav-item">
+                    <Link class="nav-link" to="/profileUpdate">Update Profile</Link>
+                </li>
+                <li class="nav-item">
                     <Link class="nav-link" to="/viewOrders">Orders</Link>
                 </li>
+                <li class="nav-item">
+                    <Link class="nav-link" to="/eventRegister">Events</Link>
+                </li>
+                
+                
             </ul>
         </div>
         )
