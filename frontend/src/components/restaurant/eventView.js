@@ -46,9 +46,9 @@ class EventView extends Component {
         for (let i = 0; i < this.state.events.length; i++) {
                 data.push(
                             <Card border="basic" style={{ width: '18rem' }}><Card.Body> 
-                              {/* <a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i].restaurant.id}> */}
+                              <a style={{ cursor: 'pointer' }} href={"/oneEventView/" + this.state.events[i].id}>
                                 <Card.Title><b>{this.state.events[i].name}</b></Card.Title>
-                              {/* </a> */}
+                              </a>
                             {/* <AggregateReview resid={this.state.restaurants[i].restaurant.id}/> */}
                             <Card.Text><b> Description: </b> {this.state.events[i].description}</Card.Text>
                             <Card.Text><b> Date: </b> {this.state.events[i].date}</Card.Text>
@@ -64,27 +64,6 @@ class EventView extends Component {
 
     return (
       <div>
-        
-        {/* <table class="searchtable">
-          <tr>
-            <td>
-            <Dropdown options={options} onChange={this._onSelect}  placeholder="Search by" />
-            </td>
-            <td>
-              <div disabled={this.state.disabled}>
-                <Dropdown options={this.state.secondoptions} onChange={this._onValueSelect} placeholder="Select" />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              {this.state.textbox}
-            </td>
-            <td>
-            <button class="icon" onClick={this.search}><i class="glyphicon glyphicon-search"></i></button>
-            </td>
-          </tr>
-        </table> */}
         {data}
       </div>
        

@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
-// // import cookie from 'react-cookies';
-// import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
-// import { Row, Col } from 'react-bootstrap';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getRestaurant, updateRestaurant } from '../../actions/restaurantProfileActions'
-// import {restaurantsSignup} from '../../actions/signupActions'
-import { Container, Col, Row, Form, Button, ButtonGroup, Card } from 'react-bootstrap';
+import { Col, Form, Button, ButtonGroup } from 'react-bootstrap';
 import backendServer from '../../config';
 import DetailsUpdate from './detailsUpdate'
 

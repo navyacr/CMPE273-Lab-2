@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
-import ReactFlexyTable from "react-flexy-table"
 import "react-flexy-table/dist/index.css";
 import CustomerLoginCheck from './customerLoginCheck';
 import OneRestaurantMenuView from './oneRestaurantMenuView';

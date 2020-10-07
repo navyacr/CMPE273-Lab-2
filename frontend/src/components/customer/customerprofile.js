@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
-// // import cookie from 'react-cookies';
-// import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
 import backendServer from '../../config';
-// import { Row, Col } from 'react-bootstrap';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import {restaurantsSignup} from '../../actions/signupActions'
-// import RestaurantMenu from './menu'
 
 class CustomerProfile extends Component {
   constructor(props) {
@@ -49,11 +41,14 @@ class CustomerProfile extends Component {
 
   }
   render(name) {
+    const id = localStorage.getItem('customer_id')
+    var imgsrc = `${backendServer}/customers/${id}/viewProfileImage`;
 
     return (
         <div>
           <div class="customerHome">
             <h2 style={{color: "maroon"}}> <b>Basic details</b></h2>
+              <img class="profile-photo" src={imgsrc}></img>
               <p> <b>Name:</b> {this.state.name}</p>
               <p> <b>Date of Birth:</b> {this.state.dob} </p>
               <p> <b>City:</b> {this.state.city} </p>

@@ -1,8 +1,9 @@
 const db = require("../models");
 const eventAttendees = db.eventAttendees;
+const customers = db.customers;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new eventAttendees
+// Create and Save a new eventAttendee
 exports.create = (req, res) => {
    
     // Create a eventAttendees
@@ -11,7 +12,6 @@ exports.create = (req, res) => {
       customerId: req.body.customerId
     };
   
-    // Save Tutorial in the database
     eventAttendees.create(eA)
       .then(data => {
         res.send(data);
@@ -27,7 +27,13 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     const eventId = req.params.eventId;
     var condition1 = eventId ? { eventId: { [Op.eq]: `${eventId}` } } : null;
-    eventAttendees.findAll({where: condition1})
+    eventAttendees.findAll(
+      {where: condition1,
+        include: [{
+            model: customers,
+            where: {}
+        }]
+      })
         .then(data => {
             res.send(data);
         })        

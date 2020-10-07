@@ -13,6 +13,8 @@ import restaurantMenu from './restaurant/menu';
 import menuUpdate from './restaurant/menuUpdate';
 import customerHome from './customer/customerHome';
 import OneRestaurantView from './customer/oneRestaurantView';
+import OneEventView from './restaurant/oneEventView';
+import oneEventAttendeeView from './restaurant/oneEventAttendeeView'
 import EventView from './restaurant/eventView';
 import PostEvent from './restaurant/postEvent'
 import ViewOrders from './customer/viewOrders';
@@ -24,7 +26,7 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <customerLoginCheck />
+        
         <Route path="/" component={Navbar} />
         <Route path="/login" component={Login} />
         {/* <Route path="/customerPage" component={CustomerPage} />
@@ -38,6 +40,8 @@ class Main extends Component {
         <Route path="/customerProfile" component={customerProfile} />
         <Route path="/customerHome" component={customerHome} />
         <Route path="/oneRestaurantView/:resid" component={OneRestaurantView} />
+        <Route path="/oneEventView/:eventid" component={OneEventView} />
+        <Route path="/oneEventAttendeeView/:cusid" component={oneEventAttendeeView} />        
         <Route path="/eventView" component={EventView} />
         <Route path="/postEvent" component={PostEvent} />
         <Route path="/viewOrders" component={ViewOrders} />
