@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import backendServer from '../../config';
 import { Card, Row, Col } from 'react-bootstrap';
-import ReactFlexyTable from "react-flexy-table"
 import "react-flexy-table/dist/index.css";
 import 'react-dropdown/style.css';
 
@@ -56,10 +54,7 @@ class EventRegister extends Component {
         for (let i = 0; i < this.state.events.length; i++) {
                 data.push(
                             <Card border="basic" style={{ width: '58rem' }}><Card.Body> 
-                              {/* <a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i].restaurant.id}> */}
-                                <Card.Title><b>{this.state.events[i].name}</b></Card.Title>
-                              {/* </a> */}
-                            {/* <AggregateReview resid={this.state.restaurants[i].restaurant.id}/> */}
+                            <Card.Title><b>{this.state.events[i].name}</b></Card.Title>                                                      
                             <Card.Text><b> Description: </b> {this.state.events[i].description}</Card.Text>
                             <Card.Text><b> Date: </b> {this.state.events[i].date}</Card.Text>
                             <Card.Text><b> Time: </b> {this.state.events[i].time}</Card.Text>

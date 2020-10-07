@@ -21,6 +21,7 @@ import ViewOrders from './customer/viewOrders';
 import CustomerProfileUpdate from './customer/customerprofileupdate';
 import EventRegister from './customer/eventRegister'
 import RestaurantViewOrders from './restaurant/restaurantViewOrders';
+import ViewRegisteredEvents from './customer/viewRegisteredEvents'
 
 class Main extends Component {
   render() {
@@ -48,6 +49,8 @@ class Main extends Component {
         <Route path="/profileUpdate" component={CustomerProfileUpdate} />
         <Route path="/eventRegister" component={EventRegister} />
         <Route path="/restaurantViewOrders" component={RestaurantViewOrders} />
+        <Route path="/viewRegisteredEvents" component={ViewRegisteredEvents} />
+        
       </div>
     );
   }

@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import backendServer from '../../config';
 import { Card, Row, Col } from 'react-bootstrap';
-import ReactFlexyTable from "react-flexy-table"
 import "react-flexy-table/dist/index.css";
-// import CustomerLoginCheck from './customerLoginCheck';
-// import AggregateReview from './aggregateReview';
-// import CustomerSearch from './searchTab';
-// import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
 class EventView extends Component {
@@ -18,16 +12,9 @@ class EventView extends Component {
     this.state = {
     };
     this.getEvents();
-    // this.search = this.search.bind(this);
-    // this.setCount = this.setCount.bind(this);
   } 
 
   getEvents = () => {
-    // var params = {
-    //   "type": this.state.type,
-    //    "value": this.state.value
-    // }
-    // console.log(params)
     axios.get(`${backendServer}/events/info`)
     .then(response => {
         console.log("Response: ", response)
@@ -49,7 +36,6 @@ class EventView extends Component {
                               <a style={{ cursor: 'pointer' }} href={"/oneEventView/" + this.state.events[i].id}>
                                 <Card.Title><b>{this.state.events[i].name}</b></Card.Title>
                               </a>
-                            {/* <AggregateReview resid={this.state.restaurants[i].restaurant.id}/> */}
                             <Card.Text><b> Description: </b> {this.state.events[i].description}</Card.Text>
                             <Card.Text><b> Date: </b> {this.state.events[i].date}</Card.Text>
                             <Card.Text><b> Time: </b> {this.state.events[i].time}</Card.Text>
