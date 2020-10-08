@@ -4,6 +4,7 @@ import axios from 'axios';
 import backendServer from '../../config';
 import {Button} from 'react-bootstrap';
 import RestaurantMenu from './menu';
+import RestaurantViewReview from './restaurantViewReview';
 
 class RestaurantProfile extends Component {
   constructor(props) {
@@ -83,17 +84,20 @@ onUserUpload = (e) => {
                     </form>
                     {/* <div> <Link to='/restaurantprofileupdate'>Update Profile</Link></div> */}
                     <p> <b>Description:</b> {this.state.description}</p>
-                    <p> <b>Reviews:</b> ***** </p>
                     <p> <b>Phone:</b> {this.state.contact} </p>
                     <p> <b>Email:</b> {this.state.email} </p>
                     <p> <b>Our Address:</b> {this.state.location}</p>
                     <p> <b>Timings:</b> {this.state.timings} </p>
                 </div>
                 <div>
-                  <h4><b> Menu: </b></h4>
+                  <h4 style={{color: "maroon"}}><b> Menu: </b></h4>
                 </div>
                 <div>
                   < RestaurantMenu />
+                </div>
+                
+                <div>
+                  < RestaurantViewReview />
                 </div>
                 
                 
