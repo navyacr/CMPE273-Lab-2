@@ -47,13 +47,19 @@ class RestaurantViewOrders extends Component {
       var data = []
 
       if (this.state && this.state.orders && this.state.orders.length > 0) {
-        let options = []
+        
         for (var i = 0; i < this.state.orders.length; i++) {
+        let options = []
+        let dropdown =<div></div>
           if (this.state.orders[i].dm) {
             let method = this.state.orders[i].dm
             if (method === "dinein") {
+              
               options = [{label: "On the way", value: i}, {label: "Delivered", value: i}]
-            } 
+            }
+            if (this.state.orders[i].status !== "cancelled") {
+              dropdown=dropdown=<Dropdown options={options} label={this.state.orders[i].id} onChange={this.onSelect} placeholder="Delivery mode" />
+            }
           }
           //let imgsrc = `${backendServer}/restaurants/${this.state.dishes[i].id}/dishImage`
             data.push(<Card border='info' border-width='10px' style={{ width: '50%' , color: 'black' , }}> <Card.Body> 
@@ -63,7 +69,7 @@ class RestaurantViewOrders extends Component {
                           <Card.Text><b> {this.state.orders[i].dish.price}</b></Card.Text>
                           <Card.Text><b> Status: {this.state.orders[i].status} </b></Card.Text>
                           <Card.Text><b> {this.state.orders[i].dm} </b></Card.Text>
-                          <Dropdown options={options} label={this.state.orders[i].id} onChange={this.onSelect} placeholder="Delivery mode" />
+                          {dropdown}
                       </Card.Body> </Card>)
         }
     }

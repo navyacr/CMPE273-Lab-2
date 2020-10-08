@@ -26,8 +26,12 @@ class RestaurantNavbar extends Component {
                         <Link class="nav-link" to="/eventView">Events</Link>
                     </li>
                     <li class="nav-item">
-                        <Link class="nav-link" to="/postEvent">Post New Event</Link>
+                        <Link class="nav-link" to="/postEvent">Add Event</Link>
                     </li>
+                    <li class="nav-item">
+                        <Link class="nav-link" to="/restaurantViewOrders">Orders</Link>
+                    </li>
+                    
                 </ul>
             </div>
         )

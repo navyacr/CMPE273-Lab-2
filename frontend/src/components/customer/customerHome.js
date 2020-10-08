@@ -8,6 +8,7 @@ import CustomerLoginCheck from './customerLoginCheck';
 import AggregateReview from './aggregateReview';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import MapContainer from './mapComponent'
 
 class CustomerHome extends Component {
   constructor(props) {
@@ -131,6 +132,7 @@ this.setState({
       <div>
         
         <CustomerLoginCheck />
+        <MapContainer />
         <table class="searchtable">
           <tr>
             <td>
