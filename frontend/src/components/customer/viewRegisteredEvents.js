@@ -37,7 +37,7 @@ class ViewRegisteredEvents extends Component {
                             <Card border="basic" style={{ width: '58rem' }}><Card.Body> 
                             <Card.Title><b>{this.state.events[i].event.name}</b></Card.Title>                                                      
                             <Card.Text><b> Description: </b> {this.state.events[i].event.description}</Card.Text>
-                            <Card.Text><b> Date: </b> {this.state.events[i].event.date}</Card.Text>
+                            <Card.Text><b> Date: </b> {this.state.events[i].event.date.split('T')[0]}</Card.Text>
                             <Card.Text><b> Time: </b> {this.state.events[i].event.time}</Card.Text>
                             <Card.Text><b> Location: </b> {this.state.events[i].event.location}</Card.Text>
                             <Card.Text><b> Trending Hashtags: </b> {this.state.events[i].event.hashtags}</Card.Text>

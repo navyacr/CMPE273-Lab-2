@@ -2,19 +2,39 @@ import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import "react-flexy-table/dist/index.css";
 import 'react-dropdown/style.css';
+import CustomerLoginCheck from './customerLoginCheck';
 
 class EventRegister extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        
+        textbox: <input type="text" placeholder="Search by event name" onChange={this._onInputChange}/>,
     };
     this.getEvents();
     this.register = this.register.bind(this);
   } 
+  _onInputChange = (e) => {
+    this.setState({
+        value: e.target.value
+    });
+  }
+  search = () => {
+    var params = {
+       "value": this.state.value
+    }
+    console.log(params)
+    axios.post(`${backendServer}/events/eventsearch`, params)
+    .then(response => {
+        console.log("Response: ", response)
+        this.setState({
+            events: response.data
+        });
+    });
+}
+
   register = (e) =>{
       console.log("Register: ", e.target.value)
       const attendee_data = {
@@ -54,11 +74,11 @@ class EventRegister extends Component {
                             <Card border="basic" style={{ width: '58rem' }}><Card.Body> 
                             <Card.Title><b>{this.state.events[i].name}</b></Card.Title>                                                      
                             <Card.Text><b> Description: </b> {this.state.events[i].description}</Card.Text>
-                            <Card.Text><b> Date: </b> {this.state.events[i].date}</Card.Text>
+                            <Card.Text><b> Date: </b> {this.state.events[i].date.split('T')[0]}</Card.Text>
                             <Card.Text><b> Time: </b> {this.state.events[i].time}</Card.Text>
                             <Card.Text><b> Location: </b> {this.state.events[i].location}</Card.Text>
                             <Card.Text><b> Trending Hashtags: </b> {this.state.events[i].hashtags}</Card.Text>
-                            <button value={this.state.events[i].id} onClick={this.register}>Register</button>
+                            <button class="btn btn-primary" value={this.state.events[i].id}  onClick={this.register}>Register</button>
 
                             <Card.Text> </Card.Text>
                         </Card.Body></Card>)
@@ -66,7 +86,22 @@ class EventRegister extends Component {
         }
     }
     return (
+      
+      
+
       <div>
+        < CustomerLoginCheck />
+
+        <table class="searchtable">
+          <tr>
+            <td>
+              {this.state.textbox}
+            </td>
+            <td>
+            <button class="icon" onClick={this.search}><i class="glyphicon glyphicon-search"></i></button>
+            </td>
+          </tr>
+        </table>
         {data}
       </div>
      )

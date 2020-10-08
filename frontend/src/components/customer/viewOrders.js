@@ -8,8 +8,11 @@ import "react-flexy-table/dist/index.css";
 const buttons = [
   { name: "All", value: "all" },
   { name: "New", value: "Order Received" },
-  { name: "Delivered", value: "delivered" },
-  { name: "Cancelled", value: "cancelled" }
+  { name: "New", value: "On the  way" },
+  { name: "Delivered", value: "Delivered" },
+  { name: "Pick up Ready", value: "Pick up Ready" },
+  { name: "Picked up", value: "Picked up" },  
+  { name: "Cancelled", value: "Cancelled" }
 ];
 
 class ViewOrders extends Component {
@@ -40,28 +43,17 @@ componentDidMount() {
   });
 }
 handleClick = (name) => {
-  // this.getOrders()
-  console.log(name)
-  let filterCoffee = [];
+  let filteredData = [];
   if (name === "all"){
     this.setState({orders: this.state.allorders})
     return
   }
-  filterCoffee = this.state.allorders.filter(
+  filteredData = this.state.allorders.filter(
         orders => orders.status === name
   );
-  // if (name === "Cancelled") {
-  //   filterCoffee = this.state.orders.filter(
-  //     orders => orders.status === name
-  //   );
-  // } else {
-  //   filterCoffee = this.state.orders.filter(
-  //     orders => orders.status === name
-  //   );
-  // }
 
-  console.log("Filter coffee: ", filterCoffee)
-  this.setState({ orders: filterCoffee });
+  console.log("Filtered data: ", filteredData)
+  this.setState({ orders: filteredData });
 };
 
   getOrders = () => {
@@ -89,6 +81,7 @@ handleClick = (name) => {
                           <Card.Text><b> {this.state.orders[i].dish.price}</b></Card.Text>
                           <Card.Text><b> Status: {this.state.orders[i].status} </b></Card.Text>                       
                           <Card.Text><b> Date: {this.state.orders[i].createdAt.split("T")[0]} </b></Card.Text>
+                          <Card.Text><b> Time: {this.state.orders[i].createdAt.split("T")[1]} </b></Card.Text>
                           <button class="btn btn-primary" value={this.state.orders[i].id} onClick={this.cancel}>Cancel</button>
                           
                       </Card.Body> </Card>)
@@ -98,19 +91,17 @@ handleClick = (name) => {
     return (
       <div>
         <div>
-        {buttons.map(({ name, value }) => (
-          <button
-            class="btn btn-primary"
-            key={name}
-            value={value}
-            onClick={this.handleClick.bind(this, value)}
-          >
-            {name}
-          </button>
-        ))}
-        {/* <p>Coffee: {renderAll}</p> */}
-        {/* <h2>{this.state.filterCoffee.length}</h2> */}
-      </div>
+          {buttons.map(({ name, value }) => (
+            <button
+              class="btn btn-primary pad"
+              key={name}
+              value={value}
+              onClick={this.handleClick.bind(this, value)}
+            >
+              {name}
+            </button>
+          ))}
+        </div>
         {data}
       </div>
     )

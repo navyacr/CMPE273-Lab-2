@@ -109,7 +109,7 @@ exports.findAll = (req, res) => {
     
       var condition = orderId ? { id: { [Op.eq]: `${orderId}` } } : null;
       const newProfile = {
-        status: "cancelled"
+        status: "Cancelled"
       };
       orders.update(newProfile, {
         where: condition

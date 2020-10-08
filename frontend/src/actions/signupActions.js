@@ -17,4 +17,6 @@ export const restaurantsSignup = (restaurantsData) => (dispatch) => {
         });
       }
     });
+
+    
 };

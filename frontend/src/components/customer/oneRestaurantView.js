@@ -58,20 +58,14 @@ class OneRestaurantView extends Component {
                 <div class="restaurantHome">
                     <h2 style={{color: "maroon"}}> <b>{ this.state.name } </b></h2>
                     <img class="profile-photo" src={imgsrc}></img>
-                    {/* <div> <Link to='/restaurantprofileupdate'>Update Profile</Link></div> */}
-                    <p> <b>Description:</b> {this.state.description}</p>
-                    <form>
-                      <p> <b>Reviews:</b> ***** </p>
-           
-                    </form>
-                    
+                    <p> <b>Description:</b> {this.state.description}</p>                    
                     <p> <b>Phone:</b> {this.state.contact} </p>
                     <p> <b>Email:</b> {this.state.email} </p>
                     <p> <b>Our Address:</b> {this.state.location}</p>
                     <p> <b>Timings:</b> {this.state.timings} </p>
                 </div>
                 <div>
-                  <h4><b> Menu: </b></h4>
+                  <h4 style={{color: "maroon"}}> <b> Menu: </b></h4>
                   <Dropdown options={options} value={this.state.selectedDm} onChange={this._onSelect}  placeholder="Delivery mode" />
                   < OneRestaurantMenuView dm={this.state.selectedDm} resid={this.props.match.params.resid}/>
                   < CustomerAddReview resid={this.props.match.params.resid}/>

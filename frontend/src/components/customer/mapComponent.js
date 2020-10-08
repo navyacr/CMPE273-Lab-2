@@ -24,10 +24,10 @@ export class MapContainer extends Component {
   };
 
   initialise = () => {
-    var addresses = ["Burj Khalifa", "Eiffel tower", "1235 wildwood avenue sunnyvale"]
-    for (let address of addresses) {
-      let name = "Check"
-    Geocode.fromAddress(address).then(
+
+    for (let restaurant of this.props.restaurants) {
+      let name = restaurant.name;
+    Geocode.fromAddress(restaurant.location).then(
       response => {
            
             const { lat, lng } = response.results[0].geometry.location;

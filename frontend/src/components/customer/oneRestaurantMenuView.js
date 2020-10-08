@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
-// // import cookie from 'react-cookies';
-// import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
 import backendServer from '../../config';
-import { Card, Row, Col } from 'react-bootstrap';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import {restaurantsSignup} from '../../actions/signupActions'
-import ReactFlexyTable from "react-flexy-table"
-import "react-flexy-table/dist/index.css"
+import { Card } from 'react-bootstrap';
 
 class OneRestaurantMenuView extends Component {
   constructor(props) {
@@ -47,11 +39,13 @@ class OneRestaurantMenuView extends Component {
 
       if (this.state && this.state.dishes && this.state.dishes.length > 0) {
         for (let i = 0; i < this.state.dishes.length; i++) {
+          let imgsrc = `${backendServer}/restaurants/${this.state.dishes[i].id}/dishImage`
           if (!this.state.dishes[i].qty) {
             this.state.dishes[i].qty = 0
           }
             data.push(<Card>
                         <Card.Body> 
+                            <Card.Img variant="top" class="dish-image" src={imgsrc}></Card.Img>
                             <Card.Title><b>{this.state.dishes[i].name}</b></Card.Title>
                             <Card.Text><b> Category: </b> {this.state.dishes[i].category}</Card.Text>
                             <Card.Text><b> Ingredients: </b>  {this.state.dishes[i].ingredients}</Card.Text>

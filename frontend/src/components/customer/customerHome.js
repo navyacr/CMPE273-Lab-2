@@ -55,9 +55,9 @@ this.setState({
  if (e && e.value === 'deliverymode'){
     this.setState({  
         secondoptions: [
-            {value: 'dinein', label: 'Dine In'},
-            {value: 'curbside', label: 'Curbside'},
-            {value: 'delivery', label: 'Yelp Delivery'},
+            {value: 'Dinein', label: 'Dine In'},
+            {value: 'Pickup', label: 'Curbside Pickup'},
+            {value: 'Delivery', label: 'Yelp Delivery'},
           ],
 
     });
@@ -117,14 +117,14 @@ this.setState({
                 // this.state.restaurants[i].qty = 0;
                 var imgsrc = `${backendServer}/restaurants/${this.state.restaurants[i].restaurant.id}/viewProfileImage`;
                 data.push(
-                            <Card border="basic" style={{ width: '18rem' }}><Card.Body> 
-                              <img class="profile-photo" src={imgsrc}></img>
-                              <a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i].restaurant.id}>
-                                <Card.Title><b>{this.state.restaurants[i].restaurant.name}</b></Card.Title>
-                              </a>
-                            <AggregateReview resid={this.state.restaurants[i].restaurant.id}/>
-                            <Card.Text><b> Description: </b> {this.state.restaurants[i].description}</Card.Text>
-                            </Card.Body></Card>)
+                          <Card border="basic" style={{ width: '18rem' }}><Card.Body> 
+                            <img class="profile-photo" src={imgsrc}></img>
+                            <a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i].restaurant.id}>
+                              <Card.Title><b>{this.state.restaurants[i].restaurant.name}</b></Card.Title>
+                            </a>
+                          <AggregateReview resid={this.state.restaurants[i].restaurant.id}/>
+                          <Card.Text><b> Description: </b> {this.state.restaurants[i].description}</Card.Text>
+                          </Card.Body></Card>)
             }
         }
     }
@@ -132,7 +132,7 @@ this.setState({
       <div>
         
         <CustomerLoginCheck />
-        <MapContainer />
+        
         <table class="searchtable">
           <tr>
             <td>
@@ -154,8 +154,8 @@ this.setState({
           </tr>
         </table>
         {data}
+        <div style={{width:"150px"}}><MapContainer restaurants={this.state.restaurants}/></div>
       </div>
-       
      )
   }
 }

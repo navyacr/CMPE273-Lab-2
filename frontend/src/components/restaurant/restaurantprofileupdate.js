@@ -1,23 +1,50 @@
 import React, { Component } from 'react';
 import '../../App.css';
-import axios from 'axios';
-// // import cookie from 'react-cookies';
-// import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
-// import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getRestaurant, updateRestaurant } from '../../actions/restaurantProfileActions'
-// import {restaurantsSignup} from '../../actions/signupActions'
-import { Container, Col, Row, Form, Button, ButtonGroup, Card } from 'react-bootstrap';
+import { getRestaurant, updateRestaurant } from '../../actions/restaurantProfileActions';
+import { Col, Form, Button, ButtonGroup } from 'react-bootstrap';
+import { Multiselect } from 'multiselect-react-dropdown';
 
 class RestaurantProfileUpdate extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+        options: [{name: 'Dinein', id: 1},{name: 'Pickup', id: 2}, {name: 'Delivery', id: 3}]
+    };
     this.onChange = this.onChange.bind(this);
+    this.onSelect = this.onSelect.bind(this);
+    this.onRemove = this.onRemove.bind(this);
     
   } 
+  onSelect(selectedList, selectedItem) {
+      let dm = "";
+      for (let item of selectedList){
+          dm += item.name;
+          dm += " ";
+
+      }
+      console.log("Selected list: ",dm)
+      this.setState({
+          deliverymode: dm
+      })
+
+  }
+ 
+  onRemove(selectedList, removedItem) {
+      console.log("remove: ", selectedList)
+      let dm = "";
+      for (let item of selectedList){
+          dm += item.name;
+          dm += " ";
+
+      }
+      console.log("Selected list: ",dm)
+      this.setState({
+          deliverymode: dm
+      })
+
+  }
 
   onChange = (e) => {
     this.setState({
@@ -116,11 +143,19 @@ class RestaurantProfileUpdate extends Component {
                             />
                     </Form.Group>
                 </Form.Row>
+
+                <Multiselect
+                    options={this.state.options} // Options to display in the dropdown
+                    selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
+                    onSelect={this.onSelect} // Function will trigger on select event
+                    onRemove={this.onRemove} // Function will trigger on remove event
+                    displayValue="name" // Property name to display in the dropdown options
+                />
+                
                 <ButtonGroup aria-label="Third group">
                     <Button type="submit" variant="success">Update Details</Button>
                 </ButtonGroup>
             </Form>
-            {/* <center><Button href="/restaurantProfile">Home</Button></center> */}
         </div>
     )
   }

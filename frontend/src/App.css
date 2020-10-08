@@ -88,3 +88,7 @@ div[disabled]
   height: 60px;
   width: 80px;
 }
+
+.pad{
+  margin: 1.5px;
+}
