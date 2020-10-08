@@ -13,7 +13,6 @@ class EventRegister extends Component {
         
     };
     this.getEvents();
-
     this.register = this.register.bind(this);
   } 
   register = (e) =>{
@@ -32,7 +31,6 @@ class EventRegister extends Component {
             alert('Oops!! something went wrong, Try again.')
         }
       })
-
   }
 
   getEvents = () => {
@@ -43,11 +41,11 @@ class EventRegister extends Component {
             events: response.data
         });
     });
-}
+  }
  
 
 
-  render(name) {
+  render() {
       var data = []
 
       if (this.state && this.state.events && this.state.events.length > 0) {
@@ -67,16 +65,12 @@ class EventRegister extends Component {
             
         }
     }
-
-
     return (
       <div>
         {data}
       </div>
-       
      )
   }
 }
-
 
 export default EventRegister;

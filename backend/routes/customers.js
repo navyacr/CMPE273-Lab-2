@@ -17,8 +17,8 @@ app.post('/validate', customers.validate)
 
 //Route to get orders of a customer
 app.get('/:customerId/orders', orders.findAll)
-
 app.post('/:customerId/orders', orders.create)
+app.get('/:orderId/cancelOrder', orders.cancelOrder)
 
 // Customer review for a restaurant
 app.post('/:customerId/reviews', reviews.create)
@@ -29,5 +29,6 @@ app.post('/:customerId/profile', customersProfile.createOrUpdate)
 app.post('/restaurantsearch', restaurantsProfile.search)
 app.post('/:customerId/uploadImage', customersProfile.uploadImage)
 app.get('/:customerId/viewProfileImage', customersProfile.viewProfileImage)
+
 
 module.exports = app;

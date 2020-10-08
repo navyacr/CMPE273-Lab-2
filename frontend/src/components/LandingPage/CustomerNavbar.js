@@ -1,7 +1,5 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
-import cookie from 'react-cookies';
-import {Redirect} from 'react-router';
 
 //create the Navbar Component
 class CustomerNavbar extends Component {
@@ -30,9 +28,7 @@ class CustomerNavbar extends Component {
                 </li>
                 <li class="nav-item">
                     <Link class="nav-link" to="/viewRegisteredEvents"> Registered Events</Link>
-                </li>
-                
-                
+                </li> 
             </ul>
         </div>
         )

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import "react-flexy-table/dist/index.css";
 import 'react-dropdown/style.css';
 

@@ -3,11 +3,9 @@ import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
 import { Card } from 'react-bootstrap';
-import ReactFlexyTable from "react-flexy-table"
 import "react-flexy-table/dist/index.css";
 import CustomerLoginCheck from './customerLoginCheck';
 import AggregateReview from './aggregateReview';
-import CustomerSearch from './searchTab';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 

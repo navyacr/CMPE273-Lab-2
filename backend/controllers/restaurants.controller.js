@@ -2,6 +2,7 @@ const db = require("../models");
 const restaurants = db.restaurants;
 const restaurantsProfile = db.restaurantsProfile;
 const Op = db.Sequelize.Op;
+const passwordHash = require('password-hash');
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
@@ -12,12 +13,12 @@ exports.create = (req, res) => {
       });
       return;
     }
-  
+    let hashedPassword = passwordHash.generate(req.body.password);
     // Create a Tutorial
     const r = {
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password
+      password: hashedPassword
     };
   
     // Save Tutorial in the database
@@ -66,6 +67,7 @@ exports.create = (req, res) => {
 
   exports.validate = (req, res) => {
     const username = req.body.username;
+    
     const pwd = req.body.password;
     var condition = username ? { email: { [Op.eq]: `${username}` } } : null;
   
@@ -76,7 +78,7 @@ exports.create = (req, res) => {
             message: "INVALID_CREDENTIALS"
           });
         }
-        else if (data.dataValues.password === pwd){
+        else if (passwordHash.verify(pwd, data.dataValues.password)){
           message = {message: "SUCCESS"}
           returnVal = Object.assign(message, data.dataValues)
           res.status(200).send(returnVal)

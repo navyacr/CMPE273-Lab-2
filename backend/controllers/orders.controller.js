@@ -60,7 +60,6 @@ exports.findAll = (req, res) => {
             err.message || "Some error occurred while retrieving orders."
         });
       })
-    
   };
 
   exports.findRestaurantOrders = (req, res) => {
@@ -102,5 +101,19 @@ exports.findAll = (req, res) => {
         where: condition
       })
     }
+    res.send({"status": "OK"})
+  };
+
+  exports.cancelOrder = (req, res) => {
+    const orderId = req.params.orderId;
+    
+      var condition = orderId ? { id: { [Op.eq]: `${orderId}` } } : null;
+      const newProfile = {
+        status: "cancelled"
+      };
+      orders.update(newProfile, {
+        where: condition
+      })
+    
     res.send({"status": "OK"})
   };

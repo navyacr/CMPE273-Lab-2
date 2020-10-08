@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import Login from './Login/Login';
-// import CustomerPage from './Login/Login';
-// import restaurantsPage from './Login/restaurantsPage'
 import Navbar from './LandingPage/Navbar';
 import customersSignup from './Signup/customersSignup';
 import restaurantsSignup from './Signup/restaurantsSignup';
@@ -30,8 +28,6 @@ class Main extends Component {
         
         <Route path="/" component={Navbar} />
         <Route path="/login" component={Login} />
-        {/* <Route path="/customerPage" component={CustomerPage} />
-        <Route path="/restaurantsPage" component={restaurantsPage} /> */}
         <Route path="/customersSignup" component={customersSignup} />
         <Route path="/restaurantsSignup" component={restaurantsSignup} />
         <Route path="/restaurantProfile" component={restaurantProfile} />

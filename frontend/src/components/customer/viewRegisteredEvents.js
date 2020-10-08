@@ -41,22 +41,15 @@ class ViewRegisteredEvents extends Component {
                             <Card.Text><b> Time: </b> {this.state.events[i].event.time}</Card.Text>
                             <Card.Text><b> Location: </b> {this.state.events[i].event.location}</Card.Text>
                             <Card.Text><b> Trending Hashtags: </b> {this.state.events[i].event.hashtags}</Card.Text>
-
                             <Card.Text> </Card.Text>
                         </Card.Body></Card>)
-            
         }
     }
-
-
     return (
       <div>
         {data}
       </div>
-       
      )
   }
 }
-
-
 export default ViewRegisteredEvents;

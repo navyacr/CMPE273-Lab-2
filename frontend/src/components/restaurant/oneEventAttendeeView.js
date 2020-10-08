@@ -62,11 +62,9 @@ class OneEventAttendeeView extends Component {
                     <p> <b>Things I Love:</b> {this.state.thingsilovethingsilove}</p>
                     <p> <b>Website:</b> {this.state.website} </p>
                 </div>
-                
             </div>
     )
   }
 }
-
 
 export default OneEventAttendeeView;
