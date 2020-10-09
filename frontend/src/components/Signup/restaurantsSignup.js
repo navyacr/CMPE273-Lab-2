@@ -25,7 +25,8 @@ class RestaurantsSignup extends Component {
     const data = {
         name: this.state.name,
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        location: this.state.location
     }
 
     this.props.restaurantsSignup(data);
@@ -68,6 +69,9 @@ class RestaurantsSignup extends Component {
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control" name="password" onChange={this.onChange} placeholder="Password" required />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="location" onChange={this.onChange} placeholder="Address" required />
                                 </div>
                                 <div style={{ color: "#ff0000" }}>{message}</div><br />
                                 <button type="submit" class="btn btn-primary">Signup</button><br /><br />

@@ -3,8 +3,8 @@ import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import Geocode from "react-geocode";
 
 const mapStyles = {
-  width: '100%',
-  height: '100%'
+  width: '500px',
+  height: '500px'
 };
 
 Geocode.setApiKey("AIzaSyAXlNf-MoO09CftUsjp5UiMHaZWvc2ydwE");
@@ -26,7 +26,7 @@ export class MapContainer extends Component {
   initialise = () => {
 
     for (let restaurant of this.props.restaurants) {
-      let name = restaurant.name;
+      let name = restaurant.restaurant.name;
     Geocode.fromAddress(restaurant.location).then(
       response => {
            

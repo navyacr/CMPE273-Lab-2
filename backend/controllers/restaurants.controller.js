@@ -25,8 +25,8 @@ exports.create = (req, res) => {
     restaurants.create(r)
       .then(data => {
         data.message = "SUCCESS";
-        value = {message: "SUCCESS"}
-        res.send({message: "SUCCESS"});
+        value = {message: "SUCCESS", id: data.id}
+        res.send(value);
       })
       .catch(err => {
         res.status(500).send({

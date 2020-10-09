@@ -92,3 +92,23 @@ div[disabled]
 .pad{
   margin: 1.5px;
 }
+
+.header_menu{
+  border-bottom:1px solid #CCC;
+  width:100%;
+}
+
+.links{
+  width:60%;
+  float:left;
+  text-align:left;
+}
+.social_media{
+  width:40%;
+  float:left;
+  text-align:right;
+  position: relative;
+}
+.clearfix{
+  clear:both;
+}

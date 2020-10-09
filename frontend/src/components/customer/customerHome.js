@@ -146,8 +146,12 @@ this.setState({
                 // this.state.restaurants[i].qty = 0;
                 var imgsrc = `${backendServer}/restaurants/${this.state.restaurants[i].restaurant.id}/viewProfileImage`;
                 data.push(
-                          <Card border="basic" style={{ width: '18rem' }}><Card.Body> 
+                          <Card border="basic" style={{ width: '100%' }}><Card.Body> 
+                            <div class="d-flex">
+                            <div class="mx-auto pull-left">
                             <img class="profile-photo" src={imgsrc}></img>
+                            </div>
+                            <div class="mx-auto pull-right">
                             <a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i].restaurant.id}>
                               <Card.Title><b>{this.state.restaurants[i].restaurant.name}</b></Card.Title>
                             </a>
@@ -155,6 +159,8 @@ this.setState({
                           <AggregateReview resid={this.state.restaurants[i].restaurant.id}/>
                           <Card.Text><b> Delivery modes:  </b> {this.state.restaurants[i].deliverymode}</Card.Text>
                           <Card.Text><b> Description: </b> {this.state.restaurants[i].description}</Card.Text>
+                          </div>
+                          </div>
                           </Card.Body></Card>)
             }
         }
@@ -197,9 +203,20 @@ this.setState({
             </button>
           ))}
         </div>
-        
-        {data}
-        <div style={{width:"150px"}}><MapContainer restaurants={this.state.restaurants}/></div>
+        <div class="header_menu">
+          <div class="links">
+            {data}
+          </div>
+          <div class="social_media">
+          <MapContainer restaurants={this.state.restaurants}/>
+          </div>
+          <div class="clearfix"></div>
+      </div>
+
+
+
+        {/* {data}
+        <div style={{width:"150px"}}><MapContainer restaurants={this.state.restaurants}/></div> */}
       </div>
      )
   }
