@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../../App.css';
 import {Redirect} from 'react-router';
 import { Link } from 'react-router-dom';
-import RestaurantsLogin from './restaurantsLogin';
+
 import axios from 'axios';
 import backendServer from '../../config'
 
@@ -65,28 +65,39 @@ class Login extends Component{
                         err: response.data                       
                     })
                 }else{
+                    console.log("Invalid cred")
                     this.setState({
-                        authFlag : false
+                        authFlag : false,
+                        invalid: true
                     })
                 }
                 
-            });
+            })
+            .catch(err => {
+                console.log("Invalid cred")
+                    this.setState({
+                        authFlag : false,
+                        invalid: true
+                    })
+            })
     }
 
     render(){
         //redirect based on successful login
         let redirectVar = null;    
+        let message = ""
         if(this.state.authFlag){
             redirectVar = <Redirect to= "/customerHome"/>
+        } else if (this.state.invalid) {
+            message = "Invalid username or password"
         }
         return(
             <div>
                 {redirectVar}
-            <div class="container">
-                <div class="customer-form">
-                    <div class="main-div">
-                        <div class="panel">
-                        
+                <div >
+                            <div class="main-div">
+                                <div class="panel">
+                            
                             <h2>Customer Login</h2>
                             <p>Please enter your username and password</p>
                             {/* <h4><font color='red'>{this.state.err}</font></h4> */}
@@ -98,12 +109,16 @@ class Login extends Component{
                             <div class="form-group">
                                 <input onChange = {this.cust_passwordChangeHandler} type="password" class="form-control" name="password" placeholder="Password" required/>
                             </div>
+                            <div style={{ color: "#ff0000" }}>{message}</div>
                             <button type="submit" class="btn btn-primary">Login</button>                 
                             <div class="signup-section">
                                 
                                 <div>
                                     <p>Don't have an account?
-                                    <Link to='/CustomersSignup'>   Signup here</Link>
+                                        <Link to='/CustomersSignup'>   Signup here</Link>
+                                    </p>
+                                    <p>
+                                        <Link to="/RestaurantsLogin">Restaurant? Click here to sign in</Link>
                                     </p>
                                     </div>
                                 </div>
@@ -113,8 +128,7 @@ class Login extends Component{
                     
                 </div>
                 
-                <div class="restaurant-form"> <RestaurantsLogin /></div>
-            </div>
+                {/* <div class="restaurant-form"> <RestaurantsLogin /></div> */}
             </div>
         )
     }

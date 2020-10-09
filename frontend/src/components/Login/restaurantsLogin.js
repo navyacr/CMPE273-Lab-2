@@ -68,7 +68,14 @@ class RestaurantsLogin extends Component{
                                     </div>
                                     <div style={{ color: "#ff0000" }}>{message}</div>
                                     <button type="submit" class="btn btn-primary">Login</button>
-                                    <div>Don't have an account? <Link to='/restaurantsSignup'>   Signup here</Link></div>
+                                    <div>
+                                        <p>
+                                            Don't have an account? <Link to='/restaurantsSignup'>   Signup here</Link>
+                                        </p>
+                                        <p>
+                                            <Link to="/login">Customer? Click here to sign in</Link>
+                                        </p>
+                                    </div>
                                 </form>
                             </div>
                         
