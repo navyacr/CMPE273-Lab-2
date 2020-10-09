@@ -95,7 +95,10 @@ class RestaurantViewOrders extends Component {
             }
           
             data.push(<Card border='info' border-width='10px' style={{ width: '50%' , color: 'black' , }}> <Card.Body> 
-                          <Card.Title><b>Customer Name: {this.state.orders[i].customer.name}</b></Card.Title>
+                          <Card.Title><b>Customer Name:</b></Card.Title>
+                          <a style={{ cursor: 'pointer' }} href={"/oneEventAttendeeView/" + this.state.orders[i].customer.id}>
+                          <Card.Title><b>{this.state.orders[i].customer.name}</b></Card.Title>
+                          </a>
                           <Card.Img variant="top" class="dish-image" src={imgsrc}></Card.Img>
                           <Card.Text><b>Dish name: {this.state.orders[i].dish.name}</b></Card.Text>
                           <Card.Text><b> {this.state.orders[i].dish.price}</b></Card.Text>

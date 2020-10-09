@@ -50,6 +50,7 @@ class CustomerViewReview extends Component {
                             numberOfStars={5}
                             changeRating=""
                             name='rating' /></Card.Text>
+                            <Card.Text><b> Date: </b> {this.state.reviews[i].createdAt.split('T')[0]}</Card.Text>
                             <Card.Text><b> Description: </b> {this.state.reviews[i].description}</Card.Text>
                             </Card.Body></Card>)
         }

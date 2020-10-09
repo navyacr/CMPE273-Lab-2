@@ -8,7 +8,7 @@ import "react-flexy-table/dist/index.css";
 const buttons = [
   { name: "All", value: "all" },
   { name: "New", value: "Order Received" },
-  { name: "New", value: "On the  way" },
+  { name: "On the way", value: "On the way" },
   { name: "Delivered", value: "Delivered" },
   { name: "Pick up Ready", value: "Pick up Ready" },
   { name: "Picked up", value: "Picked up" },  

@@ -10,6 +10,13 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import MapContainer from './mapComponent'
 
+const buttons = [
+  { name: "All", value: "all" },
+  { name: "Dinein", value: "Dinein" },
+  { name: "Curbside Pickup", value: "Pickup" },
+  { name: "Yelp Delivery", value: "Delivery" }
+];
+
 class CustomerHome extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +28,27 @@ class CustomerHome extends Component {
     this.search = this.search.bind(this);
     this.setCount = this.setCount.bind(this);
   } 
+
+  componentDidMount() {
+    this.setState({
+      all: this.state.restaurants
+    });
+  }
+
+  handleClick = (name) => {
+    console.log(name)
+    var re = new RegExp(name, 'gi');
+    let filteredData = [];
+    if (name === "all"){
+      this.setState({restaurants: this.state.allrestaurants})
+      return
+    }
+    filteredData = this.state.allrestaurants.filter(
+      restaurants => restaurants.deliverymode.match(re) 
+    );  
+    console.log("Filtered data: ", filteredData)
+    this.setState({ restaurants: filteredData });
+  };
 
   search = () => {
     var params = {
@@ -88,7 +116,8 @@ this.setState({
     axios.get(`${backendServer}/restaurants/info`)
     .then(response => {
         this.setState({
-            restaurants: response.data
+            restaurants: response.data,
+            allrestaurants : response.data
         });
     });
   }
@@ -122,7 +151,9 @@ this.setState({
                             <a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i].restaurant.id}>
                               <Card.Title><b>{this.state.restaurants[i].restaurant.name}</b></Card.Title>
                             </a>
+                          
                           <AggregateReview resid={this.state.restaurants[i].restaurant.id}/>
+                          <Card.Text><b> Delivery modes:  </b> {this.state.restaurants[i].deliverymode}</Card.Text>
                           <Card.Text><b> Description: </b> {this.state.restaurants[i].description}</Card.Text>
                           </Card.Body></Card>)
             }
@@ -153,6 +184,20 @@ this.setState({
             </td>
           </tr>
         </table>
+
+        <div>
+          {buttons.map(({ name, value }) => (
+            <button
+              class="btn btn-primary pad"
+              key={name}
+              value={value}
+              onClick={this.handleClick.bind(this, value)}
+            >
+              {name}
+            </button>
+          ))}
+        </div>
+        
         {data}
         <div style={{width:"150px"}}><MapContainer restaurants={this.state.restaurants}/></div>
       </div>

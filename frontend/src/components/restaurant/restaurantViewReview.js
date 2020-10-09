@@ -36,7 +36,9 @@ class RestaurantViewReview extends Component {
         for (let i = 0; i < this.state.reviews.length; i++) {
                 data.push(
                             <Card border="primary" style={{ width: '18rem' }}><Card.Body> 
+                            <a style={{ cursor: 'pointer' }} href={"/oneEventAttendeeView/" + this.state.reviews[i].customer.id}>
                             <Card.Title><b>{this.state.reviews[i].customer.name}</b></Card.Title>
+                            </a>
                             <Card.Text><StarRatings
                             rating={Number(this.state.reviews[i].rating)}
                             starRatedColor="orange"
@@ -45,6 +47,7 @@ class RestaurantViewReview extends Component {
                             numberOfStars={5}
                             changeRating=""
                             name='rating' /></Card.Text>
+                            <Card.Text><b> Date: </b> {this.state.reviews[i].createdAt.split('T')[0]}</Card.Text>
                             <Card.Text><b> Description: </b> {this.state.reviews[i].description}</Card.Text>
                             </Card.Body></Card>)
         }

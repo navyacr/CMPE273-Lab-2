@@ -96,9 +96,30 @@ exports.createOrUpdate = (req, res) => {
           err.message || "Some error occurred while updating the restaurantProfile."
       });
     });
-
-
     }
+
+    if (type === 'location'){
+      var condition =  { location : { [Op.like]: `%${value}%` } }
+      restaurantsProfile.findAll({
+      where: condition,
+      include: [{
+          model: restaurants,
+          where: {}
+      }]
+    }).then((data) => {
+          res.send(data)
+          console.log("*********************\n\n\n\n\n",data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while updating the restaurantProfile."
+      });
+    });
+    }
+
+
+
     var condition =  { [type] : { [Op.eq]: `${value}` } }
     restaurantsProfile.findAll({
       where: condition,

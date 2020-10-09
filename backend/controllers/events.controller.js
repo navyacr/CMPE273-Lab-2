@@ -37,7 +37,11 @@ exports.create = (req, res) => {
 
   exports.findAll = (req, res) => {
     
-    events.findAll()
+    events.findAll({
+      order: [
+        [ 'date', 'ASC' ]
+      ]
+    })
       .then(data => {
         res.send(data);
       })
