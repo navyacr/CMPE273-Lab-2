@@ -31,7 +31,7 @@ class CustomerProfile extends Component {
             country: response.data.country,
             nickname: response.data.nickname,
             headline: response.data.headline,
-            yelpsince: response.data.yelpsince,
+            yelpsince: response.data.createdAt,
             thingsilove: response.data.thingsilove,
             findmein: response.data.findmein,
             website: response.data.website,
@@ -40,14 +40,14 @@ class CustomerProfile extends Component {
     });
 
   }
-  render(name) {
+  render() {
     const id = localStorage.getItem('customer_id')
     var imgsrc = `${backendServer}/customers/${id}/viewProfileImage`;
 
     return (
         <div>
           <div class="customerHome">
-            <h2 style={{color: "maroon"}}> <b>Basic details</b></h2>
+            <h3 style={{color: "maroon"}}> <b>Basic details</b></h3>
               <img class="profile-photo" src={imgsrc}></img>
               <p> <b>Name:</b> {this.state.name}</p>
               <p> <b>Date of Birth:</b> {this.state.dob} </p>
@@ -56,12 +56,12 @@ class CustomerProfile extends Component {
               <p> <b>Country:</b> {this.state.country} </p>
               <p> <b>Nickname:</b> {this.state.nickname} </p>
               <p> <b>Headline:</b> {this.state.headline} </p>
-            <h2 style={{color: "maroon"}}> <b>About</b></h2>
+            <h3 style={{color: "maroon"}}> <b>About</b></h3>
               <p> <b>Yelping Since:</b> {this.state.yelpsince} </p>
               <p> <b>Things I love:</b> {this.state.thingsilove} </p>
               <p> <b>Find me in:</b> {this.state.findmein} </p>
               <p> <b>Website:</b> {this.state.website} </p>
-            <h2 style={{color: "maroon"}}> <b>Contact Information</b></h2>
+            <h3 style={{color: "maroon"}}> <b>Contact Information</b></h3>
               <p> <b>Phone Number:</b> {this.state.phonenumber} </p>                    
               <p> <b>Email:</b> {this.state.email} </p> 
           </div>

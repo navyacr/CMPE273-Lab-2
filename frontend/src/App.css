@@ -81,8 +81,8 @@ div[disabled]
   width: 130px;
 }
 .dish-image{
-  height: 80px;
-  width: 80px;
+  height: 150px;
+  width: 150px;
 }
 .logo{
   height: 60px;
@@ -111,4 +111,16 @@ div[disabled]
 }
 .clearfix{
   clear:both;
+}
+
+.eventtable {
+  width: 50px;
+}
+
+.form-adjust{
+  width: 500px;
+}
+
+.Dropdown-root{
+  width: 80%
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import "react-flexy-table/dist/index.css";
 import Dropdown from 'react-dropdown';
 
@@ -70,7 +70,7 @@ class RestaurantViewOrders extends Component {
     });
   }
 
-  render(name) {
+  render() {
       var data = []
 
       if (this.state && this.state.orders && this.state.orders.length > 0) {
@@ -83,11 +83,11 @@ class RestaurantViewOrders extends Component {
               let method = this.state.orders[i].dm
               if (method === "Delivery") {
                 
-                options = [{label: "On the way", value: i}, {label: "Delivered", value: i}]
+                options = [{label: "Preparing", value: i}, {label: "On the way", value: i}, {label: "Delivered", value: i}]
               }
               if (method === "Pickup") {
                 
-                options = [{label: "Pick up Ready", value: i}, {label: "Picked up", value: i}]
+                options = [{label: "Preparing", value: i}, {label: "Pick up Ready", value: i}, {label: "Picked up", value: i}]
               }
               if ((this.state.orders[i].status !== "Cancelled") && (this.state.orders[i].dm !== "Dinein")) {
                 dropdown=dropdown=<Dropdown options={options} label={this.state.orders[i].id} onChange={this.onSelect} placeholder="Delivery mode" />
@@ -95,16 +95,24 @@ class RestaurantViewOrders extends Component {
             }
           
             data.push(<Card border='info' border-width='10px' style={{ width: '50%' , color: 'black' , }}> <Card.Body> 
+                          <div class="d-flex">
+                            <div class="mx-auto pull-left">
+                            <Card.Img variant="top" class="dish-image" src={imgsrc}></Card.Img>
+                            </div>
+                            <div class="mx-auto pull-right">
                           <Card.Title><b>Customer Name:</b></Card.Title>
                           <a style={{ cursor: 'pointer' }} href={"/oneEventAttendeeView/" + this.state.orders[i].customer.id}>
                           <Card.Title><b>{this.state.orders[i].customer.name}</b></Card.Title>
                           </a>
-                          <Card.Img variant="top" class="dish-image" src={imgsrc}></Card.Img>
+                          {/* <Card.Img variant="top" class="dish-image" src={imgsrc}></Card.Img> */}
                           <Card.Text><b>Dish name: {this.state.orders[i].dish.name}</b></Card.Text>
-                          <Card.Text><b> {this.state.orders[i].dish.price}</b></Card.Text>
+                          <Card.Text><b> {this.state.orders[i].dish.price} USD</b></Card.Text>
+                          <Card.Text><b> Quantity: {this.state.orders[i].qty}</b></Card.Text>
                           <Card.Text><b> Status: {this.state.orders[i].status} </b></Card.Text>
                           <Card.Text><b> {this.state.orders[i].dm} </b></Card.Text>
                           {dropdown}
+                          </div>
+                          </div>
                       </Card.Body> </Card>)
         }
     }

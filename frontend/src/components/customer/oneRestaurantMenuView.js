@@ -43,14 +43,18 @@ class OneRestaurantMenuView extends Component {
           if (!this.state.dishes[i].qty) {
             this.state.dishes[i].qty = 0
           }
-            data.push(<Card>
+            data.push(<Card border='info' border-width='10px' style={{ width: '60%' , color: 'black' , }}>
                         <Card.Body> 
+                        <div class="d-flex">
+                            <div class="mx-auto pull-left">
                             <Card.Img variant="top" class="dish-image" src={imgsrc}></Card.Img>
+                            </div>
+                            <div class="mx-auto pull-right">
                             <Card.Title><b>{this.state.dishes[i].name}</b></Card.Title>
                             <Card.Text><b> Category: </b> {this.state.dishes[i].category}</Card.Text>
                             <Card.Text><b> Ingredients: </b>  {this.state.dishes[i].ingredients}</Card.Text>
                             <Card.Text><b> Description: </b> {this.state.dishes[i].description}</Card.Text>
-                            <Card.Text><b> Price: </b> {this.state.dishes[i].price}</Card.Text>
+                            <Card.Text><b> Price: </b> {this.state.dishes[i].price} USD</Card.Text>
                             <Card.Text> <div>
                                           <span>Quantity</span>
                                           <button onClick={() => {
@@ -73,7 +77,8 @@ class OneRestaurantMenuView extends Component {
                                           </button>
                                         </div>
                               </Card.Text>
-                        
+                        </div>
+                        </div>
                         </Card.Body>
                       </Card>)
         }

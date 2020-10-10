@@ -44,7 +44,7 @@ class AggregateReview extends Component {
       var data = <div>
                 <StarRatings
                 rating={mean}
-                starRatedColor="orange"
+                starRatedColor="red"
                 starDimension="15px"
                 starSpacing='2px'
                 numberOfStars={5}

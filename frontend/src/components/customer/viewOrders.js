@@ -7,7 +7,7 @@ import "react-flexy-table/dist/index.css";
 
 const buttons = [
   { name: "All", value: "all" },
-  { name: "New", value: "Order Received" },
+  { name: "Preparing", value: "Preparing" },
   { name: "On the way", value: "On the way" },
   { name: "Delivered", value: "Delivered" },
   { name: "Pick up Ready", value: "Pick up Ready" },
@@ -75,15 +75,21 @@ handleClick = (name) => {
         for (var i = 0; i < this.state.orders.length; i++) {
           let imgsrc = `${backendServer}/restaurants/${this.state.orders[i].dish.id}/dishImage`
             data.push(<Card border='info' border-width='10px' style={{ width: '50%' , color: 'black' , }}> <Card.Body> 
-                          <Card.Title><b>{this.state.orders[i].dish.restaurant.name}</b></Card.Title>
+                          <div class="d-flex">
+                          <div class="mx-auto pull-left">
                           <Card.Img variant="top" class="dish-image" src={imgsrc}></Card.Img>
+                          </div>
+                          <div class="mx-auto pull-right">
+                          <Card.Title><b>{this.state.orders[i].dish.restaurant.name}</b></Card.Title>
                           <Card.Text><b>{this.state.orders[i].dish.name}</b></Card.Text>
-                          <Card.Text><b> {this.state.orders[i].dish.price}</b></Card.Text>
+                          <Card.Text><b> {this.state.orders[i].dish.price} USD</b></Card.Text>
+                          <Card.Text><b> Quantity: {this.state.orders[i].qty}</b></Card.Text>
                           <Card.Text><b> Status: {this.state.orders[i].status} </b></Card.Text>                       
                           <Card.Text><b> Date: {this.state.orders[i].createdAt.split("T")[0]} </b></Card.Text>
                           <Card.Text><b> Time: {this.state.orders[i].createdAt.split("T")[1]} </b></Card.Text>
                           <button class="btn btn-primary" value={this.state.orders[i].id} onClick={this.cancel}>Cancel</button>
-                          
+                          </div>
+                          </div>
                       </Card.Body> </Card>)
         }
     }

@@ -22,32 +22,6 @@ exports.findAll = (req, res) => {
     
   };
 
-
-//   exports.createDish = (req, res) => {
-//     const restaurantId = req.params.restaurantId;
-//     const d = {
-//         name: req.body.name,
-//         ingredients: req.body.ingredients,
-//         price: req.body.price,
-//         description: req.body.description,
-//         category: req.body.category,
-//         restaurantId: restaurantId
-//     };
-            
-//             // Save Restaurant in the database
-//             dishes.create(d)
-//                 .then(data => {
-//                     res.send(data);
-//                 })
-//                 .catch(err => {
-//                     res.status(500).send({
-//                         message:
-//                         error.message || "Some error occurred while creating the dish."
-//                     });
-//                 }); 
-//   };
-
-
   exports.createOrUpdate = (req, res) => {
     // First try to find the record
     const dishName = req.params.dishName;

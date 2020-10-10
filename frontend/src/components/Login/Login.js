@@ -65,7 +65,6 @@ class Login extends Component{
                         err: response.data                       
                     })
                 }else{
-                    console.log("Invalid cred")
                     this.setState({
                         authFlag : false,
                         invalid: true
@@ -74,7 +73,6 @@ class Login extends Component{
                 
             })
             .catch(err => {
-                console.log("Invalid cred")
                     this.setState({
                         authFlag : false,
                         invalid: true
@@ -100,7 +98,7 @@ class Login extends Component{
                             
                             <h2>Customer Login</h2>
                             <p>Please enter your username and password</p>
-                            {/* <h4><font color='red'>{this.state.err}</font></h4> */}
+                            
                         </div>
                         <form onSubmit={this.submitLogin}>                        
                             <div class="form-group">

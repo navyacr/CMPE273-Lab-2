@@ -66,7 +66,8 @@ class OneRestaurantView extends Component {
                 </div>
                 <div>
                   <h4 style={{color: "maroon"}}> <b> Menu: </b></h4>
-                  <Dropdown options={options} value={this.state.selectedDm} onChange={this._onSelect}  placeholder="Delivery mode" />
+                  <p>Select mode of delivery: </p>
+                  < Dropdown options={options} value={this.state.selectedDm} onChange={this._onSelect}  placeholder="Delivery mode" />
                   < OneRestaurantMenuView dm={this.state.selectedDm} resid={this.props.match.params.resid}/>
                   < CustomerAddReview resid={this.props.match.params.resid}/>
                   <CustomerViewReview resid={this.props.match.params.resid}/>

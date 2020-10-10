@@ -66,7 +66,8 @@ class RestaurantProfileUpdate extends Component {
 
     return (
         <div>
-            <h2> Update Restaurant: </h2>
+            <h3 style={{color: "maroon"}}> <b>Update restaurant details:</b></h3>
+            <div class='form-adjust'>
            <Form onSubmit={this.onUpdate} >
                 <Form.Row>
                     <Form.Group as={Col} controlId="name">
@@ -143,6 +144,7 @@ class RestaurantProfileUpdate extends Component {
                             />
                     </Form.Group>
                 </Form.Row>
+                <p>Select modes of delivery offered:</p>
 
                 <Multiselect
                     options={this.state.options} // Options to display in the dropdown
@@ -156,6 +158,7 @@ class RestaurantProfileUpdate extends Component {
                     <Button type="submit" variant="success">Update Details</Button>
                 </ButtonGroup>
             </Form>
+            </div>
         </div>
     )
   }

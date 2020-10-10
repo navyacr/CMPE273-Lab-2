@@ -36,7 +36,6 @@ class EventRegister extends Component {
 }
 
   register = (e) =>{
-      console.log("Register: ", e.target.value)
       const attendee_data = {
           eventId: e.target.value,
           customerId: localStorage.getItem('customer_id')          
@@ -71,7 +70,7 @@ class EventRegister extends Component {
       if (this.state && this.state.events && this.state.events.length > 0) {
         for (let i = 0; i < this.state.events.length; i++) {
                 data.push(
-                            <Card border="basic" style={{ width: '58rem' }}><Card.Body> 
+                            <Card border="info" style={{ width: '58rem' }}><Card.Body> 
                             <Card.Title><b>{this.state.events[i].name}</b></Card.Title>                                                      
                             <Card.Text><b> Description: </b> {this.state.events[i].description}</Card.Text>
                             <Card.Text><b> Date: </b> {this.state.events[i].date.split('T')[0]}</Card.Text>
@@ -92,7 +91,7 @@ class EventRegister extends Component {
       <div>
         < CustomerLoginCheck />
 
-        <table class="searchtable">
+        <table class="table eventtable">
           <tr>
             <td>
               {this.state.textbox}

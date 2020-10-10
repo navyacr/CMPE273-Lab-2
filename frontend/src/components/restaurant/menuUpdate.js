@@ -126,8 +126,8 @@ submitUpdate = (e) => {
 
     return (
         <div>
-            <h2> Update Restaurant Menu: </h2>
-
+            <h3 style={{color: "maroon"}}> <b>Update Restaurant Menu:</b></h3>
+            <div class='form-adjust'>
            <Form onSubmit={this.submitUpdate} >
                 <Form.Row>
                     <Form.Group as={Col} controlId="name">
@@ -186,9 +186,10 @@ submitUpdate = (e) => {
                           <input type="file" class="custom-file-input" name="filename" accept="image/*" onChange={this.onImageUpload} required/>
                           <label class="custom-file-label" for="user-file">{this.state.fileText}</label>
                       </div><br /><br />
-                      <Button type="submit" variant="primary">Upload</Button>
+                      <Button type="submit" variant="success">Upload</Button>
             </form>
             {/* <center><Button href="/restaurantProfile">Home</Button></center> */}
+        </div>
         </div>
     )
   }

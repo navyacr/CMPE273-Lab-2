@@ -31,7 +31,7 @@ class OneEventView extends Component {
       for (let i = 0; i < this.state.customers.length; i++) {
         var imgsrc = `${backendServer}/customers/${this.state.customers[i].customer.id}/viewProfileImage`;
               data.push(
-                          <Card border="basic" style={{ width: '18rem' }}><Card.Body> 
+                          <Card border="info" style={{ width: '40%' }}><Card.Body> 
                             <img class="profile-photo" src={imgsrc}></img>
                             <a style={{ cursor: 'pointer' }} href={"/oneEventAttendeeView/" + this.state.customers[i].customer.id}>
                               <Card.Title><b>{this.state.customers[i].customer.name}</b></Card.Title>

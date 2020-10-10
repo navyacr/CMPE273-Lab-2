@@ -14,10 +14,9 @@ class CustomerProfileUpdate extends Component {
     }
     //Bind the handlers to this class
     this.changeHandler = this.changeHandler.bind(this);
-
     this.update = this.update.bind(this);
-    
   } 
+
   onImageUpload = (e) => {
     this.setState({
         filename: e.target.files[0],
@@ -78,15 +77,17 @@ update = (e) => {
     var imgsrc = `${backendServer}/customers/${this.state.customerId}/viewProfileImage`;
     return (
         <div>
-            <h2> Update basic details: </h2>
+            <h3 style={{color: "maroon"}}> <b>Update details:</b></h3>
             <img class="profile-photo" src={imgsrc}></img>
                     <form onSubmit={this.onUserUpload}><br /><br /><br />
-                      <div class="custom-file" style={{ width: "80%" }}>
+                      <div class="custom-file" style={{ width: "20%" }}>
                           <input type="file" class="custom-file-input" name="filename" accept="image/*" onChange={this.onImageUpload} required/>
                           <label class="custom-file-label" for="user-file">{this.state.fileText}</label>
                       </div><br /><br />
-                      <Button type="submit" variant="primary">Upload</Button>
+                      <Button type="submit" variant="success">Upload</Button>
             </form>
+            <h3 style={{color: "maroon"}}> <b>Basic details update:</b></h3>
+            <div class='form-adjust'>
             <Form onSubmit={this.update} >
                <Form.Row>
                     <Form.Group as={Col} controlId="name">
@@ -94,7 +95,7 @@ update = (e) => {
                         <Form.Control name="name"
                             type="text"
                             onChange={this.changeHandler}
-                             />
+                            />
                     </Form.Group>
                 </Form.Row>
               
@@ -121,6 +122,7 @@ update = (e) => {
                     <Button type="submit" variant="success">Update</Button>
                 </ButtonGroup>
             </Form> 
+            </div>
             <div>
                 <DetailsUpdate/>
             </div>

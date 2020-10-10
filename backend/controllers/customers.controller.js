@@ -31,7 +31,7 @@ exports.create = (req, res) => {
       email: req.body.email,
       password: req.body.password
     };
-  
+    
     customers.create(c)
       .then(data => {
         res.send(data);

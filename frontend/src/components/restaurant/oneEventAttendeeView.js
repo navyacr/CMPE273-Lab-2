@@ -42,20 +42,20 @@ class OneEventAttendeeView extends Component {
 
   }
  
-  render(name) {
+  render() {
     var imgsrc = `${backendServer}/customers/${this.props.match.params.cusid}/viewProfileImage`;
     return (
         <div>
           <RestaurantLoginCheck/>
                 <div class="restaurantHome">
-                    <h2 style={{color: "maroon"}}> <b>{ this.state.name } </b></h2>
+                    <h3 style={{color: "maroon"}}> <b>{ this.state.name } </b></h3>
                     <img class="profile-photo" src={imgsrc}></img>
                     <p> <b>Email:</b> {this.state.email}</p>                    
                     <p> <b>Phone:</b> {this.state.phonenumber} </p>
                     <p> <b>City:</b> {this.state.city} </p>
                     <p> <b>State:</b> {this.state.state}</p>
                     <p> <b>Country:</b> {this.state.country} </p>
-                <h2 style={{color: "maroon"}}> <b>More Details: </b></h2>
+                <h3 style={{color: "maroon"}}> <b>More Details: </b></h3>
                     <p> <b>DOB:</b> {this.state.dob}</p>                    
                     <p> <b>Nickname:</b> {this.state.nickname} </p>
                     <p> <b>Headline:</b> {this.state.headline} </p>

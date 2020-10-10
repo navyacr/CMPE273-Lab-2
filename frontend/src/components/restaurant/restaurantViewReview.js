@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import backendServer from '../../config';
 import { Card } from 'react-bootstrap';
-import ReactFlexyTable from "react-flexy-table"
 import "react-flexy-table/dist/index.css";
 import RestaurantLoginCheck from './restaurantLoginCheck';
 import StarRatings from 'react-star-ratings';
@@ -18,8 +16,7 @@ class RestaurantViewReview extends Component {
   } 
 
   getReviews = () => {
-      const id = localStorage.getItem('restaurant_id')
-    //  console.log("Res id in review:", this.props.resid)
+    const id = localStorage.getItem('restaurant_id')
     axios.get(`${backendServer}/customers/${id}/reviews`)
     .then(response => {
       console.log(response.data)
@@ -35,7 +32,7 @@ class RestaurantViewReview extends Component {
       if (this.state && this.state.reviews && this.state.reviews.length > 0) {
         for (let i = 0; i < this.state.reviews.length; i++) {
                 data.push(
-                            <Card border="primary" style={{ width: '18rem' }}><Card.Body> 
+                            <Card border="info" style={{ width: '40%' }}><Card.Body> 
                             <a style={{ cursor: 'pointer' }} href={"/oneEventAttendeeView/" + this.state.reviews[i].customer.id}>
                             <Card.Title><b>{this.state.reviews[i].customer.name}</b></Card.Title>
                             </a>

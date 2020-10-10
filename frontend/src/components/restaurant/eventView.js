@@ -32,7 +32,7 @@ class EventView extends Component {
       if (this.state && this.state.events && this.state.events.length > 0) {
         for (let i = 0; i < this.state.events.length; i++) {
                 data.push(
-                            <Card border="basic" style={{ width: '18rem' }}><Card.Body> 
+                            <Card border="info" style={{ width: '40%' }}><Card.Body> 
                               <a style={{ cursor: 'pointer' }} href={"/oneEventView/" + this.state.events[i].id}>
                                 <Card.Title><b>{this.state.events[i].name}</b></Card.Title>
                               </a>

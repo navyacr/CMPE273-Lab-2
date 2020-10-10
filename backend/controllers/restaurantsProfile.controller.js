@@ -98,6 +98,26 @@ exports.createOrUpdate = (req, res) => {
     });
     }
 
+    if (type === 'restaurantname'){
+      var condition =  { name : { [Op.like]: `%${value}%` } }
+      restaurantsProfile.findAll({
+      // where: condition,
+      include: [{
+          model: restaurants,
+          where: condition
+      }]
+    }).then((data) => {
+          res.send(data)
+          console.log("*********************\n\n\n\n\n",data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while searching the restaurantProfile."
+      });
+    });
+    }
+
     if (type === 'location'){
       var condition =  { location : { [Op.like]: `%${value}%` } }
       restaurantsProfile.findAll({

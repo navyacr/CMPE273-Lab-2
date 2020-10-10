@@ -4,6 +4,7 @@ import axios from 'axios';
 // import cookie from 'react-cookies';
 import {Redirect} from 'react-router';
 import { Link } from 'react-router-dom';
+import backendServer from '../../config'
 //Define a Login Component
 class customersSignup extends Component{
     //call the constructor method
@@ -61,14 +62,13 @@ class customersSignup extends Component{
         //set the with credentials to true
         axios.defaults.withCredentials = true;
         //make a post request with the user data
-        axios.post('http://localhost:3001/customers/info',data)
+        axios.post(`${backendServer}/customers/info`,data)
             .then(response => {
                 console.log(response.data)
                 console.log("Status Code : ",response.status);
                 if(response.status === 200){
                     this.setState({
-                        authFlag : true,
-                        err: response.data                       
+                        authFlag : true                     
                     })
                 }else{
                     this.setState({
@@ -76,7 +76,13 @@ class customersSignup extends Component{
                     })
                 }
                 
-            });
+            })
+            .catch(err => {
+                    this.setState({
+                        authFlag : false,
+                        err: "Email id is already registered"
+                    })
+            })
     }
 
     render(){
@@ -107,7 +113,7 @@ class customersSignup extends Component{
                             <div class="form-group">
                                 <input onChange = {this.passwordChangeHandler} type="password" class="form-control" name="password" placeholder="Password" required/>
                             </div>
-                            
+                            <div style={{ color: "#ff0000" }}>{this.state.err}</div>
                             <button type="submit" class="btn btn-primary">Signup</button>
                             <div>Already have an account? <Link to='/login'>Login</Link></div>
                         </form>               

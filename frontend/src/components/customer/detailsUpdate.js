@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
-// // import cookie from 'react-cookies';
-// import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
-// import { Row, Col } from 'react-bootstrap';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getRestaurant, updateRestaurant } from '../../actions/restaurantProfileActions'
-// import {restaurantsSignup} from '../../actions/signupActions'
-import { Container, Col, Row, Form, Button, ButtonGroup, Card } from 'react-bootstrap';
+import { Col, Form, Button, ButtonGroup } from 'react-bootstrap';
 import backendServer from '../../config'
 
 class DetailsUpdate extends Component {
@@ -28,32 +20,8 @@ class DetailsUpdate extends Component {
         [e.target.name]: e.target.value
     })
 }
-// categoryChangeHandler = (e) =>{
-//     this.setState({
-//         category : e.target.value
-//     })
-// }
 
-// ingredientsChangeHandler = (e) =>{
-//     this.setState({
-//         ingredients : e.target.value
-//     })
-// }
-// //password change handler to update state variable with the text entered by the user
-// descriptionChangeHandler = (e) => {
-//     this.setState({
-//         description : e.target.value
-//     })
-// }
-// priceChangeHandler = (e) =>{
-//     this.setState({
-//         price : e.target.value
-//     })
-// }
-//submit Login handler to send a request to the node backend
 update = (e) => {
-    // var headers = new Headers();
-    //prevent page from refresh
     e.preventDefault();
     let data = Object.assign({}, this.state);
     const id = localStorage.getItem('customer_id')
@@ -81,7 +49,8 @@ update = (e) => {
 
     return (
         <div>
-            <h2> Update About Info: </h2>
+            <h3 style={{color: "maroon"}}> <b>Update 'About' section:</b></h3>
+            <div class='form-adjust'>
             <Form onSubmit={this.update} >
                <Form.Row>
                     <Form.Group as={Col} controlId="dob">
@@ -184,40 +153,13 @@ update = (e) => {
                              />
                     </Form.Group>
                 </Form.Row>
-{/*                 
-                <Form.Row>
-                    <Form.Group as={Col} controlId="time">
-                        <Form.Label>Time</Form.Label>
-                        <Form.Control name="time"
-                            type="text"
-                            onChange={this.changeHandler}
-                             />
-                    </Form.Group>
-                </Form.Row>
-              
-                <Form.Row>
-                    <Form.Group as={Col} controlId="location">
-                        <Form.Label>Location</Form.Label>
-                        <Form.Control name="location"
-                            type="text"
-                            onChange={this.changeHandler}
-                             />
-                    </Form.Group>
-                </Form.Row>
-            
-                <Form.Row>
-                    <Form.Group as={Col} controlId="hashtags">
-                        <Form.Label>Trending Hashtags</Form.Label>
-                        <Form.Control name="hashtags"
-                            type="text"
-                            onChange={this.changeHandler}
-                             />
-                    </Form.Group>
-                </Form.Row> */}
+                
+
                 <ButtonGroup aria-label="Third group">
                     <Button type="submit" variant="success">Update</Button>
                 </ButtonGroup>
             </Form> 
+            </div>
             
         </div> 
         

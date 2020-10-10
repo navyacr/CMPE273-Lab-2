@@ -34,7 +34,7 @@ class ViewRegisteredEvents extends Component {
       if (this.state && this.state.events && this.state.events.length > 0) {
         for (let i = 0; i < this.state.events.length; i++) {
                 data.push(
-                            <Card border="basic" style={{ width: '58rem' }}><Card.Body> 
+                            <Card border="info" style={{ width: '58rem' }}><Card.Body> 
                             <Card.Title><b>{this.state.events[i].event.name}</b></Card.Title>                                                      
                             <Card.Text><b> Description: </b> {this.state.events[i].event.description}</Card.Text>
                             <Card.Text><b> Date: </b> {this.state.events[i].event.date.split('T')[0]}</Card.Text>

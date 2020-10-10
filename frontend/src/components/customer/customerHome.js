@@ -44,7 +44,7 @@ class CustomerHome extends Component {
       return
     }
     filteredData = this.state.allrestaurants.filter(
-      restaurants => restaurants.deliverymode.match(re) 
+      restaurants => restaurants.deliverymode && restaurants.deliverymode.match(re) 
     );  
     console.log("Filtered data: ", filteredData)
     this.setState({ restaurants: filteredData });
@@ -94,14 +94,15 @@ this.setState({
     this.setState({
 
         secondoptions: [
-            {value: 'french', label: 'French'},
-            {value: 'mexican', label: 'Mexican'},
-            {value: 'mediterranean', label: 'Mediterranean'}
+            {value: 'French', label: 'French'},
+            {value: 'Mexican', label: 'Mexican'},
+            {value: 'Mediterranean', label: 'Mediterranean'},
+            {value: 'Indian', label: 'Indian'}
         ],
         
         
     });
-} else if (e && (e.value === 'location' || e.value === 'dishname')) {
+} else if (e && (e.value === 'location' || e.value === 'dishname' || e.value === 'restaurantname')) {
     this.setState({
       textbox: <input type="text" onChange={this._onInputChange}/>,
         
@@ -132,10 +133,11 @@ this.setState({
       {value: 'cuisine', label: 'Cuisine'},
       {value: 'deliverymode', label: 'Mode of Delivery'},
       {value: 'location', label: 'Location'},
-      {value: 'dishname', label: 'Dish Name'}
+      {value: 'dishname', label: 'Dish Name'},
+      {value: 'restaurantname', label: 'Restaurant Name'}
 
     ]
-    const defaultOption = options[2]
+    const defaultOption = options[4]
 
       var data = []
 
@@ -143,10 +145,10 @@ this.setState({
         for (let i = 0; i < this.state.restaurants.length; i++) {
           
             if (this.state.restaurants[i] && this.state.restaurants[i].restaurant) {
-                // this.state.restaurants[i].qty = 0;
+                
                 var imgsrc = `${backendServer}/restaurants/${this.state.restaurants[i].restaurant.id}/viewProfileImage`;
                 data.push(
-                          <Card border="basic" style={{ width: '100%' }}><Card.Body> 
+                          <Card border="info" style={{ width: '100%' }}><Card.Body> 
                             <div class="d-flex">
                             <div class="mx-auto pull-left">
                             <img class="profile-photo" src={imgsrc}></img>
@@ -158,6 +160,7 @@ this.setState({
                           
                           <AggregateReview resid={this.state.restaurants[i].restaurant.id}/>
                           <Card.Text><b> Delivery modes:  </b> {this.state.restaurants[i].deliverymode}</Card.Text>
+                          <Card.Text><b> Cuisine:  </b> {this.state.restaurants[i].cuisine}</Card.Text>
                           <Card.Text><b> Description: </b> {this.state.restaurants[i].description}</Card.Text>
                           </div>
                           </div>
@@ -167,7 +170,6 @@ this.setState({
     }
     return (
       <div>
-        
         <CustomerLoginCheck />
         
         <table class="searchtable">
@@ -212,11 +214,6 @@ this.setState({
           </div>
           <div class="clearfix"></div>
       </div>
-
-
-
-        {/* {data}
-        <div style={{width:"150px"}}><MapContainer restaurants={this.state.restaurants}/></div> */}
       </div>
      )
   }
