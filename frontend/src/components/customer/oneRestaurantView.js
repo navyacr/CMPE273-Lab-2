@@ -42,14 +42,13 @@ class OneRestaurantView extends Component {
   }
   _onSelect = (val) => {
     this.setState({
-      selectedDm : val
+      selectedDm : val.value
     })
   }
   render(name) {
     console.log("DM: ", this.state.deliverymode)
     if (this.state.deliverymode) {
       var options = this.state.deliverymode.split(" ");
-      this.state.selectedDm = options[0]
     }
     var imgsrc = `${backendServer}/restaurants/${this.props.match.params.resid}/viewProfileImage`;
     return (
