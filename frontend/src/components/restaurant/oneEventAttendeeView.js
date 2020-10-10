@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
-import "react-flexy-table/dist/index.css";
+// import "react-flexy-table/dist/index.css";
 import RestaurantLoginCheck from './restaurantLoginCheck';
 
 

@@ -3,7 +3,7 @@ import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
 import { Card } from 'react-bootstrap';
-import "react-flexy-table/dist/index.css";
+// import "react-flexy-table/dist/index.css";
 import Dropdown from 'react-dropdown';
 
 const buttons = [

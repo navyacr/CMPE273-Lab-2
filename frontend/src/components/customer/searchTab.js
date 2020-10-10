@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import backendServer from '../../config';
 import { Card, Row, Col } from 'react-bootstrap';
 import ReactFlexyTable from "react-flexy-table"
-import "react-flexy-table/dist/index.css";
+// import "react-flexy-table/dist/index.css";
 import CustomerLoginCheck from './customerLoginCheck';
 import AggregateReview from './aggregateReview';
 import Dropdown from 'react-dropdown';

@@ -1,26 +1,17 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
-// // import cookie from 'react-cookies';
-// import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
 import backendServer from '../../config';
-import { Card, Row, Col } from 'react-bootstrap';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import {restaurantsSignup} from '../../actions/signupActions'
-import ReactFlexyTable from "react-flexy-table"
-import "react-flexy-table/dist/index.css";
+// import "react-flexy-table/dist/index.css";
 import CustomerLoginCheck from './customerLoginCheck';
 import StarRatings from 'react-star-ratings';
-// import 
+
 
 class AggregateReview extends Component {
   constructor(props) {
     super(props);
     this.state = {};
     this.getAggregateReview();
-    // this.setRestaurantShow = this.setRestaurantShow.bind(this);
   } 
 
   getAggregateReview = () => {
@@ -35,7 +26,6 @@ class AggregateReview extends Component {
   }
 
   render(name) {
-    // let data = <div>No reviews</div>
     let mean = 0
       if (this.state.aggreviews && Number(this.state.aggreviews.count)>0){
       mean = Number(this.state.aggreviews.total)/Number(this.state.aggreviews.count)
