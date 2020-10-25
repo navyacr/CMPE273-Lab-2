@@ -1,13 +1,13 @@
-import { CUSTOMER_LOGIN, RESTAURANT_LOGIN } from '../actions/types';
+import { EVENT_VIEW } from '../actions/types';
 
 
 const initialState = {
   user: {},
 };
 
-// eslint-disable-next-line func-names
 export default function (state = initialState, action) {
-  if (action.type === RESTAURANT_LOGIN || action.type === CUSTOMER_LOGIN) {
+  console.log("Eventview reducer is", action)
+  if (action.type === EVENT_VIEW) {
     return {
       ...state,
       user: action.payload,

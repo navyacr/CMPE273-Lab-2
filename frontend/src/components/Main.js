@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import Login from './Login/Login';
 import Navbar from './LandingPage/Navbar';
-import customersSignup from './Signup/customersSignup';
+import CustomersSignup from './Signup/customersSignup';
 import restaurantsSignup from './Signup/restaurantsSignup';
 import restaurantProfile from './restaurant/restaurantprofile';
 import customerProfile from './customer/customerprofile';
@@ -29,7 +29,7 @@ class Main extends Component {
         
         <Route path="/" component={Navbar} />
         <Route path="/login" component={Login} />
-        <Route path="/customersSignup" component={customersSignup} />
+        <Route path="/customersSignup" component={CustomersSignup} />
         <Route path="/restaurantsSignup" component={restaurantsSignup} />
         <Route path="/restaurantProfile" component={restaurantProfile} />
         <Route path="/restaurantProfileUpdate" component={restaurantProfileUpdate} />

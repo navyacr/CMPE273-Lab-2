@@ -91,6 +91,6 @@ RestaurantsLogin.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    user: state.restaurantsLogin.user
+    user: state.login.user
 });
 export default connect(mapStateToProps, { restaurantsLogin })(RestaurantsLogin);

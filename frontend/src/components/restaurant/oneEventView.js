@@ -24,7 +24,7 @@ class OneEventView extends Component {
     });
 
   }
-  render(name) {
+  render() {
     var data = []
 
     if (this.state && this.state.customers && this.state.customers.length > 0) {

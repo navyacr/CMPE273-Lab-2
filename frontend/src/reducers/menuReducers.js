@@ -1,13 +1,12 @@
-import { CUSTOMER_LOGIN, RESTAURANT_LOGIN } from '../actions/types';
+import { MENU_UPDATE } from '../actions/types';
 
 
 const initialState = {
   user: {},
 };
 
-// eslint-disable-next-line func-names
 export default function (state = initialState, action) {
-  if (action.type === RESTAURANT_LOGIN || action.type === CUSTOMER_LOGIN) {
+  if (action.type === MENU_UPDATE) {
     return {
       ...state,
       user: action.payload,

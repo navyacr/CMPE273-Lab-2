@@ -6,18 +6,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getRestaurant, updateRestaurant } from '../../actions/restaurantProfileActions'
 import { Container, Col, Row, Form, Button, ButtonGroup, Card } from 'react-bootstrap';
-import backendServer from '../../config'
+import backendServer from '../../config';
+import { postEvent } from '../../actions/eventActions';
 
 class PostEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        name : "",
-        description : "",
-        date : "",
-        time: "",
-        location:"",
-        hashtags:""
+        // name : "",
+        // description : "",
+        // date : "",
+        // time: "",
+        // location:"",
+        // hashtags:""
     }
     //Bind the handlers to this class
     this.changeHandler = this.changeHandler.bind(this);
@@ -33,32 +34,34 @@ class PostEvent extends Component {
 
 submitEvent = (e) => {
     e.preventDefault();
-    let data = {
-        name : this.state.name,
-        time : this.state.time,
-        description : this.state.description,
-        date: this.state.date,
-        location : this.state.location,
-        hashtags: this.state.hashtags
-    }
-    axios.post(`${backendServer}/events/info`, data)
-        .then(response => {
-            console.log(response.data)
-            console.log("Status Code : ",response.status);
-            if(response.status === 200){
-                alert("Event posted successfully")
-                this.setState({
-                    authFlag : true,
-                    err: response.data                       
-                })
-            }else{
-                alert("Some error occured. Try again..")
-                this.setState({
-                    authFlag : false
-                })
-            }
+    // let data = {
+    //     name : this.state.name,
+    //     time : this.state.time,
+    //     description : this.state.description,
+    //     date: this.state.date,
+    //     location : this.state.location,
+    //     hashtags: this.state.hashtags
+    // }
+    let data = Object.assign({}, this.state);
+    this.props.postEvent(data);
+    // axios.post(`${backendServer}/events/info`, data)
+    //     .then(response => {
+    //         console.log(response.data)
+    //         console.log("Status Code : ",response.status);
+    //         if(response.status === 200){
+    //             alert("Event posted successfully")
+    //             this.setState({
+    //                 authFlag : true,
+    //                 err: response.data                       
+    //             })
+    //         }else{
+    //             alert("Some error occured. Try again..")
+    //             this.setState({
+    //                 authFlag : false
+    //             })
+    //         }
             
-        });
+    //     });
 }
 
   render() {
@@ -138,4 +141,17 @@ submitEvent = (e) => {
 }
 
 
-export default PostEvent;
+// export default PostEvent;
+
+
+PostEvent.propTypes = {
+    postEvent: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
+}
+
+
+const mapStateToProps = state => ({
+    user: state.postEvent.user
+});
+
+export default connect(mapStateToProps, { postEvent})(PostEvent);

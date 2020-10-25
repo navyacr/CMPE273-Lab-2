@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import '../../App.css';
 import {Redirect} from 'react-router';
 import { Link } from 'react-router-dom';
-
-import axios from 'axios';
-import backendServer from '../../config'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import {login} from '../../actions/customerLoginActions';
 
 //Define a Login Component
 class Login extends Component{
@@ -13,82 +13,122 @@ class Login extends Component{
         super(props);
         //maintain the state required for this component
         this.state = {
-            cust_username : "",
-            cust_password : "",
-            cust_authFlag : false,
-            cust_err: ""
+            // cust_username : "",
+            // cust_password : "",
+            // cust_authFlag : false,
+            // cust_err: ""
+        }
+    }
+        onChange = (e) => {
+            this.setState({
+                [e.target.name]: e.target.value
+            })
+          }
+
+        onSubmit = (e) => {
+        //prevent page from refresh
+            e.preventDefault();
+            const data = {
+                username: this.state.username,
+                password: this.state.password
+            }
+        
+            console.log("data:", data)
+            this.props.login(data);
+        
+            this.setState({
+                signupFlag: 1
+            });
         }
         //Bind the handlers to this class
-        this.cust_usernameChangeHandler = this.cust_usernameChangeHandler.bind(this);
-        this.cust_passwordChangeHandler = this.cust_passwordChangeHandler.bind(this);
-        this.submitLogin = this.submitLogin.bind(this);
-    }
+        // this.cust_usernameChangeHandler = this.cust_usernameChangeHandler.bind(this);
+        // this.cust_passwordChangeHandler = this.cust_passwordChangeHandler.bind(this);
+        // this.submitLogin = this.submitLogin.bind(this);
+    
     //Call the Will Mount to set the auth Flag to false
-    componentWillMount(){
-        this.setState({
-            authFlag : false,
-            err: ""
-        })
-    }
+    // componentWillMount(){
+    //     this.setState({
+    //         authFlag : false,
+    //         err: ""
+    //     })
+    // }
     //username change handler to update state variable with the text entered by the user
-    cust_usernameChangeHandler = (e) => {
-        this.setState({
-            username : e.target.value
-        })
-    }
+    // cust_usernameChangeHandler = (e) => {
+    //     this.setState({
+    //         username : e.target.value
+    //     })
+    // }
     //password change handler to update state variable with the text entered by the user
-    cust_passwordChangeHandler = (e) => {
-        this.setState({
-            password : e.target.value
-        })
-    }
+    // cust_passwordChangeHandler = (e) => {
+    //     this.setState({
+    //         password : e.target.value
+    //     })
+    // }
     //submit Login handler to send a request to the node backend
-    submitLogin = (e) => {
-        e.preventDefault();
-        const data = {
-            username : this.state.username,
-            password : this.state.password
-        }
-        //set the with credentials to true
-        axios.defaults.withCredentials = true;
-        //make a post request with the user data
-        axios.post(`${backendServer}/customers/validate`,data)
-            .then(response => {
-                console.log(response.data)
-                console.log("Status Code : ",response.status);
-                if(response.status === 200){
-                    localStorage.setItem('customer_id', response.data.id)
-                    localStorage.setItem('customer_name', response.data.name)
-                    localStorage.setItem('type', "customer")
-                    this.setState({
-                        authFlag : true,
-                        err: response.data                       
-                    })
-                }else{
-                    this.setState({
-                        authFlag : false,
-                        invalid: true
-                    })
-                }
+    // submitLogin = (e) => {
+    //     e.preventDefault();
+    //     const data = {
+    //         username : this.state.username,
+    //         password : this.state.password
+    //     }
+    //     //set the with credentials to true
+    //     axios.defaults.withCredentials = true;
+    //     //make a post request with the user data
+    //     axios.post(`${backendServer}/customers/validate`,data)
+    //         .then(response => {
+    //             console.log(response.data)
+    //             console.log("Status Code : ",response.status);
+    //             if(response.status === 200){
+    //                 localStorage.setItem('customer_id', response.data.id)
+    //                 localStorage.setItem('customer_name', response.data.name)
+    //                 localStorage.setItem('type', "customer")
+    //                 this.setState({
+    //                     authFlag : true,
+    //                     err: response.data                       
+    //                 })
+    //             }else{
+    //                 this.setState({
+    //                     authFlag : false,
+    //                     invalid: true
+    //                 })
+    //             }
                 
-            })
-            .catch(err => {
-                    this.setState({
-                        authFlag : false,
-                        invalid: true
-                    })
-            })
-    }
+    //         })
+    //         .catch(err => {
+    //                 this.setState({
+    //                     authFlag : false,
+    //                     invalid: true
+    //                 })
+    //         })
+    // }
 
     render(){
         //redirect based on successful login
-        let redirectVar = null;    
-        let message = ""
-        if(this.state.authFlag){
-            redirectVar = <Redirect to= "/customerHome"/>
-        } else if (this.state.invalid) {
+        // let redirectVar = null;    
+        // let message = ""
+        // if(this.state.authFlag){
+        //     redirectVar = <Redirect to= "/customerHome"/>
+        // } else if (this.state.invalid) {
+        //     message = "Invalid username or password"
+        // }
+
+        let redirectVar = null;
+        let message = "";
+        console.log("Props user value")
+        console.log(this.props)
+        if (this.props.user && this.props.user.message === "SUCCESS" && this.state.signupFlag) {
+            localStorage.setItem('customer_id', this.props.user.id)
+            localStorage.setItem('customer_name', this.props.user.name)
+            localStorage.setItem('type', "customer")
+            
+            alert("Logged in successfully");
+            redirectVar = <Redirect to="/customerHome" />
+        }
+        else if (this.props.user.message === "INVALID_CREDENTIALS" && this.state.signupFlag){
             message = "Invalid username or password"
         }
+
+
         return(
             <div>
                 {redirectVar}
@@ -100,12 +140,12 @@ class Login extends Component{
                             <p>Please enter your username and password</p>
                             
                         </div>
-                        <form onSubmit={this.submitLogin}>                        
+                        <form onSubmit={this.onSubmit}>                        
                             <div class="form-group">
-                                <input onChange = {this.cust_usernameChangeHandler} type="text" class="form-control" name="username" placeholder="Username" required/>
+                                <input onChange = {this.onChange} type="text" class="form-control" name="username" placeholder="Username" required/>
                             </div>
                             <div class="form-group">
-                                <input onChange = {this.cust_passwordChangeHandler} type="password" class="form-control" name="password" placeholder="Password" required/>
+                                <input onChange = {this.onChange} type="password" class="form-control" name="password" placeholder="Password" required/>
                             </div>
                             <div style={{ color: "#ff0000" }}>{message}</div>
                             <button type="submit" class="btn btn-primary">Login</button>                 
@@ -132,4 +172,14 @@ class Login extends Component{
     }
 }
 //export Login Component
-export default Login;
+// export default Login;
+
+Login.propTypes = {
+    login: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    user: state.login.user
+});
+export default connect(mapStateToProps, { login })(Login);

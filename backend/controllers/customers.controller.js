@@ -34,12 +34,15 @@ exports.create = (req, res) => {
     
     customers.create(c)
       .then(data => {
-        res.send(data);
+        data.message = "SUCCESS";
+        value = {message: "SUCCESS", id: data.id}
+        res.send(value);
+        // res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while creating the restaurant."
+            err.message || "Some error occurred while creating the customer."
         });
       });
   };

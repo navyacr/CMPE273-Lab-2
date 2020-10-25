@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import backendServer from '../../config';
 import { Card, Row, Col } from 'react-bootstrap';
-import ReactFlexyTable from "react-flexy-table"
-// import "react-flexy-table/dist/index.css";
 
 
 class RestaurantMenu extends Component {
@@ -27,7 +24,7 @@ class RestaurantMenu extends Component {
 
 
   }
-  render(name) {
+  render() {
       var data = []
 
       if (this.state && this.state.dishes && this.state.dishes.length > 0) {
