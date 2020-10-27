@@ -5,6 +5,9 @@ import backendServer from '../../config';
 import {Button} from 'react-bootstrap';
 import RestaurantMenu from './menu';
 import RestaurantViewReview from './restaurantViewReview';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getRestaurant } from '../../actions/restaurantProfileActions';
 
 class RestaurantProfile extends Component {
   constructor(props) {
@@ -13,6 +16,7 @@ class RestaurantProfile extends Component {
       fileText : "ChooseImage.."
     };
     this.getRestaurantInfo();
+    // this.props.getRestaurant();
   } 
 
   onImageUpload = (e) => {
@@ -103,6 +107,16 @@ onUserUpload = (e) => {
     )
   }
 }
-
-
 export default RestaurantProfile;
+
+// RestaurantProfile.propTypes = {
+//   getRestaurant: PropTypes.func.isRequired,
+//   user: PropTypes.object.isRequired
+// }
+
+
+// const mapStateToProps = state => ({
+//   user: state.getRestaurant.user
+// });
+
+// export default connect(mapStateToProps, { getRestaurant })(RestaurantProfile);

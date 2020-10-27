@@ -3,8 +3,10 @@ import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
 import { Card } from 'react-bootstrap';
-// import "react-flexy-table/dist/index.css";
 import Dropdown from 'react-dropdown';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { restaurantViewOrders } from '../../actions/restaurantViewOrdersActions';
 
 const buttons = [
   { name: "All", value: "all" },
@@ -18,7 +20,7 @@ class RestaurantViewOrders extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.getOrders();
+    this.props.restaurantViewOrders();
   } 
   componentDidMount() {
     this.setState({
@@ -57,18 +59,18 @@ class RestaurantViewOrders extends Component {
     this.state.orders[e.value].status = e.label
     console.log(this.state.orders)
   }
-  getOrders = () => {
+  // getOrders = () => {
      
-    const id = localStorage.getItem('restaurant_id')
-    axios.get(`${backendServer}/restaurants/${id}/orders`)
-    .then(response => {
-      console.log("RestaurantOrders:", response.data)
-        this.setState({
-            orders: response.data,
-            allorders: response.data,
-        });
-    });
-  }
+  //   const id = localStorage.getItem('restaurant_id')
+  //   axios.get(`${backendServer}/restaurants/${id}/orders`)
+  //   .then(response => {
+  //     console.log("RestaurantOrders:", response.data)
+  //       this.setState({
+  //           orders: response.data,
+  //           allorders: response.data,
+  //       });
+  //   });
+  // }
 
   render() {
       var data = []
@@ -140,4 +142,16 @@ class RestaurantViewOrders extends Component {
 }
 
 
-export default RestaurantViewOrders;
+// export default RestaurantViewOrders;
+
+RestaurantViewOrders.propTypes = {
+  restaurantViewOrders: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
+}
+
+
+const mapStateToProps = state => ({
+  user: state.restaurantViewOrders.user
+});
+
+export default connect(mapStateToProps, { restaurantViewOrders})(RestaurantViewOrders);

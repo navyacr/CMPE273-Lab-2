@@ -1,40 +1,43 @@
 import React, { Component } from 'react';
 import '../../App.css';
-import axios from 'axios';
+// import axios from 'axios';
 import backendServer from '../../config';
 import RestaurantLoginCheck from './restaurantLoginCheck';
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { oneEventView } from '../../actions/oneEventViewActions'
 
 
 class OneEventView extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.getEventInfo();
+    this.props.oneEventView(this.props.match.params.eventid);
   } 
 
-  getEventInfo = () => {
+  // getEventInfo = () => {
      
-    axios.get(`${backendServer}/events/${this.props.match.params.eventid}/attendees`)
-    .then(response => {
-        console.log("one event response", response)
-        this.setState({
-            customers: response.data
-        });
-    });
+  //   axios.get(`${backendServer}/events/${this.props.match.params.eventid}/attendees`)
+  //   .then(response => {
+  //       console.log("one event response", response)
+  //       this.setState({
+  //           customers: response.data
+  //       });
+  //   });
 
-  }
+  // }
   render() {
     var data = []
 
-    if (this.state && this.state.customers && this.state.customers.length > 0) {
-      for (let i = 0; i < this.state.customers.length; i++) {
-        var imgsrc = `${backendServer}/customers/${this.state.customers[i].customer.id}/viewProfileImage`;
+    if (this.props.user && this.props.user.length > 0) {
+      for (let i = 0; i < this.props.user.length; i++) {
+        var imgsrc = `${backendServer}/customers/${this.props.user[i].customer.id}/viewProfileImage`;
               data.push(
                           <Card border="info" style={{ width: '40%' }}><Card.Body> 
                             <img class="profile-photo" src={imgsrc}></img>
-                            <a style={{ cursor: 'pointer' }} href={"/oneEventAttendeeView/" + this.state.customers[i].customer.id}>
-                              <Card.Title><b>{this.state.customers[i].customer.name}</b></Card.Title>
+                            <a style={{ cursor: 'pointer' }} href={"/oneEventAttendeeView/" + this.props.user[i].customer.id}>
+                              <Card.Title><b>{this.props.user[i].customer.name}</b></Card.Title>
                             </a>
                           </Card.Body></Card>)
           
@@ -52,4 +55,16 @@ class OneEventView extends Component {
 }
 
 
-export default OneEventView;
+// export default OneEventView;
+
+OneEventView.propTypes = {
+  oneEventView: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
+}
+
+
+const mapStateToProps = state => ({
+  user: state.oneEventView.user
+});
+
+export default connect(mapStateToProps, { oneEventView })(OneEventView);

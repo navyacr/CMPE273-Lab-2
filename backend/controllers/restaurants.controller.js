@@ -3,37 +3,48 @@ const restaurants = db.restaurants;
 const restaurantsProfile = db.restaurantsProfile;
 const Op = db.Sequelize.Op;
 const passwordHash = require('password-hash');
+var kafka = require('../kafka/client');
+const bookModel = require('../models/books.model');
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
-    // Validate request
-    if (!req.body.name) {
-      res.status(400).send({
-        message: "Content can not be empty!"
-      });
-      return;
-    }
-    let hashedPassword = passwordHash.generate(req.body.password);
-    // Create a Tutorial
-    const r = {
-      name: req.body.name,
-      email: req.body.email,
-      password: hashedPassword
-    };
-  
-    // Save Tutorial in the database
-    restaurants.create(r)
-      .then(data => {
-        data.message = "SUCCESS";
-        value = {message: "SUCCESS", id: data.id}
-        res.send(value);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the restaurant."
-        });
-      });
+
+  // var newbook = new bookModel({
+  //   BookID: req.body.BookID,
+  //   Title: req.body.Title,
+  //   Author: req.body.Author
+  // });
+  // newbook.save((error, data) => {
+  //   if (error) {
+  //     res.send(error)
+  //     // callback({"status": "error"}, {"status": "error"})
+  //   }
+  //   else {
+  //     res.send(data)
+  //     // callback(null, {"status": "Done"})
+  //   }
+  // });
+
+  kafka.make_request('res_post_info',req.body, function(err,results){
+    console.log('in result');
+    console.log(results);
+    if (err){
+        console.log("Inside err");
+        res.json({
+            status:"error",
+            msg:"System Error, Try Again."
+        })
+    }else{
+        console.log("Inside else");
+            res.json({
+                updatedList:results
+            });
+
+            res.end();
+        }
+    
+});
+   
   };
 
   exports.findById = (req, res) => {

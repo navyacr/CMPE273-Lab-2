@@ -47,9 +47,6 @@ class EventView extends Component {
 }
 
 
-// export default EventView;
-
-
 EventView.propTypes = {
   eventView: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired
@@ -60,4 +57,4 @@ const mapStateToProps = state => ({
   user: state.eventView.user
 });
 
-export default connect(mapStateToProps, { eventView})(EventView);
+export default connect(mapStateToProps, { eventView })(EventView);

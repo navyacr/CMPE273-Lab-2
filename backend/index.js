@@ -1,12 +1,12 @@
-// const { mongoDB, frontendURL } = require('./config/db.config');
+// const { mongoDB, frontendURL } = require('./config/mongo.config');
 // const mongoose = require('mongoose');
 
-var options = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    poolSize: 500,
-    bufferMaxEntries: 0
-};
+// var options = {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     poolSize: 500,
+//     bufferMaxEntries: 0
+// };
 
 // mongoose.connect(mongoDB, options, (err, res) => {
 //     if (err) {

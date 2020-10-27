@@ -3,7 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const restaurantsProfile = db.restaurantsProfile;
 const restaurants = db.restaurants;
-const Op = db.Sequelize.Op;
+// const Op = db.Sequelize.Op;
 const fs = require('fs');
 const dishes = db.dishes;
 

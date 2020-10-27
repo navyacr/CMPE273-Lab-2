@@ -9,4 +9,11 @@ export const UPDATE_CUSTOMER = 'UPDATE_CUSTOMER';
 export const POST_EVENT = 'POST_EVENT';
 export const MENU_UPDATE = 'MENU_UPDATE';
 export const EVENT_VIEW = 'EVENT_VIEW';
+export const ONE_EVENT_VIEW = 'ONE_EVENT_VIEW';
+export const ONE_ATTENDEE_VIEW = 'ONE_ATTENDEE_VIEW';
+export const ORDERS_VIEW = 'ORDERS_VIEW';
+export const REVIEW_VIEW = 'REVIEW_VIEW';
+export const MENU_VIEW = 'MENU_VIEW';
+
+
 
