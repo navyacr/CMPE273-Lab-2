@@ -2,9 +2,9 @@ var connection =  new require('./kafka/Connection');
 //topics files
 //var signin = require('./services/signin.js');
 var Books = require('./services/books.js');
+var Customers = require("./services/customers.js")
 
 const mongoose = require('mongoose');
-const bookModel = require('./models/books.model');
 
 const { mongoDB, frontendURL } = require('../backend/config/mongo.config');
 
@@ -57,3 +57,4 @@ function handleTopicRequest(topic_name,fname){
 //first argument is topic name
 //second argument is a function that will handle this topic request
 handleTopicRequest("res_post_info",Books)
+handleTopicRequest("cusPostInfoa", Customers)
