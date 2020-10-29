@@ -3,20 +3,6 @@ const customers = db.customers;
 const Op = db.Sequelize.Op;
 var kafka = require('../kafka/client');
 
-// exports.findOne = (req, res) => {
-//   var customerId = req.params.customerId
-//   var condition = customerId ? { id: { [Op.eq]: `${customerId}` } } : null;
-//   customers.findOne({where: condition})
-//         .then(data => {
-//           res.send(data)
-//         })
-//         .catch(err => {
-//           res.status(500).send({
-//             message:
-//               err.message || "Some error occurred while creating the customerProfile."
-//           });
-//         });
-//     }
 
 exports.create = (req, res) => {
     kafka.make_request('cusPostInfoa',req.body, function(err,results){

@@ -25,6 +25,7 @@ function handle_request(msg, callback){
       else {
           newrestaurant.save(function (error, data) {
               if (error) {
+                console.log("Erroris:", error)
                 callback({"status": "error"}, {"status": "error"})
               }
               else {

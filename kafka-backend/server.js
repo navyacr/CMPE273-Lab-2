@@ -8,6 +8,8 @@ var CustomersGetInfo = require("./services/customersGetInfo.js")
 var RestaurantsInfoUpdate = require("./services/restaurantsInfoUpdate.js")
 var RestaurantsGetInfo = require("./services/restaurantsGetInfo.js")
 var RestaurantsMenuUpdate = require("./services/restaurantsMenuUpdate.js")
+var CustomersPostReview = require("./services/customersPostReview.js")
+var CustomersOrderCreate = require("./services/customersOrderCreate.js")
 
 const mongoose = require('mongoose');
 
@@ -68,3 +70,8 @@ handleTopicRequest("cusGetInfo", CustomersGetInfo)
 handleTopicRequest("resUpdateInfo", RestaurantsInfoUpdate)
 handleTopicRequest("resGetInfo", RestaurantsGetInfo)
 handleTopicRequest("resCreateDish", RestaurantsMenuUpdate)
+handleTopicRequest("cusPostReview", CustomersPostReview)
+handleTopicRequest("cusOrderCreate", CustomersOrderCreate)
+
+
+

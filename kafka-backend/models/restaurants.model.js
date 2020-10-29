@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -8,6 +9,14 @@ var dishSchema = new Schema({
    price: {type: String},
    category: {type: String},
    filename: {type: String}
+})
+
+var reviewSchema = new Schema({
+   rating: {type: String},
+   date: {type: Date, default: Date.now},
+   description: {type: String},
+   customerId: {type: ObjectId},
+   customerName: {type: String}
 })
 
 var restaurantsSchema = new Schema({
@@ -21,7 +30,8 @@ var restaurantsSchema = new Schema({
     filename: {type: String,},
     cuisine: { type: String,},
     deliverymode: { type: String,},
-    menu:[dishSchema]
+    menu:[dishSchema],
+    reviews: [reviewSchema]
  },
  {
     versionKey: false
@@ -29,7 +39,9 @@ var restaurantsSchema = new Schema({
 
 const restaurantsModel = mongoose.model('restaurants', restaurantsSchema);
 const dishModel = mongoose.model('dishes', dishSchema);
+const reviewModel = mongoose.model('reviews', reviewSchema);
 module.exports = {
    dishModel: dishModel,
-   restaurantsModel: restaurantsModel
+   restaurantsModel: restaurantsModel,
+   reviewModel: reviewModel
 };

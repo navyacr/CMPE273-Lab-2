@@ -9,22 +9,6 @@ const bookModel = require('../models/books.model');
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
 
-  // var newbook = new bookModel({
-  //   BookID: req.body.BookID,
-  //   Title: req.body.Title,
-  //   Author: req.body.Author
-  // });
-  // newbook.save((error, data) => {
-  //   if (error) {
-  //     res.send(error)
-  //     // callback({"status": "error"}, {"status": "error"})
-  //   }
-  //   else {
-  //     res.send(data)
-  //     // callback(null, {"status": "Done"})
-  //   }
-  // });
-
   kafka.make_request('resPostInfo',req.body, function(err,results){
 
     if (err){
@@ -41,6 +25,26 @@ exports.create = (req, res) => {
         }    
   });
    
+};
+
+exports.createReview = (req, res) => {
+  req.body.customerId = req.params.customerId
+  kafka.make_request('cusPostReview',req.body, function(err,results){
+
+    if (err){
+        res.json({
+            status:"error",
+            msg:"System Error, Try Again."
+        })
+    }else{
+            res.json({
+                updatedList:results
+            });
+
+            res.end();
+        }    
+  });
+  
 };
 
   exports.findById = (req, res) => {

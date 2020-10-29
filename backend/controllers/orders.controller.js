@@ -4,38 +4,54 @@ const orders = db.orders;
 const dishes = db.dishes;
 const customers = db.customers;
 const Op = db.Sequelize.Op;
+var kafka = require('../kafka/client');
 
 exports.create = (req, res) => { 
+  req.body.customerId = req.params.customerId
+    kafka.make_request('cusOrderCreate',req.body, function(err,results){
+      if (err){
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      }else {
+        res.json({
+            updatedList:results
+        });
+        res.end();
+      }
+      
+  });
 
-  var result = []
+  // var result = []
   
-  for(dish of req.body.dishes) {
-    if (dish.qty < 1) {
-      continue
-    }
-    // Create a Order
-    var status = "Order Received"
-    const o = {
-      customerId: req.params.customerId,
-      dishId: dish.id,
-      qty: dish.qty,
-      dm: req.body.dm,
-      status: status
-    };
+  // for(dish of req.body.dishes) {
+  //   if (dish.qty < 1) {
+  //     continue
+  //   }
+  //   // Create a Order
+  //   var status = "Order Received"
+  //   const o = {
+  //     customerId: req.params.customerId,
+  //     dishId: dish.id,
+  //     qty: dish.qty,
+  //     dm: req.body.dm,
+  //     status: status
+  //   };
   
-    // Save Order in the database
-    orders.create(o)
-      .then(data => {
-        result.push(data);
-      })
-      .catch(err => {
-        // res.status(500).send({
-        //   message:
-        //     err.message || "Some error occurred while creating orders."
-        // });
-      });
-  }
-  res.send({"result": result})
+  //   // Save Order in the database
+  //   orders.create(o)
+  //     .then(data => {
+  //       result.push(data);
+  //     })
+  //     .catch(err => {
+  //       // res.status(500).send({
+  //       //   message:
+  //       //     err.message || "Some error occurred while creating orders."
+  //       // });
+  //     });
+  // }
+  // res.send({"result": result})
 };
 
 exports.findAll = (req, res) => {
