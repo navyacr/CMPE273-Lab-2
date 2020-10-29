@@ -57,19 +57,19 @@ exports.createOrUpdate = (req, res) => {
   };
 
   exports.findOne = (req, res) => {
-    const customerId = req.params.customerId;
-    var condition = customerId ? { customerId: { [Op.eq]: `${customerId}` } } : null;
+    // const customerId = req.params.customerId;
+    // var condition = customerId ? { customerId: { [Op.eq]: `${customerId}` } } : null;
   
-    customersProfile.findOne({ where: condition })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving customers."
-        });
-      });
+    // customersProfile.findOne({ where: condition })
+    //   .then(data => {
+    //     res.send(data);
+    //   })
+    //   .catch(err => {
+    //     res.status(500).send({
+    //       message:
+    //         err.message || "Some error occurred while retrieving customers."
+    //     });
+    //   });
   };
 
   const cusstorage = multer.diskStorage({

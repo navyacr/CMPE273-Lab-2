@@ -40,6 +40,24 @@ exports.create = (req, res) => {
   });
   };
 
+  exports.findProfile = (req, res) => {
+    req.body._id = req.params.customerId
+    kafka.make_request('cusGetInfo',req.body, function(err,results){
+      if (err){
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      }else {
+        res.json({
+            updatedList:results
+        });
+        res.end();
+      }
+      
+  });
+  };
+  
   // exports.validate = (req, res) => {
   //   const username = req.body.username;
   //   const pwd = req.body.password;
@@ -71,33 +89,34 @@ exports.create = (req, res) => {
   //     });
   // };
 
-  // exports.update = (req, res) => {
-  //   kafka.make_request('cusPostInfoUpdate',req.body, function(err,results){
-  //     console.log('in result');
-  //     console.log(results);
-  //     if (err) {
-  //         console.log("Inside err");
-  //         res.json({
-  //             status:"error",
-  //             msg:"System Error, Try Again."
-  //         })
-  //     } 
-  //     else {
-  //         console.log("Inside else");
-  //         res.json({
-  //             updatedList:results
-  //         });
+  exports.update = (req, res) => {
+    req.body._id = req.params.customerId
+    kafka.make_request('cusPostInfoUpdatea',req.body, function(err,results){
+      console.log('in result');
+      console.log(results);
+      if (err) {
+          console.log("Inside err");
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      } 
+      else {
+          console.log("Inside else");
+          res.json({
+              updatedList:results
+          });
   
-  //         res.end();
-  //     }
-  //   });
-  //   const id = req.params.customerId;
-  //   var condition = id ? { id: { [Op.eq]: `${id}` } } : null;
-  //   const newDetails = {
-  //     name: req.body.name,
-  //     email: req.body.email,
-  //     password: req.body.password,
-  //   };
+          res.end();
+      }
+    });
+    // const id = req.params.customerId;
+    // var condition = id ? { id: { [Op.eq]: `${id}` } } : null;
+    // const newDetails = {
+    //   name: req.body.name,
+    //   email: req.body.email,
+    //   password: req.body.password,
+    // };
 
     // customers.update(newDetails, { where: condition })
     //   .then(data => {
@@ -109,4 +128,4 @@ exports.create = (req, res) => {
     //         err.message || "Some error occurred while updating restaurants."
     //     });
     //   });
-  // };
+  };

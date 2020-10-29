@@ -25,43 +25,63 @@ exports.create = (req, res) => {
   //   }
   // });
 
-  kafka.make_request('res_post_info',req.body, function(err,results){
-    console.log('in result');
-    console.log(results);
+  kafka.make_request('resPostInfo',req.body, function(err,results){
+
     if (err){
-        console.log("Inside err");
         res.json({
             status:"error",
             msg:"System Error, Try Again."
         })
     }else{
-        console.log("Inside else");
             res.json({
                 updatedList:results
             });
 
             res.end();
-        }
-    
-});
+        }    
+  });
    
-  };
+};
 
   exports.findById = (req, res) => {
-    const id = req.params.restaurantId;
-    var condition = id ? { id: { [Op.eq]: `${id}` } } : null;
+    req.body._id = req.params.restaurantId
+    kafka.make_request('resGetInfo',req.body, function(err,results){
+
+      if (err){
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      }else{
+              res.json({
+                  updatedList:results
+              });
   
-    restaurants.findOne({ where: condition })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving restaurants."
-        });
-      });
+              res.end();
+          }    
+    });
+    
   };
+  exports.createOrUpdateDish = (req, res) => {
+    req.body.name = req.params.dishName
+    kafka.make_request('resCreateDish',req.body, function(err,results){
+
+      if (err){
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      }else{
+              res.json({
+                  updatedList:results
+              });
+  
+              res.end();
+          }    
+    });
+    
+  };
+  
 
   exports.findAll = (req, res) => {
     restaurantsProfile.findAll({
@@ -109,22 +129,38 @@ exports.create = (req, res) => {
   };
 
   exports.update = (req, res) => {
-    const id = req.params.restaurantId;
-    var condition = id ? { id: { [Op.eq]: `${id}` } } : null;
-    const newDetails = {
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-    };
+    req.body._id = req.params.restaurantId
+    kafka.make_request('resUpdateInfo',req.body, function(err,results){
 
-    restaurants.update(newDetails, { where: condition })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while updating restaurants."
-        });
-      });
+      if (err){
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      }else{
+              res.json({
+                  updatedList:results
+              });
+  
+              res.end();
+          }    
+    });
+    // const id = req.params.restaurantId;
+    // var condition = id ? { id: { [Op.eq]: `${id}` } } : null;
+    // const newDetails = {
+    //   name: req.body.name,
+    //   email: req.body.email,
+    //   password: req.body.password,
+    // };
+
+    // restaurants.update(newDetails, { where: condition })
+    //   .then(data => {
+    //     res.send(data);
+    //   })
+    //   .catch(err => {
+    //     res.status(500).send({
+    //       message:
+    //         err.message || "Some error occurred while updating restaurants."
+    //     });
+    //   });
   };

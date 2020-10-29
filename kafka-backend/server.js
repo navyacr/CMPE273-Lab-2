@@ -1,8 +1,13 @@
 var connection =  new require('./kafka/Connection');
 //topics files
 //var signin = require('./services/signin.js');
-var Books = require('./services/books.js');
+var RestaurantsInfoCreate = require('./services/restaurantsInfoCreate.js');
 var Customers = require("./services/customers.js")
+var CustomersInfoUpdate = require("./services/customersInfoUpdate.js")
+var CustomersGetInfo = require("./services/customersGetInfo.js")
+var RestaurantsInfoUpdate = require("./services/restaurantsInfoUpdate.js")
+var RestaurantsGetInfo = require("./services/restaurantsGetInfo.js")
+var RestaurantsMenuUpdate = require("./services/restaurantsMenuUpdate.js")
 
 const mongoose = require('mongoose');
 
@@ -56,5 +61,10 @@ function handleTopicRequest(topic_name,fname){
 // Add your TOPICs here
 //first argument is topic name
 //second argument is a function that will handle this topic request
-handleTopicRequest("res_post_info",Books)
+handleTopicRequest("resPostInfo",RestaurantsInfoCreate)
 handleTopicRequest("cusPostInfoa", Customers)
+handleTopicRequest("cusPostInfoUpdatea", CustomersInfoUpdate)
+handleTopicRequest("cusGetInfo", CustomersGetInfo)
+handleTopicRequest("resUpdateInfo", RestaurantsInfoUpdate)
+handleTopicRequest("resGetInfo", RestaurantsGetInfo)
+handleTopicRequest("resCreateDish", RestaurantsMenuUpdate)

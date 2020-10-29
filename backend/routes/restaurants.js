@@ -24,10 +24,10 @@ app.get('/:restaurantId/info', restaurants.findById)
 //Route to get menu in a selected restaurant
 app.get('/:restaurantId/dishes', dishes.findAll)
 
-app.post('/:dishName/dishes', dishes.createOrUpdate)
+app.post('/:dishName/dishes', restaurants.createOrUpdateDish)
 // app.get('/:restaurantName/dishes/:dishName', dishes.findByName)
 
-app.post('/:restaurantId/profile', restaurantsProfile.createOrUpdate)
+// app.post('/:restaurantId/profile', restaurantsProfile.createOrUpdate)
 
 app.post('/:restaurantId/uploadImage', restaurantsProfile.uploadImage)
 app.get('/:restaurantId/viewProfileImage', restaurantsProfile.viewProfileImage)
