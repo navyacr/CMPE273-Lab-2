@@ -1,8 +1,8 @@
-const restaurantsModel = require('../models/restaurants.model');
+const Model = require('../models/restaurants.model');
 
 function handle_request(msg, callback){
 
-  let newrestaurant = new restaurantsModel(msg)
+  let newrestaurant = new Model.restaurantsModel(msg)
   
   console.log("New book is", newrestaurant)
 
@@ -14,7 +14,7 @@ function handle_request(msg, callback){
     return newrestaurant
   }
 
-  restaurantsModel.findOne({ email: msg.email }, (error, restaurant) => {
+  Model.restaurantsModel.findOne({ email: msg.email }, (error, restaurant) => {
       if (error) {
           callback(error, {"status": "error"})
       }

@@ -1,7 +1,7 @@
-const restaurantsModel = require('../models/restaurants.model');
+const Model = require('../models/restaurants.model');
 
 function handle_request(msg, callback){
-  restaurantsModel.findByIdAndUpdate(msg._id, msg, { safe: true, new: true, useFindAndModify: false }, function(error, restaurant) {
+  Model.restaurantsModel.findByIdAndUpdate(msg._id, msg, { safe: true, new: true, useFindAndModify: false }, function(error, restaurant) {
       if (error) {
           callback(error, {"status": "error"})
       }
