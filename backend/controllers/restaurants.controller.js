@@ -4,7 +4,7 @@ const restaurantsProfile = db.restaurantsProfile;
 const Op = db.Sequelize.Op;
 const passwordHash = require('password-hash');
 var kafka = require('../kafka/client');
-const bookModel = require('../models/books.model');
+
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
@@ -68,7 +68,7 @@ exports.createReview = (req, res) => {
   };
   exports.createOrUpdateDish = (req, res) => {
     req.body.name = req.params.dishName
-    kafka.make_request('resCreateDish',req.body, function(err,results){
+    kafka.make_request('resCreateDisha',req.body, function(err,results){
 
       if (err){
           res.json({

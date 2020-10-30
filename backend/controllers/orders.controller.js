@@ -55,81 +55,147 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    const customerId = req.params.customerId;
-    var condition = customerId ? { customerId: { [Op.eq]: `${customerId}` } } : null;
-    orders.findAll({
-      where: condition,
-      include: [{
-          model: dishes,
-          where: {},
-          include: [{
-            model: restaurants,
-            where: {}
-          }]
-      }]
-    }).then(data => {
-            res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred while retrieving orders."
+  req.body.customerId = req.params.customerId
+    kafka.make_request('cusGetOrder',req.body, function(err,results){
+      if (err){
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      }else {
+        res.json({
+            updatedList:results
         });
-      })
+        res.end();
+      }
+      
+  });
+
+
+    // const customerId = req.params.customerId;
+    // var condition = customerId ? { customerId: { [Op.eq]: `${customerId}` } } : null;
+    // orders.findAll({
+    //   where: condition,
+    //   include: [{
+    //       model: dishes,
+    //       where: {},
+    //       include: [{
+    //         model: restaurants,
+    //         where: {}
+    //       }]
+    //   }]
+    // }).then(data => {
+    //         res.send(data);
+    //   })
+    //   .catch(err => {
+    //     res.status(500).send({
+    //         message:
+    //         err.message || "Some error occurred while retrieving orders."
+    //     });
+    //   })
   };
 
   exports.findRestaurantOrders = (req, res) => {
-    const restaurantId = req.params.restaurantId;
-    var condition = restaurantId ? { restaurantId: { [Op.eq]: `${restaurantId}` } } : null;
-    orders.findAll({
-      where: {},
-      include: [{
-          model: dishes,
-          where: condition,
-          include: [{
-            model: restaurants,
-            where: {}
-          }]
-      }, {
-        model: customers
-      }]
-    }).then(data => {
-            res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred while retrieving orders."
+    req.body.restaurantId = req.params.restaurantId
+    kafka.make_request('resGetOrder',req.body, function(err,results){
+      if (err){
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      }else {
+        res.json({
+            updatedList:results
         });
-      })
+        res.end();
+      }
+      
+  });
+
+    // const restaurantId = req.params.restaurantId;
+    // var condition = restaurantId ? { restaurantId: { [Op.eq]: `${restaurantId}` } } : null;
+    // orders.findAll({
+    //   where: {},
+    //   include: [{
+    //       model: dishes,
+    //       where: condition,
+    //       include: [{
+    //         model: restaurants,
+    //         where: {}
+    //       }]
+    //   }, {
+    //     model: customers
+    //   }]
+    // }).then(data => {
+    //         res.send(data);
+    //   })
+    //   .catch(err => {
+    //     res.status(500).send({
+    //         message:
+    //         err.message || "Some error occurred while retrieving orders."
+    //     });
+    //   })
     
   };
 
   exports.updateOrderStatus = (req, res) => {
-    const restaurantId = req.params.restaurantId;
-    const values = req.body.orders
-    for (o of values) {
-      var condition = o.id ? { id: { [Op.eq]: `${o.id}` } } : null;
-      const newProfile = {
-        status: o.status
-      };
-      orders.update(newProfile, {
-        where: condition
-      })
-    }
-    res.send({"status": "OK"})
+    // req.body.name = req.params.restaurantId
+    kafka.make_request('resOrderUpdate',req.body, function(err,results){
+
+      if (err){
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      }else{
+              res.json({
+                  updatedList:results
+              });
+  
+              res.end();
+          }    
+    });
+    
+    // const restaurantId = req.params.restaurantId;
+    // const values = req.body.orders
+    // for (o of values) {
+    //   var condition = o.id ? { id: { [Op.eq]: `${o.id}` } } : null;
+    //   const newProfile = {
+    //     status: o.status
+    //   };
+    //   orders.update(newProfile, {
+    //     where: condition
+    //   })
+    // }
+    // res.send({"status": "OK"})
   };
 
   exports.cancelOrder = (req, res) => {
-    const orderId = req.params.orderId;
+
+    req.body.orderId = req.params.orderId;
+    req.body.status = "cancelled";
+    kafka.make_request('cusCancelOrder',req.body, function(err,results){
+      if (err){
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      }else {
+        res.json({
+            updatedList:results
+        });
+        res.end();
+      }
+    });
+    // const orderId = req.params.orderId;
     
-      var condition = orderId ? { id: { [Op.eq]: `${orderId}` } } : null;
-      const newProfile = {
-        status: "Cancelled"
-      };
-      orders.update(newProfile, {
-        where: condition
-      })
+    //   var condition = orderId ? { id: { [Op.eq]: `${orderId}` } } : null;
+    //   const newProfile = {
+    //     status: "Cancelled"
+    //   };
+    //   orders.update(newProfile, {
+    //     where: condition
+    //   })
     
-    res.send({"status": "OK"})
+    // res.send({"status": "OK"})
   };

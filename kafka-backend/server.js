@@ -7,9 +7,14 @@ var CustomersInfoUpdate = require("./services/customersInfoUpdate.js")
 var CustomersGetInfo = require("./services/customersGetInfo.js")
 var RestaurantsInfoUpdate = require("./services/restaurantsInfoUpdate.js")
 var RestaurantsGetInfo = require("./services/restaurantsGetInfo.js")
-var RestaurantsMenuUpdate = require("./services/restaurantsMenuUpdate.js")
+var RestaurantsCreateDish = require("./services/restaurantsCreateUpdateDish.js")
 var CustomersPostReview = require("./services/customersPostReview.js")
 var CustomersOrderCreate = require("./services/customersOrderCreate.js")
+var CustomersGetOrder = require("./services/customersGetOrder.js")
+var RestaurantsGetOrder = require("./services/restaurantsGetOrder.js")
+var RestaurantsOrderUpdate = require("./services/restaurantsOrderUpdate.js")
+var CustomersOrderCancel = require("./services/customersOrderCancel")
+
 
 const mongoose = require('mongoose');
 
@@ -69,9 +74,17 @@ handleTopicRequest("cusPostInfoUpdatea", CustomersInfoUpdate)
 handleTopicRequest("cusGetInfo", CustomersGetInfo)
 handleTopicRequest("resUpdateInfo", RestaurantsInfoUpdate)
 handleTopicRequest("resGetInfo", RestaurantsGetInfo)
-handleTopicRequest("resCreateDish", RestaurantsMenuUpdate)
+handleTopicRequest("resCreateDisha", RestaurantsCreateDish)
 handleTopicRequest("cusPostReview", CustomersPostReview)
 handleTopicRequest("cusOrderCreate", CustomersOrderCreate)
+handleTopicRequest("cusGetOrder", CustomersGetOrder)
+handleTopicRequest("resGetOrder", RestaurantsGetOrder)
+handleTopicRequest("resOrderUpdate", RestaurantsOrderUpdate)
+handleTopicRequest("cusCancelOrder", CustomersOrderCancel)
+
+
+
+
 
 
 

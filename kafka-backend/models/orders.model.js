@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var ordersSchema = new Schema({
-    customerId: {type: ObjectId},
-    restaurantId: {type: ObjectId},
-    dishId: {type: ObjectId},
+    customerId: {type: ObjectId, ref: "customers"},
+    restaurantId: {type: ObjectId, ref: "restaurants"},
+    dishId: {type: ObjectId, ref: "dishes"},
     qty: { type: String},
     dm: { type: String},
     status: { type: String},
