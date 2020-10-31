@@ -4,21 +4,39 @@ const Op = db.Sequelize.Op;
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+var kafka = require('../kafka/client');
 
 exports.findAll = (req, res) => {
-    const restaurantId = req.params.restaurantId;
-    var condition1 = restaurantId ? { restaurantId: { [Op.eq]: `${restaurantId}` } } : null;
-  
-            dishes.findAll({ where: condition1 })
-            .then(data => {
-                res.send(data);
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message:
-                    err.message || "Some error occurred while retrieving dishes."
-                });
+  req.body.restaurantId = req.params.restaurantId;
+  kafka.make_request('resGetMenu',req.body, function(err,results){  
+
+    if (err){
+        res.json({
+            status:"error",
+            msg:"System Error, Try Again."
+        })
+    }else{
+            
+            res.json({
+                updatedList:results
             });
+
+            res.end();
+        }    
+  });
+    // const restaurantId = req.params.restaurantId;
+    // var condition1 = restaurantId ? { restaurantId: { [Op.eq]: `${restaurantId}` } } : null;
+  
+    //         dishes.findAll({ where: condition1 })
+    //         .then(data => {
+    //             res.send(data);
+    //         })
+    //         .catch(err => {
+    //             res.status(500).send({
+    //                 message:
+    //                 err.message || "Some error occurred while retrieving dishes."
+    //             });
+    //         });
     
   };
 

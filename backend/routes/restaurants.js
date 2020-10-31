@@ -30,6 +30,8 @@ app.get('/:restaurantId/viewProfileImage', restaurantsProfile.viewProfileImage)
 app.post('/:dishId/dishImage', dishes.dishUploadImage)
 app.get('/:dishId/dishImage', dishes.viewDishImage)
 
+//Route to get menu in a selected restaurant
+app.get('/:restaurantId/dishes', dishes.findAll)
 
 // Get reviews of the restaurant
 // app.get('/:restaurantId/reviews', reviews.findAll)

@@ -14,7 +14,11 @@ var CustomersGetOrder = require("./services/customersGetOrder.js")
 var RestaurantsGetOrder = require("./services/restaurantsGetOrder.js")
 var RestaurantsOrderUpdate = require("./services/restaurantsOrderUpdate.js")
 var CustomersOrderCancel = require("./services/customersOrderCancel")
-
+var EventsCreateUpdate = require("./services/eventsCreateUpdate")
+var EventsGetAll = require("./services/eventsGetAll")
+var RestaurantsGetMenu = require("./services/restaurantsGetMenu")
+var CustomerEventRegister = require("./services/customersEventRegister")
+var CustomersEventsEnrolled = require("./services/customersEventsEnrolled")
 
 const mongoose = require('mongoose');
 
@@ -81,6 +85,12 @@ handleTopicRequest("cusGetOrder", CustomersGetOrder)
 handleTopicRequest("resGetOrder", RestaurantsGetOrder)
 handleTopicRequest("resOrderUpdate", RestaurantsOrderUpdate)
 handleTopicRequest("cusCancelOrder", CustomersOrderCancel)
+handleTopicRequest("eventsCreate", EventsCreateUpdate)
+handleTopicRequest("eventsGet", EventsGetAll)
+handleTopicRequest("resGetMenu", RestaurantsGetMenu)
+handleTopicRequest("cusEventRegister", CustomerEventRegister)
+handleTopicRequest("cusEventsEnrolled", CustomersEventsEnrolled)
+
 
 
 

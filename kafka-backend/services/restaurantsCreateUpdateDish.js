@@ -2,8 +2,6 @@ const dishesModel = require('../models/dishes.model');
 
 function handle_request(msg, callback){
 
-  // id = msg._id
-  // delete msg["_id"]
   let newDish = new dishesModel(msg)
   
   console.log("New dish is", newDish)

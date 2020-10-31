@@ -7,9 +7,9 @@ app.post('/info', events.create)
 app.get('/info', events.findAll)
 app.post('/eventsearch', events.search)
 
-app.post('/:eventId/attendees', eventAttendees.create)
+app.post('/:eventId/attendees', events.register)
 app.get('/:eventId/attendees', eventAttendees.findAll)
-app.get('/:customerId/eventList', eventAttendees.customerEvents)
+app.get('/:customerId/eventList', events.customerEvents)
 
 
 
