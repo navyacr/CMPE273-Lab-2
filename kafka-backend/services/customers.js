@@ -69,7 +69,7 @@ function handle_request(msg, callback){
                 callback({"status": "error"}, {"status": "error"})
               }
               else {
-                callback(null, {"status": "Done"})
+                callback(null, {"status": "SUCCESS"})
               }
           });
       }

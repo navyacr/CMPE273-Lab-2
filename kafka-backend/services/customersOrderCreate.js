@@ -1,19 +1,15 @@
 const ordersModel = require('../models/orders.model');
 
 function handle_request(msg, callback){
-
-  let neworder = new ordersModel(msg)
-  
-  console.log("New order is", neworder)
-
-  if (!neworder) {
-    callback(null, {message: "Not Done"})
-
+  console.log(msg)
+  var dish = msg.dishes
+  for (var i in dish) {
+    console.log("Each dish:", dish)
+    // if (dish.qty !== "0"){
+      let neworder = new ordersModel({dishId: dish[i]._id, restaurantId: dish[i].restaurantId, customerId: msg.customerId, qty: dish[i].qty, dm: msg.dm, status: "Order received"})
+      neworder.save()
+    // }
   }
-  if (!callback) {
-    return neworder
-  }
-  neworder.save()
   callback(null, {"status":"SUCCESS"})
 
 }

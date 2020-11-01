@@ -3,7 +3,6 @@ import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
 import { Card } from 'react-bootstrap';
-// import "react-flexy-table/dist/index.css";
 import 'react-dropdown/style.css';
 import CustomerLoginCheck from './customerLoginCheck';
 
@@ -57,7 +56,7 @@ class EventRegister extends Component {
     .then(response => {
         console.log("Response: ", response)
         this.setState({
-            events: response.data
+            events: response.data.updatedList
         });
     });
   }
@@ -77,7 +76,7 @@ class EventRegister extends Component {
                             <Card.Text><b> Time: </b> {this.state.events[i].time}</Card.Text>
                             <Card.Text><b> Location: </b> {this.state.events[i].location}</Card.Text>
                             <Card.Text><b> Trending Hashtags: </b> {this.state.events[i].hashtags}</Card.Text>
-                            <button class="btn btn-primary" value={this.state.events[i].id}  onClick={this.register}>Register</button>
+                            <button class="btn btn-primary" value={this.state.events[i]._id}  onClick={this.register}>Register</button>
 
                             <Card.Text> </Card.Text>
                         </Card.Body></Card>)

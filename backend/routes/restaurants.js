@@ -11,6 +11,7 @@ app.get("/", (req, res) => res.send("Hello World !"));
 
 //Route to handle Post Request Call
 app.post('/info', restaurants.create)
+app.get('/info', restaurants.findAll)
 
 app.post('/:restaurantId/infoUpdate', restaurants.update)
 

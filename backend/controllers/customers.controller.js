@@ -44,7 +44,24 @@ exports.create = (req, res) => {
   });
   };
   
-  // exports.validate = (req, res) => {
+  exports.validate = (req, res) => {
+    
+    kafka.make_request('cusInfoValidate',req.body, function(err,results){
+      if (err){
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      }else {
+        res.json({
+            updatedList:results
+        });
+        res.end();
+      }
+      
+  });
+
+  }
   //   const username = req.body.username;
   //   const pwd = req.body.password;
   //   var condition = username ? { email: { [Op.eq]: `${username}` } } : null;

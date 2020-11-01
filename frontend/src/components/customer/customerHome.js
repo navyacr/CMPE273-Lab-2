@@ -3,12 +3,11 @@ import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
 import { Card } from 'react-bootstrap';
-// import "react-flexy-table/dist/index.css";
 import CustomerLoginCheck from './customerLoginCheck';
 import AggregateReview from './aggregateReview';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import MapContainer from './mapComponent'
+// import MapContainer from './mapComponent'
 
 const buttons = [
   { name: "All", value: "all" },
@@ -25,8 +24,8 @@ class CustomerHome extends Component {
       count: 0
     };
     this.getRestaurants();
-    this.search = this.search.bind(this);
-    this.setCount = this.setCount.bind(this);
+    // this.search = this.search.bind(this);
+    // this.setCount = this.setCount.bind(this);
   } 
 
   componentDidMount() {
@@ -114,13 +113,16 @@ this.setState({
 }
   getRestaurants = () => {
      
+    console.log("Making axios call")
     axios.get(`${backendServer}/restaurants/info`)
     .then(response => {
+        console.log("Response is:", response.data.updatedList)
         this.setState({
-            restaurants: response.data,
-            allrestaurants : response.data
+            restaurants: response.data.updatedList,
+            allrestaurants : response.data.updatedList
         });
     });
+    console.log("State:", this.state)
   }
 
   setCount = (count) => {
@@ -142,11 +144,12 @@ this.setState({
       var data = []
 
       if (this.state && this.state.restaurants && this.state.restaurants.length > 0) {
+        console.log("All restaurants list:",this.state.restaurants)
         for (let i = 0; i < this.state.restaurants.length; i++) {
           
-            if (this.state.restaurants[i] && this.state.restaurants[i].restaurant) {
-                
-                var imgsrc = `${backendServer}/restaurants/${this.state.restaurants[i].restaurant.id}/viewProfileImage`;
+            if (this.state.restaurants[i]) {
+                console.log(this.state.restaurants[i])
+                var imgsrc = `${backendServer}/restaurants/${this.state.restaurants[i]._id}/viewProfileImage`;
                 data.push(
                           <Card border="info" style={{ width: '100%' }}><Card.Body> 
                             <div class="d-flex">
@@ -154,11 +157,11 @@ this.setState({
                             <img class="profile-photo" src={imgsrc}></img>
                             </div>
                             <div class="mx-auto pull-right">
-                            <a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i].restaurant.id}>
-                              <Card.Title><b>{this.state.restaurants[i].restaurant.name}</b></Card.Title>
+                            <a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i]._id}>
+                              <Card.Title><b>{this.state.restaurants[i].name}</b></Card.Title>
                             </a>
                           
-                          <AggregateReview resid={this.state.restaurants[i].restaurant.id}/>
+                          <AggregateReview resid={this.state.restaurants[i]._id}/>
                           <Card.Text><b> Delivery modes:  </b> {this.state.restaurants[i].deliverymode}</Card.Text>
                           <Card.Text><b> Cuisine:  </b> {this.state.restaurants[i].cuisine}</Card.Text>
                           <Card.Text><b> Description: </b> {this.state.restaurants[i].description}</Card.Text>
@@ -210,7 +213,7 @@ this.setState({
             {data}
           </div>
           <div class="social_media">
-          <MapContainer restaurants={this.state.restaurants}/>
+          {/* <MapContainer restaurants={this.state.restaurants}/> */}
           </div>
           <div class="clearfix"></div>
       </div>

@@ -45,12 +45,12 @@ class CustomersSignup extends Component{
         let message = "";
         console.log("Props user value:::")
         console.log(this.props)
-        console.log(this.props.user.message)
-        if (this.props.user.message === "SUCCESS" && this.state.signupFlag) {
+        console.log(this.props.user.updatedList )
+        if (this.props.user.updatedList && this.props.user.updatedList.status === "SUCCESS" && this.state.signupFlag) {
             alert("Registered successfully");
             redirectVar = <Redirect to="/Login" />
         }
-        else if (this.props.user.message === "Validation error" && this.state.signupFlag){
+        else if (this.props.user.updatedList && this.props.user.updatedList.status  === "Validation error" && this.state.signupFlag){
             message = "Email id is already registered"
         }
         return(

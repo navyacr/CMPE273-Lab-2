@@ -116,15 +116,15 @@ class Login extends Component{
         let message = "";
         console.log("Props user value")
         console.log(this.props)
-        if (this.props.user && this.props.user.message === "SUCCESS" && this.state.signupFlag) {
-            localStorage.setItem('customer_id', this.props.user.id)
-            localStorage.setItem('customer_name', this.props.user.name)
+        if (this.props.user.updatedList && this.props.user.updatedList.status === "SUCCESS" && this.state.signupFlag) {
+            localStorage.setItem('customer_id', this.props.user.updatedList._id)
+            localStorage.setItem('customer_name', this.props.user.updatedList.name)
             localStorage.setItem('type', "customer")
             
             alert("Logged in successfully");
             redirectVar = <Redirect to="/customerHome" />
         }
-        else if (this.props.user.message === "INVALID_CREDENTIALS" && this.state.signupFlag){
+        else if (this.props.user.updatedList && this.props.user.updatedList.status === "INVALID_CREDENTIALS" && this.state.signupFlag){
             message = "Invalid username or password"
         }
 

@@ -19,6 +19,8 @@ var EventsGetAll = require("./services/eventsGetAll")
 var RestaurantsGetMenu = require("./services/restaurantsGetMenu")
 var CustomerEventRegister = require("./services/customersEventRegister")
 var CustomersEventsEnrolled = require("./services/customersEventsEnrolled")
+var CustomersInfoValidate = require("./services/customersInfoValidate")
+var RestaurantsGetAll = require("./services/restaurantsGetAll")
 
 const mongoose = require('mongoose');
 
@@ -90,6 +92,8 @@ handleTopicRequest("eventsGet", EventsGetAll)
 handleTopicRequest("resGetMenu", RestaurantsGetMenu)
 handleTopicRequest("cusEventRegister", CustomerEventRegister)
 handleTopicRequest("cusEventsEnrolled", CustomersEventsEnrolled)
+handleTopicRequest("cusInfoValidate", CustomersInfoValidate)
+handleTopicRequest("resGetAll", RestaurantsGetAll)
 
 
 

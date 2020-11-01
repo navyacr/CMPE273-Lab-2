@@ -13,7 +13,7 @@ app.post('/info', customers.create)
 app.post('/:customerId/infoUpdate', customers.update)
 app.get('/:customerId/profile', customers.findProfile)
 
-// app.post('/validate', customers.validate)
+app.post('/validate', customers.validate)
 
 //Route to get orders of a customer
 app.get('/:customerId/orders', orders.findAll)

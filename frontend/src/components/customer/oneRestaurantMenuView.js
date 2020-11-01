@@ -16,13 +16,14 @@ class OneRestaurantMenuView extends Component {
     axios.get(`${backendServer}/restaurants/${this.props.resid}/dishes`)
     .then(response => {
         this.setState({
-            dishes: response.data
+            dishes: response.data.updatedList
         });
     });
   }
   placeOrder = () => {
     let customerId = localStorage.getItem("customer_id")
-    console.log(this.state.dishes)
+    console.log("Dishes list: ", this.state.dishes)
+    console.log("customerId: ", customerId)
     axios.post(`${backendServer}/customers/${customerId}/orders`, {dishes: this.state.dishes, dm: this.props.dm})
     .then(response => {
       console.log(response)
@@ -34,7 +35,7 @@ class OneRestaurantMenuView extends Component {
     })
   }
 
-  render(name) {
+  render() {
       var data = []
 
       if (this.state && this.state.dishes && this.state.dishes.length > 0) {

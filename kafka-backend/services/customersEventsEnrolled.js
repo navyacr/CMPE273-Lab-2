@@ -2,8 +2,8 @@ const Model = require('../models/events.model');
 var mongoose = require('mongoose');
 
 function handle_request(msg, callback){
-    Model.eventsModel.find({ "eventAttendees": {
-      $elemMatch: {customerId: msg.customerId}}})
+    Model.eventsModel.find({ "attendees": {
+      $elemMatch: {"customerId": msg.customerId}}})
       // customerId: msg.customerId})
     .then(function(customers) {
       if (customers) {

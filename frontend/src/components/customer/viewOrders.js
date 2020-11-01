@@ -3,7 +3,6 @@ import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
 import { Card } from 'react-bootstrap';
-// import "react-flexy-table/dist/index.css";
 
 const buttons = [
   { name: "All", value: "all" },
@@ -39,7 +38,7 @@ class ViewOrders extends Component {
 }
 componentDidMount() {
   this.setState({
-    all: this.state.orders
+    all: this.state.orders.updatedList
   });
 }
 handleClick = (name) => {

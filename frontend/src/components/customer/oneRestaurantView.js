@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
-// import "react-flexy-table/dist/index.css";
 import CustomerLoginCheck from './customerLoginCheck';
 import OneRestaurantMenuView from './oneRestaurantMenuView';
 import CustomerAddReview from './customerAddReview';
@@ -21,23 +20,30 @@ class OneRestaurantView extends Component {
      
     axios.get(`${backendServer}/restaurants/${this.props.match.params.resid}/info`)
     .then(response => {
+        let values = response.data.updatedList
         this.setState({
-            name: response.data.name,
-            email: response.data.email,
-            restaurantId: response.data.id
+            name: values.name,
+            email: values.email,
+            restaurantId: values.id,
+            description: values.description,
+            contact: values.contact,
+            timings: values.timings,
+            location: values.location,
+            deliverymode: values.deliverymode
+
         });
     });
 
-    axios.get(`${backendServer}/restaurants/${this.props.match.params.resid}/profile`)
-    .then(response => {
-        this.setState({
-            description: response.data.description,
-            contact: response.data.contact,
-            timings: response.data.timings,
-            location: response.data.location,
-            deliverymode: response.data.deliverymode
-        });
-    });
+    // axios.get(`${backendServer}/restaurants/${this.props.match.params.resid}/profile`)
+    // .then(response => {
+    //     this.setState({
+    //         description: response.data.description,
+    //         contact: response.data.contact,
+    //         timings: response.data.timings,
+    //         location: response.data.location,
+    //         deliverymode: response.data.deliverymode
+    //     });
+    // });
 
   }
   _onSelect = (val) => {
@@ -45,7 +51,7 @@ class OneRestaurantView extends Component {
       selectedDm : val.value
     })
   }
-  render(name) {
+  render() {
     console.log("DM: ", this.state.deliverymode)
     if (this.state.deliverymode) {
       var options = this.state.deliverymode.split(" ");

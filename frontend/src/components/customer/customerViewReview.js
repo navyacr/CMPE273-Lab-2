@@ -3,7 +3,6 @@ import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
 import { Card } from 'react-bootstrap';
-// import "react-flexy-table/dist/index.css";
 import CustomerLoginCheck from './customerLoginCheck';
 import StarRatings from 'react-star-ratings';
 
@@ -16,11 +15,11 @@ class CustomerViewReview extends Component {
   } 
 
   getReviews = () => {
-    axios.get(`${backendServer}/customers/${this.props.resid}/reviews`)
+    axios.get(`${backendServer}/restaurants/${this.props.resid}/info`)
     .then(response => {
       console.log(response.data)
         this.setState({
-            reviews: response.data
+            reviews: response.data.updatedList.reviews
         });
     });
   }
@@ -32,7 +31,7 @@ class CustomerViewReview extends Component {
         for (let i = 0; i < this.state.reviews.length; i++) {
                 data.push(
                             <Card border="info" style={{ width: '40%' }}><Card.Body> 
-                            <Card.Title><b>{this.state.reviews[i].customer.name}</b></Card.Title>
+                            <Card.Title><b>{this.state.reviews[i].customerName}</b></Card.Title>
                             <Card.Text><StarRatings
                             rating={Number(this.state.reviews[i].rating)}
                             starRatedColor="orange"
@@ -41,7 +40,7 @@ class CustomerViewReview extends Component {
                             numberOfStars={5}
                             changeRating=""
                             name='rating' /></Card.Text>
-                            <Card.Text><b> Date: </b> {this.state.reviews[i].createdAt.split('T')[0]}</Card.Text>
+                            <Card.Text><b> Date: </b> {this.state.reviews[i].date.split('T')[0]}</Card.Text>
                             <Card.Text><b> Description: </b> {this.state.reviews[i].description}</Card.Text>
                             </Card.Body></Card>)
         }
