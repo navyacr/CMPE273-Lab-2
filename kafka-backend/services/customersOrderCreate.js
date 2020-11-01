@@ -4,11 +4,11 @@ function handle_request(msg, callback){
   console.log(msg)
   var dish = msg.dishes
   for (var i in dish) {
-    console.log("Each dish:", dish)
-    // if (dish.qty !== "0"){
+    console.log("Each dish qty is:", dish[i].qty)
+    if (dish[i].qty !== 0){
       let neworder = new ordersModel({dishId: dish[i]._id, restaurantId: dish[i].restaurantId, customerId: msg.customerId, qty: dish[i].qty, dm: msg.dm, status: "Order received"})
       neworder.save()
-    // }
+    }
   }
   callback(null, {"status":"SUCCESS"})
 
