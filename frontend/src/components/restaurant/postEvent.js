@@ -44,6 +44,7 @@ submitEvent = (e) => {
     // }
     let data = Object.assign({}, this.state);
     this.props.postEvent(data);
+    alert("Event Posted")
     // axios.post(`${backendServer}/events/info`, data)
     //     .then(response => {
     //         console.log(response.data)

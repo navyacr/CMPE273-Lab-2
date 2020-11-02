@@ -9,7 +9,7 @@ export const restaurantViewOrders = (cusid) => (dispatch) => {
   axios.get(`${backendServer}/restaurants/${id}/orders`)
     .then((response) => dispatch({
       type: ORDERS_VIEW,
-      payload: response.data,
+      payload: response.data.updatedList,
     }))
     .catch((error) => {
       if (error.response && error.response.data) {

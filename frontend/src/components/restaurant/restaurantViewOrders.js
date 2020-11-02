@@ -13,7 +13,8 @@ const buttons = [
   { name: "New", value: "Order Received" },
   { name: "Delivered", value: "Delivered" },
   { name: "Picked Up", value: "Picked Up" },
-  { name: "Cancelled", value: "Cancelled" }
+  { name: "Cancelled", value: "Cancelled" },
+  
 ];
 
 class RestaurantViewOrders extends Component {
@@ -21,15 +22,22 @@ class RestaurantViewOrders extends Component {
     super(props);
     this.state = {};
     this.props.restaurantViewOrders();
+    
   } 
-  componentDidMount() {
+  componentWillReceiveProps(props) {
+    console.log("props:", props)
     this.setState({
-      all: this.state.orders
+      allorders: props.user,
+      orders: props.user
     });
   }
 
   handleClick = (name) => {
-    console.log(name)
+    // this.setState({
+    //   allorders: this.props.user,
+    //   orders: this.props.user
+    // });
+    console.log(name, this.state.allorders)
     let filteredData = [];
     if (name === "all"){
       this.setState({orders: this.state.allorders})
@@ -44,11 +52,12 @@ class RestaurantViewOrders extends Component {
 
   update = () => {
     const id = localStorage.getItem('restaurant_id')
-    axios.post(`${backendServer}/restaurants/${id}/orders`, {orders: this.state.orders})
+    axios.post(`${backendServer}/restaurants/${id}/orders`, {orders: this.props.user})
     .then(response => {
-      console.log("RestaurantOrders:", response.data)
+      // console.log("RestaurantOrders:", response.data.updatedList)
       alert ("Order status updated.");
-      this.getOrders();
+      this.props.restaurantViewOrders();
+      // this.getOrders();
         
     });
 
@@ -56,8 +65,8 @@ class RestaurantViewOrders extends Component {
   onSelect = (e) => {
     console.log("Changed", e.value)
     console.log(e.label)
-    this.state.orders[e.value].status = e.label
-    console.log(this.state.orders)
+    this.props.user[e.value].status = e.label
+    console.log(this.props.user)
   }
   // getOrders = () => {
      
@@ -75,10 +84,10 @@ class RestaurantViewOrders extends Component {
   render() {
       var data = []
 
-      if (this.state && this.state.orders && this.state.orders.length > 0) {
+      if (this.state.orders && this.state.orders.length > 0) {
         
         for (var i = 0; i < this.state.orders.length; i++) {
-          let imgsrc = `${backendServer}/restaurants/${this.state.orders[i].dish.id}/dishImage`
+          let imgsrc = `${backendServer}/restaurants/${this.state.orders[i].dishId._id}/dishImage`
           let options = []
           let dropdown =<div></div>
             if (this.state.orders[i].dm) {
@@ -103,12 +112,12 @@ class RestaurantViewOrders extends Component {
                             </div>
                             <div class="mx-auto pull-right">
                           <Card.Title><b>Customer Name:</b></Card.Title>
-                          <a style={{ cursor: 'pointer' }} href={"/oneEventAttendeeView/" + this.state.orders[i].customer.id}>
-                          <Card.Title><b>{this.state.orders[i].customer.name}</b></Card.Title>
+                          <a style={{ cursor: 'pointer' }} href={"/oneEventAttendeeView/" + this.state.orders[i].customerId.id}>
+                          <Card.Title><b>{this.state.orders[i].customerId.name}</b></Card.Title>
                           </a>
                           {/* <Card.Img variant="top" class="dish-image" src={imgsrc}></Card.Img> */}
-                          <Card.Text><b>Dish name: {this.state.orders[i].dish.name}</b></Card.Text>
-                          <Card.Text><b> {this.state.orders[i].dish.price} USD</b></Card.Text>
+                          <Card.Text><b>Dish name: {this.state.orders[i].dishId.name}</b></Card.Text>
+                          <Card.Text><b> {this.state.orders[i].dishId.price} USD</b></Card.Text>
                           <Card.Text><b> Quantity: {this.state.orders[i].qty}</b></Card.Text>
                           <Card.Text><b> Status: {this.state.orders[i].status} </b></Card.Text>
                           <Card.Text><b> {this.state.orders[i].dm} </b></Card.Text>

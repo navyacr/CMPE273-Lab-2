@@ -98,11 +98,11 @@ class RestaurantViewReview extends Component {
 
   getReviews = () => {
     const id = localStorage.getItem('restaurant_id')
-    axios.get(`${backendServer}/customers/${id}/reviews`)
+    axios.get(`${backendServer}/restaurants/${id}/info`)
     .then(response => {
-      console.log(response.data)
+      console.log("Reviews given: ",response.data.updatedList)
         this.setState({
-            reviews: response.data
+            reviews: response.data.updatedList.reviews
         });
     });
   }
@@ -114,8 +114,8 @@ class RestaurantViewReview extends Component {
         for (let i = 0; i < this.state.reviews.length; i++) {
                 data.push(
                             <Card border="info" style={{ width: '40%' }}><Card.Body> 
-                            <a style={{ cursor: 'pointer' }} href={"/oneEventAttendeeView/" + this.state.reviews[i].customer.id}>
-                            <Card.Title><b>{this.state.reviews[i].customer.name}</b></Card.Title>
+                            <a style={{ cursor: 'pointer' }} href={"/oneEventAttendeeView/" + this.state.reviews[i].customerId}>
+                            <Card.Title><b>{this.state.reviews[i].customerName}</b></Card.Title>
                             </a>
                             <Card.Text><StarRatings
                             rating={Number(this.state.reviews[i].rating)}
@@ -125,7 +125,7 @@ class RestaurantViewReview extends Component {
                             numberOfStars={5}
                             changeRating=""
                             name='rating' /></Card.Text>
-                            <Card.Text><b> Date: </b> {this.state.reviews[i].createdAt.split('T')[0]}</Card.Text>
+                            <Card.Text><b> Date: </b> {this.state.reviews[i].date.split('T')[0]}</Card.Text>
                             <Card.Text><b> Description: </b> {this.state.reviews[i].description}</Card.Text>
                             </Card.Body></Card>)
         }

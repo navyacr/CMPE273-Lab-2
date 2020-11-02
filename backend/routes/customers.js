@@ -23,7 +23,7 @@ app.get('/:orderId/cancelOrder', orders.cancelOrder)
 // Customer review for a restaurant
 app.post('/:customerId/reviews', restaurants.createReview)
 app.get('/:restaurantId/reviews', reviews.findAll)
-app.get('/:restaurantId/aggreviews', reviews.aggReview)
+app.get('/:restaurantId/aggreviews', restaurants.aggReview)
 // app.post('/:customerId/profile', customersProfile.createOrUpdate)
 app.post('/restaurantsearch', restaurantsProfile.search)
 app.post('/:customerId/uploadImage', customersProfile.uploadImage)

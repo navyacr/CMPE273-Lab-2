@@ -60,6 +60,7 @@ class RestaurantProfileUpdate extends Component {
     let data = Object.assign({}, this.state);
     this.props.updateRestaurant(data);
     console.log("OnUpdate called", data);
+    alert("Profile data updated")
   };
 
   render() {
@@ -108,6 +109,17 @@ class RestaurantProfileUpdate extends Component {
                             type="password"
                             onChange={this.onChange}
                             value={this.state.password}
+                             />
+                    </Form.Group>
+                </Form.Row>
+
+                <Form.Row>
+                    <Form.Group as={Col} controlId="cuisine">
+                        <Form.Label>Cuisine</Form.Label>
+                        <Form.Control name="cuisine"
+                            type="text"
+                            onChange={this.onChange}
+                            value={this.state.cuisine}
                              />
                     </Form.Group>
                 </Form.Row>

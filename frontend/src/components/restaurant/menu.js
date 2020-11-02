@@ -93,7 +93,7 @@ class RestaurantMenu extends Component {
     axios.get(`${backendServer}/restaurants/${id}/dishes`)
     .then(response => {
         this.setState({
-            dishes: response.data
+            dishes: response.data.updatedList
         });
     });
 

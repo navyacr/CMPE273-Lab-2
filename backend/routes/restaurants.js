@@ -22,6 +22,8 @@ app.post('/validate', restaurants.validate)
 app.get('/:restaurantId/info', restaurants.findById)
 
 app.post('/:dishName/dishes', restaurants.createOrUpdateDish)
+//Route to get menu in a selected restaurant
+app.get('/:restaurantId/dishes', dishes.findAll)
 
 // TODO
 app.post('/:restaurantId/uploadImage', restaurantsProfile.uploadImage)
@@ -31,8 +33,7 @@ app.get('/:restaurantId/viewProfileImage', restaurantsProfile.viewProfileImage)
 app.post('/:dishId/dishImage', dishes.dishUploadImage)
 app.get('/:dishId/dishImage', dishes.viewDishImage)
 
-//Route to get menu in a selected restaurant
-app.get('/:restaurantId/dishes', dishes.findAll)
+
 
 // Get reviews of the restaurant
 // app.get('/:restaurantId/reviews', reviews.findAll)

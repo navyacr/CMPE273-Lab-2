@@ -7,7 +7,7 @@ export const eventView = () => (dispatch) => {
   axios.get(`${backendServer}/events/info`)
     .then((response) => dispatch({
       type: EVENT_VIEW,
-      payload: response.data,
+      payload: response.data.updatedList,
     }))
     .catch((error) => {
       if (error.response && error.response.data) {

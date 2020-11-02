@@ -40,11 +40,11 @@ class RestaurantsSignup extends Component {
     let message = "";
     console.log("Props user value")
     console.log(this.props.user.message)
-    if (this.props.user.message === "SUCCESS" && this.state.signupFlag) {
+    if (this.props.user.updatedList && this.props.user.updatedList.status === "SUCCESS" && this.state.signupFlag) {
         alert("Registered successfully");
-        redirectVar = <Redirect to="/Login" />
+        redirectVar = <Redirect to="/restaurantsLogin" />
     }
-    else if (this.props.user.message === "Validation error" && this.state.signupFlag){
+    else if (this.props.user.updatedList && this.props.user.updatedList.status === "error" && this.state.signupFlag){
         message = "Email id is already registered"
     }
     return (

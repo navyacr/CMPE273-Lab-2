@@ -38,7 +38,7 @@ class ViewOrders extends Component {
 }
 componentDidMount() {
   this.setState({
-    all: this.state.orders.updatedList
+    all: this.state.orders
   });
 }
 handleClick = (name) => {
@@ -62,8 +62,8 @@ handleClick = (name) => {
     .then(response => {
       console.log(response.data)
         this.setState({
-            allorders: response.data,
-            orders: response.data
+            allorders: response.data.updatedList,
+            orders: response.data.updatedList
         });
     });
   }
@@ -72,21 +72,21 @@ handleClick = (name) => {
 
       if (this.state && this.state.orders && this.state.orders.length > 0) {
         for (var i = 0; i < this.state.orders.length; i++) {
-          let imgsrc = `${backendServer}/restaurants/${this.state.orders[i].dish.id}/dishImage`
+          let imgsrc = `${backendServer}/restaurants/${this.state.orders[i].dishId._id}/dishImage`
             data.push(<Card border='info' border-width='10px' style={{ width: '50%' , color: 'black' , }}> <Card.Body> 
                           <div class="d-flex">
                           <div class="mx-auto pull-left">
                           <Card.Img variant="top" class="dish-image" src={imgsrc}></Card.Img>
                           </div>
                           <div class="mx-auto pull-right">
-                          <Card.Title><b>{this.state.orders[i].dish.restaurant.name}</b></Card.Title>
-                          <Card.Text><b>{this.state.orders[i].dish.name}</b></Card.Text>
-                          <Card.Text><b> {this.state.orders[i].dish.price} USD</b></Card.Text>
+                          <Card.Title><b>{this.state.orders[i].restaurantId.name}</b></Card.Title>
+                          <Card.Text><b>{this.state.orders[i].dishId.name}</b></Card.Text>
+                          <Card.Text><b> {this.state.orders[i].dishId.price} USD</b></Card.Text>
                           <Card.Text><b> Quantity: {this.state.orders[i].qty}</b></Card.Text>
                           <Card.Text><b> Status: {this.state.orders[i].status} </b></Card.Text>                       
-                          <Card.Text><b> Date: {this.state.orders[i].createdAt.split("T")[0]} </b></Card.Text>
-                          <Card.Text><b> Time: {this.state.orders[i].createdAt.split("T")[1]} </b></Card.Text>
-                          <button class="btn btn-primary" value={this.state.orders[i].id} onClick={this.cancel}>Cancel</button>
+                          <Card.Text><b> Date: {this.state.orders[i].date.split("T")[0]} </b></Card.Text>
+                          <Card.Text><b> Time: {this.state.orders[i].date.split("T")[1]} </b></Card.Text>
+                          <button class="btn btn-primary" value={this.state.orders[i]._id} onClick={this.cancel}>Cancel</button>
                           </div>
                           </div>
                       </Card.Body> </Card>)

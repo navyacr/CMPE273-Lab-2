@@ -21,7 +21,9 @@ var CustomerEventRegister = require("./services/customersEventRegister")
 var CustomersEventsEnrolled = require("./services/customersEventsEnrolled")
 var CustomersInfoValidate = require("./services/customersInfoValidate")
 var RestaurantsGetAll = require("./services/restaurantsGetAll")
-
+var RestaurantsAggReview = require("./services/restaurantsAggReview")
+var RestaurantsInfoValidate = require("./services/restaurantsInfoValidate")
+var RestaurantGetEventAttendees = require("./services/restaurantsGetEventAttendees")
 const mongoose = require('mongoose');
 
 const { mongoDB, frontendURL } = require('../backend/config/mongo.config');
@@ -94,6 +96,9 @@ handleTopicRequest("cusEventRegister", CustomerEventRegister)
 handleTopicRequest("cusEventsEnrolled", CustomersEventsEnrolled)
 handleTopicRequest("cusInfoValidate", CustomersInfoValidate)
 handleTopicRequest("resGetAll", RestaurantsGetAll)
+handleTopicRequest("resAggReview", RestaurantsAggReview)
+handleTopicRequest("resInfoValidate", RestaurantsInfoValidate)
+handleTopicRequest("resEventAttendees", RestaurantGetEventAttendees)
 
 
 

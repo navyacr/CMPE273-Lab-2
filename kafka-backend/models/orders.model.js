@@ -9,6 +9,7 @@ var ordersSchema = new Schema({
     qty: { type: String},
     dm: { type: String},
     status: { type: String},
+    date: {type: Date, default: Date.now},
 },
 {
     versionKey: false

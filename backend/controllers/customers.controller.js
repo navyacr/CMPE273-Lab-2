@@ -58,8 +58,7 @@ exports.create = (req, res) => {
         });
         res.end();
       }
-      
-  });
+    });
 
   }
   //   const username = req.body.username;

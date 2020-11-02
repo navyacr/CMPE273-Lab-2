@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import backendServer from '../../config';
 import { Card, Row, Col } from 'react-bootstrap';
 import ReactFlexyTable from "react-flexy-table"
-// import "react-flexy-table/dist/index.css";
 import CustomerLoginCheck from './customerLoginCheck';
 import AggregateReview from './aggregateReview';
 import Dropdown from 'react-dropdown';
@@ -81,7 +80,7 @@ class CustomerSearch extends Component {
     }
   }
 
-  render(name) {
+  render() {
     const options = [
         {value: 'cuisine', label: 'Cuisine'},
         {value: 'deliverymode', label: 'Mode of Delivery'},

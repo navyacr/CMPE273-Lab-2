@@ -50,7 +50,7 @@ class CustomersSignup extends Component{
             alert("Registered successfully");
             redirectVar = <Redirect to="/Login" />
         }
-        else if (this.props.user.updatedList && this.props.user.updatedList.status  === "Validation error" && this.state.signupFlag){
+        else if (this.props.user.updatedList && this.props.user.updatedList.status  === "error" && this.state.signupFlag){
             message = "Email id is already registered"
         }
         return(

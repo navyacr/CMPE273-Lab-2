@@ -16,7 +16,6 @@ class RestaurantProfile extends Component {
       fileText : "ChooseImage.."
     };
     this.getRestaurantInfo();
-    // this.props.getRestaurant();
   } 
 
   onImageUpload = (e) => {
@@ -52,21 +51,17 @@ onUserUpload = (e) => {
     axios.get(`${backendServer}/restaurants/${id}/info`)
     .then(response => {
         this.setState({
-            name: response.data.name,
-            email: response.data.email,
-            restaurantId: response.data.id
+            name: response.data.updatedList.name,
+            email: response.data.updatedList.email,
+            restaurantId: response.data.updatedList._id,
+            description: response.data.updatedList.description,
+            contact: response.data.updatedList.contact,
+            timings: response.data.updatedList.timings,
+            location: response.data.updatedList.location,
+            cuisine: response.data.updatedList.cuisine
         });
     });
 
-    axios.get(`${backendServer}/restaurants/${id}/profile`)
-    .then(response => {
-        this.setState({
-            description: response.data.description,
-            contact: response.data.contact,
-            timings: response.data.timings,
-            location: response.data.location
-        });
-    });
 
   }
   render() {
@@ -84,7 +79,7 @@ onUserUpload = (e) => {
                       </div><br /><br />
                       <Button type="submit" variant="primary">Upload</Button>
                     </form>
-                    
+                    <p> <b>Cuisine:</b> {this.state.cuisine}</p>
                     <p> <b>Description:</b> {this.state.description}</p>
                     <p> <b>Phone:</b> {this.state.contact} </p>
                     <p> <b>Email:</b> {this.state.email} </p>

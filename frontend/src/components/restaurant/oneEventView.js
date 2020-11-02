@@ -32,12 +32,12 @@ class OneEventView extends Component {
 
     if (this.props.user && this.props.user.length > 0) {
       for (let i = 0; i < this.props.user.length; i++) {
-        var imgsrc = `${backendServer}/customers/${this.props.user[i].customer.id}/viewProfileImage`;
+        var imgsrc = `${backendServer}/customers/${this.props.user[i].customerId}/viewProfileImage`;
               data.push(
                           <Card border="info" style={{ width: '40%' }}><Card.Body> 
                             <img class="profile-photo" src={imgsrc}></img>
-                            <a style={{ cursor: 'pointer' }} href={"/oneEventAttendeeView/" + this.props.user[i].customer.id}>
-                              <Card.Title><b>{this.props.user[i].customer.name}</b></Card.Title>
+                            <a style={{ cursor: 'pointer' }} href={"/oneEventAttendeeView/" + this.props.user[i].customerId}>
+                              <Card.Title><b>{this.props.user[i].customerName}</b></Card.Title>
                             </a>
                           </Card.Body></Card>)
           

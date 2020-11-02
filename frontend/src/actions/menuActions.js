@@ -8,7 +8,7 @@ export const menuUpdate = (menuData) => (dispatch) => {
   axios.post(`${backendServer}/restaurants/${name}/dishes`, menuData)
     .then((response) => dispatch({
       type: MENU_UPDATE,
-      payload: response.data,
+      payload: response.data.updatedList,
     }))
     .catch((error) => {
       if (error.response && error.response.data) {

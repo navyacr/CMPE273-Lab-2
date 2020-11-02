@@ -4,7 +4,7 @@ function handle_request(msg, callback){
 
   let newrestaurant = new Model.restaurantsModel(msg)
   
-  console.log("New book is", newrestaurant)
+  console.log("New restaurant is", newrestaurant)
 
   if (!newrestaurant) {
     callback(null, {message: "Not Done"})
@@ -29,7 +29,7 @@ function handle_request(msg, callback){
                 callback({"status": "error"}, {"status": "error"})
               }
               else {
-                callback(null, {"status": "Done", data})
+                callback(null, {"status": "SUCCESS", data})
               }
           });
       }

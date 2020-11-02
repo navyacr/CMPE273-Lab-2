@@ -7,7 +7,7 @@ export const oneEventView = (eventid) => (dispatch) => {
   axios.get(`${backendServer}/events/${eventid}/attendees`)
     .then((response) => dispatch({
       type: ONE_EVENT_VIEW,
-      payload: response.data,
+      payload: response.data.updatedList.attendees,
     }))
     .catch((error) => {
       if (error.response && error.response.data) {

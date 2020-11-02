@@ -159,3 +159,42 @@ exports.create = (req, res) => {
 
 
     }
+
+    exports.findAttendees = (req, res) => {
+      req.body.eventId = req.params.eventId
+      kafka.make_request('resEventAttendees',req.body, function(err,results){
+    
+        if (err){
+            res.json({
+                status:"error",
+                msg:"System Error, Try Again."
+            })
+        }else{
+                res.json({
+                    updatedList:results
+                });
+    
+                res.end();
+            }    
+      });
+
+
+      // const eventId = req.params.eventId;
+      // var condition1 = eventId ? { eventId: { [Op.eq]: `${eventId}` } } : null;
+      // eventAttendees.findAll(
+      //   {where: condition1,
+      //     include: [{
+      //         model: customers,
+      //         where: {}
+      //     }]
+      //   })
+      //     .then(data => {
+      //         res.send(data);
+      //     })        
+      //     .catch(err => {
+      //         res.status(500).send({
+      //             message:
+      //             err.message || "Some error occurred while retrieving dishes."
+      //         });
+      //     });
+  }

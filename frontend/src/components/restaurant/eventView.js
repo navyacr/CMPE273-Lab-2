@@ -22,7 +22,7 @@ class EventView extends Component {
         for (let i = 0; i < this.props.user.length; i++) {
                 data.push(
                             <Card border="info" style={{ width: '40%' }}><Card.Body> 
-                              <a style={{ cursor: 'pointer' }} href={"/oneEventView/" + this.props.user[i].id}>
+                              <a style={{ cursor: 'pointer' }} href={"/oneEventView/" + this.props.user[i]._id}>
                                 <Card.Title><b>{this.props.user[i].name}</b></Card.Title>
                               </a>
                             <Card.Text><b> Description: </b> {this.props.user[i].description}</Card.Text>

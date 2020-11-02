@@ -12,7 +12,7 @@ const Schema = mongoose.Schema;
 // })
 
 var reviewSchema = new Schema({
-   rating: {type: String},
+   rating: {type: Number},
    date: {type: Date, default: Date.now},
    description: {type: String},
    customerId: {type: ObjectId},

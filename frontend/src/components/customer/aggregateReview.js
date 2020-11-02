@@ -24,7 +24,7 @@ class AggregateReview extends Component {
     });
   }
 
-  render(name) {
+  render() {
     let mean = 0
       if (this.state.aggreviews && Number(this.state.aggreviews.count)>0){
       mean = Number(this.state.aggreviews.total)/Number(this.state.aggreviews.count)
