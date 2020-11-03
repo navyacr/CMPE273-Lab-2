@@ -59,7 +59,7 @@ class CustomerHome extends Component {
     .then(response => {
         console.log("Response: ", response)
         this.setState({
-            restaurants: response.data
+            restaurants: response.data.updatedList
         });
     });
 }

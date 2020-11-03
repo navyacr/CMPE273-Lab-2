@@ -13,29 +13,33 @@ class CustomerProfile extends Component {
   getCustomerInfo = () => {
      
     const id = localStorage.getItem('customer_id')
-    axios.get(`${backendServer}/customers/${id}/info`)
-    .then(response => {
-        this.setState({
-            name: response.data.name,
-            email: response.data.email,
-            customerId: response.data.id
-        });
-    });
+    // axios.get(`${backendServer}/customers/${id}/info`)
+    // .then(response => {
+    //     this.setState({
+    //         name: response.data.updatedListname,
+    //         email: response.data.email,
+    //         customerId: response.data._id
+    //     });
+    // });
 
     axios.get(`${backendServer}/customers/${id}/profile`)
     .then(response => {
         this.setState({
-            dob: response.data.dob,
-            city: response.data.city,
-            state: response.data.state,
-            country: response.data.country,
-            nickname: response.data.nickname,
-            headline: response.data.headline,
-            yelpsince: response.data.createdAt,
-            thingsilove: response.data.thingsilove,
-            findmein: response.data.findmein,
-            website: response.data.website,
-            phonenumber: response.data.phonenumber
+            name: response.data.updatedList.name,
+            email: response.data.updatedList.email,
+            customerId: response.data.updatedList._id,
+            dob: response.data.updatedList.dob,
+            city: response.data.updatedList.city,
+            state: response.data.updatedList.state,
+            country: response.data.updatedList.country,
+            nickname: response.data.updatedList.nickname,
+            headline: response.data.updatedList.headline,
+            yelpsince: response.data.updatedList.yelpsince.split('T')[0],
+            thingsilove: response.data.updatedList.thingsilove,
+            findmein: response.data.updatedList.findmein,
+            website: response.data.updatedList.website,
+            phonenumber: response.data.updatedList.phonenumber,
+            customerId: response.data.updatedList._id
         });
     });
 

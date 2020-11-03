@@ -93,8 +93,6 @@ const dishes = db.dishes;
     });
     }
 
-
-
     var condition =  { [type] : { [Op.eq]: `${value}` } }
     restaurantsProfile.findAll({
       where: condition,

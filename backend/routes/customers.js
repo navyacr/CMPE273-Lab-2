@@ -25,7 +25,7 @@ app.post('/:customerId/reviews', restaurants.createReview)
 app.get('/:restaurantId/reviews', reviews.findAll)
 app.get('/:restaurantId/aggreviews', restaurants.aggReview)
 // app.post('/:customerId/profile', customersProfile.createOrUpdate)
-app.post('/restaurantsearch', restaurantsProfile.search)
+app.post('/restaurantsearch', restaurants.search)
 app.post('/:customerId/uploadImage', customersProfile.uploadImage)
 app.get('/:customerId/viewProfileImage', customersProfile.viewProfileImage)
 

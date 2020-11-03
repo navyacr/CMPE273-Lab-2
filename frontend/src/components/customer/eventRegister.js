@@ -29,7 +29,7 @@ class EventRegister extends Component {
     .then(response => {
         console.log("Response: ", response)
         this.setState({
-            events: response.data
+            events: response.data.updatedList
         });
     });
 }

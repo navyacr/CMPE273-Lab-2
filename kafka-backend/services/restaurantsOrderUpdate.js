@@ -3,9 +3,9 @@ const ordersModel = require('../models/orders.model');
 function handle_request(msg, callback){
     // console.log("Orders for update:", msg)
     orders = msg.orders
-    for (order of orders){
+    for (var i in orders){
         // console.log(order)
-        ordersModel.findByIdAndUpdate(order._id, {status: order.status}, { safe: true, new: true, useFindAndModify: false }, function(error, output) {
+        ordersModel.findByIdAndUpdate(orders[i]._id, {status: orders[i].status}, { safe: true, new: true, useFindAndModify: false }, function(error, output) {
             // console.log("Error, output:", error, output)
         })
 

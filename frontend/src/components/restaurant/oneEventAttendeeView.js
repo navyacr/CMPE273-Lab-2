@@ -12,19 +12,19 @@ class OneEventAttendeeView extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.getAttendeeInfo();
+    // this.getAttendeeInfo();
     this.props.oneEventAttendeeView(this.props.match.params.cusid);
   } 
 
-  getAttendeeInfo = () => {
+  // getAttendeeInfo = () => {
      
-    axios.get(`${backendServer}/customers/${this.props.match.params.cusid}/info`)
-    .then(response => {
-        this.setState({
-            name: response.data.name,
-            email: response.data.email
-        });
-    });
+  //   axios.get(`${backendServer}/customers/${this.props.match.params.cusid}/info`)
+  //   .then(response => {
+  //       this.setState({
+  //           name: response.data.name,
+  //           email: response.data.email
+  //       });
+  //   });
 
     // axios.get(`${backendServer}/customers/${this.props.match.params.cusid}/profile`)
     // .then(response => {
@@ -43,7 +43,7 @@ class OneEventAttendeeView extends Component {
     //     });
     // });
 
-  }
+  // }
  
   render() {
     var imgsrc = `${backendServer}/customers/${this.props.match.params.cusid}/viewProfileImage`;
@@ -51,9 +51,9 @@ class OneEventAttendeeView extends Component {
         <div>
           <RestaurantLoginCheck/>
                 <div class="restaurantHome">
-                    <h3 style={{color: "maroon"}}> <b>{ this.state.name } </b></h3>
+                    <h3 style={{color: "maroon"}}> <b>{ this.props.user.name } </b></h3>
                     <img class="profile-photo" src={imgsrc}></img>
-                    <p> <b>Email:</b> {this.state.email}</p>                    
+                    <p> <b>Email:</b> {this.props.user.email}</p>                    
                     <p> <b>Phone:</b> {this.props.user.phonenumber} </p>
                     <p> <b>City:</b> {this.props.user.city} </p>
                     <p> <b>State:</b> {this.props.user.state}</p>
@@ -62,7 +62,7 @@ class OneEventAttendeeView extends Component {
                     <p> <b>DOB:</b> {this.props.user.dob}</p>                    
                     <p> <b>Nickname:</b> {this.props.user.nickname} </p>
                     <p> <b>Headline:</b> {this.props.user.headline} </p>
-                    <p> <b>Things I Love:</b> {this.props.user.thingsilovethingsilove}</p>
+                    <p> <b>Things I Love:</b> {this.props.user.thingsilove}</p>
                     <p> <b>Website:</b> {this.props.user.website} </p>
                 </div>
             </div>

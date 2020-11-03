@@ -141,24 +141,37 @@ exports.create = (req, res) => {
   }
 
   exports.search = (req, res) => {
-    var value = req.body.value
-      var condition =  { name : { [Op.like]: `%${value}%` } }
-      events.findAll({
-      where: condition,
-      
-    }).then((data) => {
-          res.send(data)
-          console.log("*********************\n\n\n\n\n",data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while updating the restaurantProfile."
-      });
+    kafka.make_request('eventsSearch',req.body, function(err,results){
+  
+      if (err){
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      }else{
+              res.json({
+                  updatedList:results
+              });
+  
+              res.end();
+          }    
     });
-
-
-    }
+    // var value = req.body.value
+    //   var condition =  { name : { [Op.like]: `%${value}%` } }
+    //   events.findAll({
+    //   where: condition,
+      
+    // }).then((data) => {
+    //       res.send(data)
+    //       console.log("*********************\n\n\n\n\n",data);
+    // })
+    // .catch(err => {
+    //   res.status(500).send({
+    //     message:
+    //       err.message || "Some error occurred while updating the restaurantProfile."
+    //   });
+    // });
+  }
 
     exports.findAttendees = (req, res) => {
       req.body.eventId = req.params.eventId

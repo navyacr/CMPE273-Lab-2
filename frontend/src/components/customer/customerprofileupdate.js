@@ -62,7 +62,7 @@ update = (e) => {
                 alert("Information updated successfully")
                 this.setState({
                     authFlag : true,
-                    err: response.data                       
+                    err: response.data                     
                 })
             }else{
                 alert("Some error occured. Try again..")

@@ -25,7 +25,7 @@ update = (e) => {
     e.preventDefault();
     let data = Object.assign({}, this.state);
     const id = localStorage.getItem('customer_id')
-    axios.post(`${backendServer}/customers/${id}/profile`, data)
+    axios.post(`${backendServer}/customers/${id}/infoUpdate`, data)
         .then(response => {
             console.log(response.data)
             console.log("Status Code : ",response.status);
@@ -144,16 +144,6 @@ update = (e) => {
                              />
                     </Form.Group>
                 </Form.Row>
-                <Form.Row>
-                    <Form.Group as={Col} controlId="yelpsince">
-                        <Form.Label>Yelping Since</Form.Label>
-                        <Form.Control name="yelpsince"
-                            type="text"
-                            onChange={this.changeHandler}
-                             />
-                    </Form.Group>
-                </Form.Row>
-                
 
                 <ButtonGroup aria-label="Third group">
                     <Button type="submit" variant="success">Update</Button>

@@ -23,7 +23,10 @@ var CustomersInfoValidate = require("./services/customersInfoValidate")
 var RestaurantsGetAll = require("./services/restaurantsGetAll")
 var RestaurantsAggReview = require("./services/restaurantsAggReview")
 var RestaurantsInfoValidate = require("./services/restaurantsInfoValidate")
-var RestaurantGetEventAttendees = require("./services/restaurantsGetEventAttendees")
+var RestaurantsGetEventAttendees = require("./services/restaurantsGetEventAttendees")
+var RestaurantsSerach = require("./services/restaurantsSearch")
+var EventsSearch = require("./services/eventsSearch")
+
 const mongoose = require('mongoose');
 
 const { mongoDB, frontendURL } = require('../backend/config/mongo.config');
@@ -98,7 +101,9 @@ handleTopicRequest("cusInfoValidate", CustomersInfoValidate)
 handleTopicRequest("resGetAll", RestaurantsGetAll)
 handleTopicRequest("resAggReview", RestaurantsAggReview)
 handleTopicRequest("resInfoValidate", RestaurantsInfoValidate)
-handleTopicRequest("resEventAttendees", RestaurantGetEventAttendees)
+handleTopicRequest("resEventAttendees", RestaurantsGetEventAttendees)
+handleTopicRequest("resSearch", RestaurantsSerach)
+handleTopicRequest("eventsSearch", EventsSearch)
 
 
 
