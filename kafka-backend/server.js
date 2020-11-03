@@ -26,6 +26,8 @@ var RestaurantsInfoValidate = require("./services/restaurantsInfoValidate")
 var RestaurantsGetEventAttendees = require("./services/restaurantsGetEventAttendees")
 var RestaurantsSerach = require("./services/restaurantsSearch")
 var EventsSearch = require("./services/eventsSearch")
+var AllCustomers = require("./services/allCustomers")
+
 
 const mongoose = require('mongoose');
 
@@ -104,6 +106,7 @@ handleTopicRequest("resInfoValidate", RestaurantsInfoValidate)
 handleTopicRequest("resEventAttendees", RestaurantsGetEventAttendees)
 handleTopicRequest("resSearch", RestaurantsSerach)
 handleTopicRequest("eventsSearch", EventsSearch)
+handleTopicRequest("allcus", AllCustomers)
 
 
 

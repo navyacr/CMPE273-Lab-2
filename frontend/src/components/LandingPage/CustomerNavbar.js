@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 
-//create the Navbar Component
 class CustomerNavbar extends Component {
     constructor(props){
         super(props);

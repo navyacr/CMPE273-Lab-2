@@ -12,6 +12,7 @@ const restaurants = require("../controllers/restaurants.controller.js");
 app.post('/info', customers.create)
 app.post('/:customerId/infoUpdate', customers.update)
 app.get('/:customerId/profile', customers.findProfile)
+app.get('/allCustomers', customers.allcustomers)
 
 app.post('/validate', customers.validate)
 

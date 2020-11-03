@@ -15,13 +15,13 @@ function handle_request(msg, callback){
             returnVal.push(output[i].restaurantId)
           }
           console.log("returnVal:", returnVal)
-          callback(null, returnVal)  
+          callback(null, returnVal)
         }
       });
   }
   if (msg.type === 'restaurantname'){
     // var condition =  { name : { [Op.like]: `%${value}%` } }
-    Model.restaurantsModel.find({ name : msg.value})
+    Model.restaurantsModel.find({ name : new RegExp(msg.value, 'i')})
     // .populate("restaurantId")
     .then(function(output) {
       if (output) {
@@ -33,7 +33,7 @@ function handle_request(msg, callback){
 
   if (msg.type === 'location'){
     // var condition =  { name : { [Op.like]: `%${value}%` } }
-    Model.restaurantsModel.find({ location : msg.value})
+    Model.restaurantsModel.find({ location : new RegExp(msg.value, 'i')})
     // .populate("restaurantId")
     .then(function(output) {
       if (output) {

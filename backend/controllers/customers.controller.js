@@ -43,6 +43,22 @@ exports.create = (req, res) => {
       
   });
   };
+
+  exports.allcustomers = (req, res) => {
+    kafka.make_request('allcus',req.body, function(err,results){
+      if (err){
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      }else {
+        res.json({
+            updatedList:results
+        });
+        res.end();
+      }
+  });
+  };
   
   exports.validate = (req, res) => {
     

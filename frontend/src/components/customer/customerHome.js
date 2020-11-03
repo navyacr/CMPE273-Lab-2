@@ -57,7 +57,7 @@ class CustomerHome extends Component {
     console.log(params)
     axios.post(`${backendServer}/customers/restaurantsearch`, params)
     .then(response => {
-        console.log("Response: ", response)
+        console.log("Response: ", response.data)
         this.setState({
             restaurants: response.data.updatedList
         });
