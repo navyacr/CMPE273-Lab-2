@@ -33,6 +33,7 @@ class CustomerAddReview extends Component{
             restaurantId: this.props.resid
         }
         let cusid = localStorage.getItem('customer_id')
+        axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
         axios.post(`${backendServer}/customers/${cusid}/reviews`,data)
             .then(response => {
                 console.log(response.data)

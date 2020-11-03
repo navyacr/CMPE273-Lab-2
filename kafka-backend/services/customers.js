@@ -1,14 +1,15 @@
 const customersModel = require('../models/customers.model');
-var mongoose = require('mongoose');
+const passwordHash = require('password-hash');
 
 function handle_request(msg, callback){
    
-    console.log("Inside customers kafka backend");
-    console.log(msg);
+  console.log("Inside customers kafka backend");
+  console.log(msg);
+  let hashedPassword = passwordHash.generate(msg.password);
 
   let newcus = new customersModel({name: msg.name,
     email: msg.email,
-    password: msg.password })
+    password: hashedPassword })
   
   console.log("New cus is", newcus)
 
@@ -20,12 +21,12 @@ function handle_request(msg, callback){
     return newcus
   }
 
-  customersModel.findOne({ email: msg.email }, (error, book) => {
+  customersModel.findOne({ email: msg.email }, (error, cus) => {
       console.log("Finding book")
       if (error) {
           callback(error, {"status": "error"})
       }
-      if (book) {
+      if (cus) {
           console.log("Customer already exists")
           callback({"status": "error"}, {"status": "error"})
       }

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {login} from '../../actions/customerLoginActions';
+const jwt_decode = require('jwt-decode');
 
 //Define a Login Component
 class Login extends Component{
@@ -19,6 +20,11 @@ class Login extends Component{
             // cust_err: ""
         }
     }
+        componentWillReceiveProps(props){
+            this.setState({
+                token: props.user.updatedList.token
+            })
+        }
         onChange = (e) => {
             this.setState({
                 [e.target.name]: e.target.value
@@ -117,6 +123,11 @@ class Login extends Component{
         console.log("Props user value")
         console.log(this.props)
         if (this.props.user.updatedList && this.props.user.updatedList.status === "SUCCESS" && this.state.signupFlag) {
+            localStorage.setItem('token', this.props.user.updatedList.token)
+            var test = localStorage.getItem('token')
+            console.log("Token: ", test)
+            var decoded = jwt_decode(this.props.user.updatedList.token.split(' ')[1]);
+            console.log("id and name from token: ", decoded._id + decoded.username + decoded.type)
             localStorage.setItem('customer_id', this.props.user.updatedList._id)
             localStorage.setItem('customer_name', this.props.user.updatedList.name)
             localStorage.setItem('type', "customer")

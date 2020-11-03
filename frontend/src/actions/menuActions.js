@@ -5,6 +5,7 @@ import backendServer from '../config'
 export const menuUpdate = (menuData) => (dispatch) => {
   axios.defaults.withCredentials = true;
   const name = menuData.name
+  axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
   axios.post(`${backendServer}/restaurants/${name}/dishes`, menuData)
     .then((response) => dispatch({
       type: MENU_UPDATE,

@@ -2,6 +2,10 @@ const db = require("../models");
 const customers = db.customers;
 const Op = db.Sequelize.Op;
 var kafka = require('../kafka/client');
+// const jwt = require('jsonwebtoken');
+// const { secret } = require('../config/db.config');
+// const { auth } = require("../config/passport");
+// auth();
 
 
 exports.create = (req, res) => {

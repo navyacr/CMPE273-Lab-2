@@ -1,9 +1,13 @@
 const Model = require('../models/restaurants.model');
+const passwordHash = require('password-hash');
 
 function handle_request(msg, callback){
-
-  let newrestaurant = new Model.restaurantsModel(msg)
   
+  let hashedPassword = passwordHash.generate(msg.password);
+  let newrestaurant = new Model.restaurantsModel({name: msg.name,
+    email: msg.email,
+    password: hashedPassword,
+    location: msg.location })
   console.log("New restaurant is", newrestaurant)
 
   if (!newrestaurant) {

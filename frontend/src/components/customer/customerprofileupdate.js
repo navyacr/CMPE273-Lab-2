@@ -12,7 +12,6 @@ class CustomerProfileUpdate extends Component {
         fileText : "ChooseImage..",
         customerId: localStorage.getItem('customer_id')
     }
-    //Bind the handlers to this class
     this.changeHandler = this.changeHandler.bind(this);
     this.update = this.update.bind(this);
   } 
@@ -44,7 +43,6 @@ class CustomerProfileUpdate extends Component {
             console.log("Error");
         });
   }
- //username change handler to update state variable with the text entered by the user
    changeHandler = (e) => {
     this.setState({
         [e.target.name]: e.target.value
@@ -54,6 +52,7 @@ update = (e) => {
     e.preventDefault();
     let data = Object.assign({}, this.state);
     const id = localStorage.getItem('customer_id')
+    axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
     axios.post(`${backendServer}/customers/${id}/infoUpdate`, data)
         .then(response => {
             console.log(response.data)

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {restaurantsLogin} from '../../actions/loginActions';
+const jwt_decode = require('jwt-decode');
 
 class RestaurantsLogin extends Component{
     constructor(props) {
@@ -38,6 +39,11 @@ class RestaurantsLogin extends Component{
         console.log("Props user value")
         console.log(this.props)
         if (this.props.user.updatedList && this.props.user.updatedList.status === "SUCCESS" && this.state.signupFlag) {
+            localStorage.setItem('token', this.props.user.updatedList.token)
+            var test = localStorage.getItem('token')
+            console.log("Token: ", test)
+            var decoded = jwt_decode(this.props.user.updatedList.token.split(' ')[1]);
+            console.log("id and name from token: ", decoded._id + decoded.username + decoded.type)
             localStorage.setItem('restaurant_id', this.props.user.updatedList._id)
             localStorage.setItem('restaurant_name', this.props.user.updatedList.name)
             localStorage.setItem('type', "restaurant")
