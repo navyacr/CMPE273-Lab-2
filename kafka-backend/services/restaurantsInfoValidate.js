@@ -11,7 +11,6 @@ function handle_request(msg, callback){
           callback(error, {"status": "INVALID_CREDENTIALS"})
       }
       if (restaurant) {
-        // if (restaurant.password === msg.password){
         if (passwordHash.verify(msg.password, restaurant.password)){
           message = {"status": "SUCCESS"};
           const payload = { _id: restaurant._id, username: restaurant.name, type:"restaurant"};
