@@ -19,6 +19,7 @@ import ViewOrders from './customer/viewOrders';
 import CustomerProfileUpdate from './customer/customerprofileupdate';
 import EventRegister from './customer/eventRegister'
 import RestaurantViewOrders from './restaurant/restaurantViewOrders';
+import AllCustomers from './restaurant/allCustomers';
 import ViewRegisteredEvents from './customer/viewRegisteredEvents';
 import RestaurantsLogin from './Login/restaurantsLogin';
 
@@ -48,6 +49,7 @@ class Main extends Component {
         <Route path="/restaurantViewOrders" component={RestaurantViewOrders} />
         <Route path="/viewRegisteredEvents" component={ViewRegisteredEvents} />
         <Route path="/restaurantsLogin" component={RestaurantsLogin} />
+        <Route path="/allCustomers" component={AllCustomers} />
       </div>
     );
   }

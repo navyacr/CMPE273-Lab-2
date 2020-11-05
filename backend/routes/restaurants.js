@@ -33,6 +33,8 @@ app.get('/:restaurantId/viewProfileImage', restaurantsProfile.viewProfileImage)
 app.post('/:dishId/dishImage', dishes.dishUploadImage)
 app.get('/:dishId/dishImage', dishes.viewDishImage)
 
+app.post('/message', restaurants.postMessage)
+app.post('/getMessage', restaurants.getMessage)
 
 
 // Get reviews of the restaurant

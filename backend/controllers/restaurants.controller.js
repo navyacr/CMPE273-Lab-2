@@ -101,6 +101,7 @@ exports.aggReview = (req, res) => {
     });
     
   };
+
   exports.createOrUpdateDish = (req, res) => {
     req.body.name = req.params.dishName
     kafka.make_request('resCreateDisha',req.body, function(err,results){
@@ -121,7 +122,44 @@ exports.aggReview = (req, res) => {
     
   };
   
+  exports.postMessage = (req, res) => {
+    kafka.make_request('postMessage',req.body, function(err,results){
 
+      if (err){
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      }else{
+              res.json({
+                  updatedList:results
+              });
+  
+              res.end();
+          }    
+    });
+    
+  };
+  
+  exports.getMessage = (req, res) => {
+    kafka.make_request('getMessage',req.body, function(err,results){
+
+      if (err){
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      }else{
+              res.json({
+                  updatedList:results
+              });
+  
+              res.end();
+          }    
+    });
+    
+  };
+  
   exports.findAll = (req, res) => {
 
     kafka.make_request('resGetAll',req.body, function(err,results){

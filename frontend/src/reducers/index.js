@@ -11,6 +11,8 @@ import oneEventAttendeeView from './eventViewReducers';
 import restaurantViewOrders from './restaurantViewOrdersReducers';
 import restaurantViewReview from './restaurantViewOrdersReducers';
 import restaurantMenu from './restaurantViewOrdersReducers';
+import customersView from './allCustomersReducers';
+import getMessages from './allCustomersReducers';
 
 export default combineReducers({
   login: loginReducers,
@@ -24,6 +26,8 @@ export default combineReducers({
   restaurantViewOrders: restaurantViewOrders,
   restaurantViewReview: restaurantViewReview,
   restaurantMenu: restaurantMenu,
-  getRestaurant: getRestaurant
+  getRestaurant: getRestaurant,
+  customersView : customersView,
+  getMessages: getMessages,
   
 });

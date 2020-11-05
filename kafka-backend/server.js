@@ -27,7 +27,8 @@ var RestaurantsGetEventAttendees = require("./services/restaurantsGetEventAttend
 var RestaurantsSerach = require("./services/restaurantsSearch")
 var EventsSearch = require("./services/eventsSearch")
 var AllCustomers = require("./services/allCustomers")
-
+var GetMessage = require("./services/getMessage")
+var PostMessage = require("./services/postMessage")
 
 const mongoose = require('mongoose');
 
@@ -107,7 +108,8 @@ handleTopicRequest("resEventAttendees", RestaurantsGetEventAttendees)
 handleTopicRequest("resSearch", RestaurantsSerach)
 handleTopicRequest("eventsSearch", EventsSearch)
 handleTopicRequest("allcus", AllCustomers)
-
+handleTopicRequest("getMessage", GetMessage)
+handleTopicRequest("postMessage", PostMessage)
 
 
 

@@ -14,6 +14,6 @@ export const ONE_ATTENDEE_VIEW = 'ONE_ATTENDEE_VIEW';
 export const ORDERS_VIEW = 'ORDERS_VIEW';
 export const REVIEW_VIEW = 'REVIEW_VIEW';
 export const MENU_VIEW = 'MENU_VIEW';
-
-
+export const CUSTOMERS_VIEW = 'CUSTOMERS_VIEW';
+export const GET_MESSAGE = 'GET_MESSAGE';
 

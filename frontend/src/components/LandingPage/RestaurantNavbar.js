@@ -31,6 +31,9 @@ class RestaurantNavbar extends Component {
                     <li class="nav-item">
                         <Link class="nav-link" to="/restaurantViewOrders">Orders</Link>
                     </li>
+                    <li class="nav-item">
+                        <Link class="nav-link" to="/allCustomers">Customers List</Link>
+                    </li>
                     
                 </ul>
             </div>
