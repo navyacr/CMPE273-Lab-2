@@ -15,7 +15,6 @@ app.get('/info', restaurants.findAll)
 
 app.post('/:restaurantId/infoUpdate', restaurants.update)
 
-// TODO
 app.post('/validate', restaurants.validate)
 
 //Route to get restaurants by name
@@ -25,13 +24,12 @@ app.post('/:dishName/dishes', restaurants.createOrUpdateDish)
 //Route to get menu in a selected restaurant
 app.get('/:restaurantId/dishes', dishes.findAll)
 
-// TODO
-app.post('/:restaurantId/uploadImage', restaurantsProfile.uploadImage)
-app.get('/:restaurantId/viewProfileImage', restaurantsProfile.viewProfileImage)
+app.post('/:restaurantId/uploadImage', restaurants.uploadImage)
+app.get('/:restaurantId/viewProfileImage', restaurants.viewProfileImage)
 
 // TODO
-app.post('/:dishId/dishImage', dishes.dishUploadImage)
-app.get('/:dishId/dishImage', dishes.viewDishImage)
+app.post('/:dishId/dishImage', restaurants.dishUploadImage)
+app.get('/:dishId/dishImage', restaurants.viewDishImage)
 
 app.post('/message', restaurants.postMessage)
 app.post('/getMessage', restaurants.getMessage)

@@ -1,6 +1,6 @@
 const customersModel = require('../models/customers.model');
 var mongoose = require('mongoose');
-const { update } = require('../models/customers.model');
+
 
 function handle_request(msg, callback){
    

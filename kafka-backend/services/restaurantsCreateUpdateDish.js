@@ -21,11 +21,18 @@ function handle_request(msg, callback){
       if (dish) {
         dish.update(msg)
         dish.save()
-        callback(null, {"status": "Updated"})  
+        callback(null, {"status": "Updated", "dish": dish})  
       }
       else{
-        newDish.save()
-        callback(null, {"status":"Added"})
+        newDish.save(function(err, dish){
+          if (dish){
+            callback(null, dish)
+          }
+          else{
+            callback(null, {"status": err})
+
+          }
+        })
       }
   });
 }

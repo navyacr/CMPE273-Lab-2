@@ -1,7 +1,5 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
-import cookie from 'react-cookies';
-import {Redirect} from 'react-router';
 import RestaurantNavbar from './RestaurantNavbar'
 import CustomerNavbar from './CustomerNavbar'
 import '../../App.css';

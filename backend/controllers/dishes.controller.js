@@ -11,37 +11,22 @@ exports.findAll = (req, res) => {
   kafka.make_request('resGetMenu',req.body, function(err,results){  
 
     if (err){
-        res.json({
-            status:"error",
-            msg:"System Error, Try Again."
-        })
+      res.json({
+          status:"error",
+          msg:"System Error, Try Again."
+      })
     }else{
-            
-            res.json({
-                updatedList:results
-            });
+        res.json({
+            updatedList:results
+        });
 
-            res.end();
-        }    
+        res.end();
+      }    
   });
-    // const restaurantId = req.params.restaurantId;
-    // var condition1 = restaurantId ? { restaurantId: { [Op.eq]: `${restaurantId}` } } : null;
-  
-    //         dishes.findAll({ where: condition1 })
-    //         .then(data => {
-    //             res.send(data);
-    //         })
-    //         .catch(err => {
-    //             res.status(500).send({
-    //                 message:
-    //                 err.message || "Some error occurred while retrieving dishes."
-    //             });
-    //         });
     
   };
 
   exports.createOrUpdate = (req, res) => {
-    // First try to find the record
     const dishName = req.params.dishName;
     var condition = dishName ? { name: { [Op.eq]: `${dishName}` } } : null;
     // Create a profile table

@@ -1,9 +1,15 @@
 const db = require("../models");
+const multer = require('multer');
+const path = require('path');
 const restaurants = db.restaurants;
 const restaurantsProfile = db.restaurantsProfile;
 const Op = db.Sequelize.Op;
 const passwordHash = require('password-hash');
 var kafka = require('../kafka/client');
+const Model = require('../models/restaurants.model.mongo');
+const dishesModel = require('../models/dishes.model.mongo');
+const fs = require('fs');
+
 
 
 exports.create = (req, res) => {
@@ -63,22 +69,6 @@ exports.aggReview = (req, res) => {
             res.end();
         }    
   });
-
-  // const restaurantId = req.params.restaurantId;
-  // // var condition = restaurantId ? { restaurantId: { [Op.eq]: `${restaurantId}` } } : null;
-  // var condition = restaurantId ? { restaurantId: { [Op.eq]: `${restaurantId}` } } : null;
-  // reviews.findAll({
-  //   where: condition,
-  //   attributes: [[Sequelize.fn('count', Sequelize.col('rating')), 'count'],[Sequelize.fn('sum', Sequelize.col('rating')), 'total']],
-  // }).then(data => {
-  //         res.send(data);
-  //   })
-  //   .catch(err => {
-  //     res.status(500).send({
-  //         message:
-  //         err.message || "Some error occurred while retrieving orders."
-  //     });
-  //   })
   
 };
 
@@ -177,18 +167,6 @@ exports.aggReview = (req, res) => {
               res.end();
           }    
     });
-    
-
-    // restaurantsProfile.findAll({
-    //   where: {},
-    //   include: [{
-    //       model: restaurants,
-    //       where: {}
-    //   }]
-    // }).then((data) => {
-    //       res.send(data)
-    //       console.log("*********************\n\n\n\n\n",data);
-    // });
   };
 
   exports.validate = (req, res) => {
@@ -206,35 +184,7 @@ exports.aggReview = (req, res) => {
         res.end();
       }
     });
-    // const username = req.body.username;
     
-    // const pwd = req.body.password;
-    // var condition = username ? { email: { [Op.eq]: `${username}` } } : null;
-  
-    // restaurants.findOne({ where: condition })
-    //   .then(data => {
-    //     if (!data) {
-    //       res.status(401).send({
-    //         message: "INVALID_CREDENTIALS"
-    //       });
-    //     }
-    //     else if (passwordHash.verify(pwd, data.dataValues.password)){
-    //       message = {message: "SUCCESS"}
-    //       returnVal = Object.assign(message, data.dataValues)
-    //       res.status(200).send(returnVal)
-    //     }
-    //     else{
-    //       res.status(401).send({
-    //         message: "INVALID_CREDENTIALS"
-    //       });
-    //     }
-    //   })
-    //   .catch(err => {
-    //     res.status(500).send({
-    //       message:
-    //         err.message || "Some error occurred while logging in."
-    //     });
-    //   });
   };
 
   exports.update = (req, res) => {
@@ -254,30 +204,11 @@ exports.aggReview = (req, res) => {
               res.end();
           }    
     });
-    // const id = req.params.restaurantId;
-    // var condition = id ? { id: { [Op.eq]: `${id}` } } : null;
-    // const newDetails = {
-    //   name: req.body.name,
-    //   email: req.body.email,
-    //   password: req.body.password,
-    // };
-
-    // restaurants.update(newDetails, { where: condition })
-    //   .then(data => {
-    //     res.send(data);
-    //   })
-    //   .catch(err => {
-    //     res.status(500).send({
-    //       message:
-    //         err.message || "Some error occurred while updating restaurants."
-    //     });
-    //   });
   };
 
   exports.search = (req, res) => {
 
     kafka.make_request('resSearch',req.body, function(err,results){
-
       if (err){
           res.json({
               status:"error",
@@ -287,90 +218,112 @@ exports.aggReview = (req, res) => {
               res.json({
                   updatedList:results
               });
-  
               res.end();
       }    
     });
-    // var type = req.body.type
-    // var value = req.body.value
-    // if (type === 'dishname'){
-    //   var condition =  { name : { [Op.like]: `%${value}%` } }
-    //   dishes.findAll({
-    //   where: condition,
-    //   include: [{
-    //       model: restaurants,
-    //       where: {}
-    //   }]
-    // }).then((data) => {
-    //       res.send(data)
-    //       console.log("*********************\n\n\n\n\n",data);
-    // })
-    // .catch(err => {
-    //   res.status(500).send({
-    //     message:
-    //       err.message || "Some error occurred while updating the restaurantProfile."
-    //   });
-    // });
-    // }
-
-    // if (type === 'restaurantname'){
-    //   var condition =  { name : { [Op.like]: `%${value}%` } }
-    //   restaurantsProfile.findAll({
-    //   // where: condition,
-    //   include: [{
-    //       model: restaurants,
-    //       where: condition
-    //   }]
-    // }).then((data) => {
-    //       res.send(data)
-    //       console.log("*********************\n\n\n\n\n",data);
-    // })
-    // .catch(err => {
-    //   res.status(500).send({
-    //     message:
-    //       err.message || "Some error occurred while searching the restaurantProfile."
-    //   });
-    // });
-    // }
-
-    // if (type === 'location'){
-    //   var condition =  { location : { [Op.like]: `%${value}%` } }
-    //   restaurantsProfile.findAll({
-    //   where: condition,
-    //   include: [{
-    //       model: restaurants,
-    //       where: {}
-    //   }]
-    // }).then((data) => {
-    //       res.send(data)
-    //       console.log("*********************\n\n\n\n\n",data);
-    // })
-    // .catch(err => {
-    //   res.status(500).send({
-    //     message:
-    //       err.message || "Some error occurred while updating the restaurantProfile."
-    //   });
-    // });
-    
-
-
-
-    // var condition =  { [type] : { [Op.eq]: `${value}` } }
-    // restaurantsProfile.findAll({
-    //   where: condition,
-    //   include: [{
-    //       model: restaurants,
-    //       where: {}
-    //   }]
-    // }).then((data) => {
-    //       res.send(data)
-    //       console.log("*********************\n\n\n\n\n",data);
-    // })
-    // .catch(err => {
-    //   res.status(500).send({
-    //     message:
-    //       err.message || "Some error occurred while updating the restaurantProfile."
-    //   });
-    // });
   };
+
+  const resstorage = multer.diskStorage({
+    destination: path.join(__dirname, '..') + '/public/uploads/restaurants',
+    filename: (req, file, cb) => {
+        cb(null, 'restaurant' + "-" + Date.now() + path.extname(file.originalname));
+    }
+  });
+  const resuploads = multer({
+    storage: resstorage
+  }).single("resimage");
+
+  exports.uploadImage = (req, res) => {
+    
+    resuploads(req, res, function (err) {
+      if (!err) {
+        const restaurantId = req.params.restaurantId;
+        console.log('resId:', restaurantId)
+        console.log("filename:", req.file)
+        
+        Model.restaurantsModel.findByIdAndUpdate(restaurantId, {filename: req.file.filename }, { safe: true, new: true, useFindAndModify: false }, function(error, restaurant){
+          if (error) {
+            res.send({"status": error})
+          }
+          if (restaurant) {
+            console.log("Image updated")
+            res.send({"status": restaurant})
+          }
+        });
+      } else {
+        res.status(404).send({"error": "err occurred"})
+      }
+  })
+};
+
+exports.viewProfileImage = (req, res) =>{
+  const restaurantId = req.params.restaurantId;
   
+    Model.restaurantsModel.findOne({ _id: restaurantId })
+      .then(data => {
+        var image = path.join(__dirname, '..') + '/public/uploads/restaurants/' + data.filename;
+        console.log("Image path", image)
+        if (fs.existsSync(image)) {
+            res.sendFile(image);
+        }
+        else {
+            res.sendFile(path.join(__dirname, '..') + '/public/uploads/restaurants/restaurant-1601843772667.jpg')
+        }
+      })
+      .catch(err => {
+        res.sendFile(path.join(__dirname, '..') + '/public/uploads/restaurants/restaurant-1601843772667.jpg')
+        res.send("Error")
+      });
+};
+
+const dishstorage = multer.diskStorage({
+  destination: path.join(__dirname, '..') + '/public/uploads/dishes',
+  filename: (req, file, cb) => {
+      cb(null, 'dish' + "-" + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const dishuploads = multer({
+  storage: dishstorage
+}).single("image");
+
+exports.dishUploadImage = (req, res) => {
+  let payload = {};
+  payload.id = req.params.dishId
+  dishuploads(req, res, function (err) {
+
+    payload.filename = req.file.filename
+    kafka.make_request('dishImageUpload', payload, function(err,results){
+      if (err){
+          res.json({
+              status:"error",
+              msg:"System Error, Try Again."
+          })
+      }else{
+              res.json({
+                  updatedList:results
+              });
+              res.end();
+      }    
+    });
+  })
+};
+exports.viewDishImage = (req, res) =>{
+  const dishId = req.params.dishId;
+  
+  dishesModel.findOne({ _id: dishId })
+    .then(data => {
+      var image = path.join(__dirname, '..') + '/public/uploads/dishes/' + data.filename;
+      console.log("Image path", image)
+      if (fs.existsSync(image)) {
+          res.sendFile(image);
+      }
+      else {
+          res.sendFile(path.join(__dirname, '..') + '/public/uploads/dishes/restaurant-1601843772667.jpg')
+      }
+    })
+    .catch(err => {
+      res.sendFile(path.join(__dirname, '..') + '/public/uploads/restaurants/restaurant-1601843772667.jpg')
+      res.send("Error")
+    });
+};

@@ -38,6 +38,7 @@ class MenuUpdate extends Component {
   }
 
   onImageUpload = (e) => {
+    
     this.setState({
         filename: e.target.files[0],
         fileText: e.target.files[0].name
@@ -52,7 +53,7 @@ class MenuUpdate extends Component {
             "content-type": "multipart/form-data"
         }
     };
-    axios.post(`${backendServer}/restaurants/${this.props.user.id}/dishImage`, formData, uploadConfig)
+    axios.post(`${backendServer}/restaurants/${this.props.user._id}/dishImage`, formData, uploadConfig)
         .then(response => {
             alert("Image uploaded successfully!");
             this.setState({

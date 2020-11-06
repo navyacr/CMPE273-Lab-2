@@ -104,7 +104,7 @@ class RestaurantMenu extends Component {
 
       if (this.state && this.state.dishes && this.state.dishes.length > 0) {
         for (var i = 0; i < this.state.dishes.length; i++) {
-          let imgsrc = `${backendServer}/restaurants/${this.state.dishes[i].id}/dishImage`
+          let imgsrc = `${backendServer}/restaurants/${this.state.dishes[i]._id}/dishImage`
             data.push(<Card border='info' border-width='10px' style={{ width: '60%' , color: 'black' , }}> <Card.Body> 
                           <div class="d-flex">
                             <div class="mx-auto pull-left">
