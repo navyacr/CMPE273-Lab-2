@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../../App.css';
-// import axios from 'axios';
 import backendServer from '../../config';
 import RestaurantLoginCheck from './restaurantLoginCheck';
 import { Card } from 'react-bootstrap';
@@ -16,17 +15,6 @@ class OneEventView extends Component {
     this.props.oneEventView(this.props.match.params.eventid);
   } 
 
-  // getEventInfo = () => {
-     
-  //   axios.get(`${backendServer}/events/${this.props.match.params.eventid}/attendees`)
-  //   .then(response => {
-  //       console.log("one event response", response)
-  //       this.setState({
-  //           customers: response.data
-  //       });
-  //   });
-
-  // }
   render() {
     var data = []
 
@@ -53,9 +41,6 @@ class OneEventView extends Component {
     )
   }
 }
-
-
-// export default OneEventView;
 
 OneEventView.propTypes = {
   oneEventView: PropTypes.func.isRequired,

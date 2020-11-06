@@ -27,16 +27,12 @@ app.get('/:restaurantId/dishes', dishes.findAll)
 app.post('/:restaurantId/uploadImage', restaurants.uploadImage)
 app.get('/:restaurantId/viewProfileImage', restaurants.viewProfileImage)
 
-// TODO
 app.post('/:dishId/dishImage', restaurants.dishUploadImage)
 app.get('/:dishId/dishImage', restaurants.viewDishImage)
 
 app.post('/message', restaurants.postMessage)
 app.post('/getMessage', restaurants.getMessage)
 
-
-// Get reviews of the restaurant
-// app.get('/:restaurantId/reviews', reviews.findAll)
 
 app.get('/:restaurantId/orders', orders.findRestaurantOrders)
 app.post('/:restaurantId/orders', orders.updateOrderStatus)

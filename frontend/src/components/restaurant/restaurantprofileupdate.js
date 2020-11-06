@@ -48,13 +48,11 @@ class RestaurantProfileUpdate extends Component {
 
   onChange = (e) => {
     this.setState({
-        // [e.target.name]: e.target.value
         [e.target.name]: e.target.value
     })
   }
 
   onUpdate = (e) => {
-    //prevent page from refresh
     e.preventDefault();
 
     let data = Object.assign({}, this.state);

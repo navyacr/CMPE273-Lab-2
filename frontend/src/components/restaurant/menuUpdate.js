@@ -1,40 +1,19 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
-// // import cookie from 'react-cookies';
-// import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
-// import { Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getRestaurant, updateRestaurant } from '../../actions/restaurantProfileActions'
-// import {restaurantsSignup} from '../../actions/signupActions'
-import { Container, Col, Row, Form, Button, ButtonGroup, Card } from 'react-bootstrap';
+import { Col, Row, Form, Button, ButtonGroup, Card } from 'react-bootstrap';
 import backendServer from '../../config';
-// import menuUpdate from '../../actions/menuActions';
 import { menuUpdate } from '../../actions/menuActions';
 
 class MenuUpdate extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        // name : "",
-        // category: "",
-        // description : "",
-        // ingredients : "",
-        // price: "",
-        // fileText : "ChooseImage..",
-        // id:""
     }
-    //Bind the handlers to this class
     this.changeHandler = this.changeHandler.bind(this);
-    // this.categoryChangeHandler = this.categoryChangeHandler.bind(this);
-    // this.descriptionChangeHandler = this.descriptionChangeHandler.bind(this);
-    // this.ingredientsChangeHandler = this.ingredientsChangeHandler.bind(this);
-    // this.priceChangeHandler = this.priceChangeHandler.bind(this);
-
     this.submitUpdate = this.submitUpdate.bind(this);
-    
   }
 
   onImageUpload = (e) => {
@@ -65,34 +44,13 @@ class MenuUpdate extends Component {
             console.log("Error");
         });
   }
- //username change handler to update state variable with the text entered by the user
+ 
  changeHandler = (e) => {
     this.setState({
         [e.target.name] : e.target.value
     })
 }
-// categoryChangeHandler = (e) =>{
-//     this.setState({
-//         category : e.target.value
-//     })
-// }
 
-// ingredientsChangeHandler = (e) =>{
-//     this.setState({
-//         ingredients : e.target.value
-//     })
-// }
-// //password change handler to update state variable with the text entered by the user
-// descriptionChangeHandler = (e) => {
-//     this.setState({
-//         description : e.target.value
-//     })
-// }
-// priceChangeHandler = (e) =>{
-//     this.setState({
-//         price : e.target.value
-//     })
-// }
 
 submitUpdate = (e) => {
     e.preventDefault();
@@ -105,25 +63,6 @@ submitUpdate = (e) => {
         restaurantId: localStorage.getItem("restaurant_id")
     }
     this.props.menuUpdate(data);
-    // let dishname = this.state.name;
-    // console.log(this.state.name)
-    // axios.post(`${backendServer}/restaurants/${this.state.name}/dishes`, data)
-    //     .then(response => {
-    //         console.log(response.data)
-    //         console.log("Status Code : ",response.status);
-    //         if(response.status === 200){
-    //             this.setState({
-    //                 id: response.data.id,
-    //                 authFlag : true,
-    //                 err: response.data                       
-    //             })
-    //         }else{
-    //             this.setState({
-    //                 authFlag : false
-    //             })
-    //         }
-            
-    //     });
 }
 
   render() {
@@ -198,9 +137,6 @@ submitUpdate = (e) => {
     )
   }
 }
-
-
-// export default MenuUpdate;
 
 
 MenuUpdate.propTypes = {

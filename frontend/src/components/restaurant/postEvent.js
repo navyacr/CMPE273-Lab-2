@@ -13,19 +13,12 @@ class PostEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        // name : "",
-        // description : "",
-        // date : "",
-        // time: "",
-        // location:"",
-        // hashtags:""
     }
-    //Bind the handlers to this class
     this.changeHandler = this.changeHandler.bind(this);
     this.submitEvent = this.submitEvent.bind(this);
     
   } 
- //username change handler to update state variable with the text entered by the user
+ 
    changeHandler = (e) => {
     this.setState({
         [e.target.name]: e.target.value
@@ -34,35 +27,9 @@ class PostEvent extends Component {
 
 submitEvent = (e) => {
     e.preventDefault();
-    // let data = {
-    //     name : this.state.name,
-    //     time : this.state.time,
-    //     description : this.state.description,
-    //     date: this.state.date,
-    //     location : this.state.location,
-    //     hashtags: this.state.hashtags
-    // }
     let data = Object.assign({}, this.state);
     this.props.postEvent(data);
     alert("Event Posted")
-    // axios.post(`${backendServer}/events/info`, data)
-    //     .then(response => {
-    //         console.log(response.data)
-    //         console.log("Status Code : ",response.status);
-    //         if(response.status === 200){
-    //             alert("Event posted successfully")
-    //             this.setState({
-    //                 authFlag : true,
-    //                 err: response.data                       
-    //             })
-    //         }else{
-    //             alert("Some error occured. Try again..")
-    //             this.setState({
-    //                 authFlag : false
-    //             })
-    //         }
-            
-    //     });
 }
 
   render() {
@@ -141,15 +108,10 @@ submitEvent = (e) => {
   }
 }
 
-
-// export default PostEvent;
-
-
 PostEvent.propTypes = {
     postEvent: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired
 }
-
 
 const mapStateToProps = state => ({
     user: state.postEvent.user

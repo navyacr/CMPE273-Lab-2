@@ -2,10 +2,6 @@ const db = require("../models");
 const customers = db.customers;
 const Op = db.Sequelize.Op;
 var kafka = require('../kafka/client');
-// const jwt = require('jsonwebtoken');
-// const { secret } = require('../config/db.config');
-// const { auth } = require("../config/passport");
-// auth();
 
 
 exports.create = (req, res) => {
@@ -81,35 +77,6 @@ exports.create = (req, res) => {
     });
 
   }
-  //   const username = req.body.username;
-  //   const pwd = req.body.password;
-  //   var condition = username ? { email: { [Op.eq]: `${username}` } } : null;
-  
-  //   customers.findOne({ where: condition })
-  //     .then(data => {
-  //       if (!data) {
-  //         res.status(401).send({
-  //           message: "INVALID_CREDENTIALS"
-  //         });
-  //       }
-  //       else if (data.dataValues.password === pwd){
-  //         message = {message: "SUCCESS"}
-  //         returnVal = Object.assign(message, data.dataValues)
-  //         res.status(200).send(returnVal)
-  //       }
-  //       else{
-  //         res.status(401).send({
-  //           message: "INVALID_CREDENTIALS"
-  //         });
-  //       }
-  //     })
-  //     .catch(err => {
-  //       res.status(500).send({
-  //         message:
-  //           err.message || "Some error occurred while logging in."
-  //       });
-  //     });
-  // };
 
   exports.update = (req, res) => {
     req.body._id = req.params.customerId
@@ -132,22 +99,5 @@ exports.create = (req, res) => {
           res.end();
       }
     });
-    // const id = req.params.customerId;
-    // var condition = id ? { id: { [Op.eq]: `${id}` } } : null;
-    // const newDetails = {
-    //   name: req.body.name,
-    //   email: req.body.email,
-    //   password: req.body.password,
-    // };
-
-    // customers.update(newDetails, { where: condition })
-    //   .then(data => {
-    //     res.send(data);
-    //   })
-    //   .catch(err => {
-    //     res.status(500).send({
-    //       message:
-    //         err.message || "Some error occurred while updating restaurants."
-    //     });
-    //   });
+   
   };

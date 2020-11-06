@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../../App.css';
-import axios from 'axios';
 import backendServer from '../../config';
 import RestaurantLoginCheck from './restaurantLoginCheck';
 import PropTypes from 'prop-types';
@@ -12,38 +11,8 @@ class OneEventAttendeeView extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    // this.getAttendeeInfo();
     this.props.oneEventAttendeeView(this.props.match.params.cusid);
   } 
-
-  // getAttendeeInfo = () => {
-     
-  //   axios.get(`${backendServer}/customers/${this.props.match.params.cusid}/info`)
-  //   .then(response => {
-  //       this.setState({
-  //           name: response.data.name,
-  //           email: response.data.email
-  //       });
-  //   });
-
-    // axios.get(`${backendServer}/customers/${this.props.match.params.cusid}/profile`)
-    // .then(response => {
-    //     this.setState({
-    //         dob: response.data.dob,
-    //         city: response.data.city,
-    //         state: response.data.state,
-    //         country: response.data.country,
-    //         nickname: response.data.nickname,
-    //         headline: response.data.headline,
-    //         yelpsince: response.data.yelpsince,
-    //         thingsilove: response.data.thingsilove,
-    //         findmein: response.data.findmein,
-    //         website: response.data.website,
-    //         phonenumber: response.data.phonenumber
-    //     });
-    // });
-
-  // }
  
   render() {
     var imgsrc = `${backendServer}/customers/${this.props.match.params.cusid}/viewProfileImage`;

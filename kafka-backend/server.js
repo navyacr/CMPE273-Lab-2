@@ -1,6 +1,5 @@
 var connection =  new require('./kafka/Connection');
-//topics files
-//var signin = require('./services/signin.js');
+
 var RestaurantsInfoCreate = require('./services/restaurantsInfoCreate.js');
 var Customers = require("./services/customers.js")
 var CustomersInfoUpdate = require("./services/customersInfoUpdate.js")
@@ -80,9 +79,7 @@ function handleTopicRequest(topic_name,fname){
         
     });
 }
-// Add your TOPICs here
-//first argument is topic name
-//second argument is a function that will handle this topic request
+
 handleTopicRequest("resPostInfo",RestaurantsInfoCreate)
 handleTopicRequest("cusPostInfoa", Customers)
 handleTopicRequest("cusPostInfoUpdatea", CustomersInfoUpdate)
