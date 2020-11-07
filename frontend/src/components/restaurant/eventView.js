@@ -31,26 +31,23 @@ class EventView extends Component {
       
     }
    );	
+   console.log("Page count?", this.state.pageCount)
   }
 
   handlePageClick = e => {
-    // alert("inside handle");
     const selectedPage = e.selected;
     const offset = selectedPage * this.state.perPage;
-
     this.setState({
         currentPage: selectedPage,
         offset: offset
     }
     );
-
   };
 
   render() {
       const count = this.state.events.length;
       const slice = this.state.events.slice(this.state.offset, this.state.offset + this.state.perPage);
       const testResult = slice.map((item,key)=>
-      
         <div class="row">
           <Card border="info" style={{ width: '40%' }}><Card.Body> 
                               <a style={{ cursor: 'pointer' }} href={"/oneEventView/" + item._id}>
@@ -71,25 +68,25 @@ class EventView extends Component {
         </div> 
       );
       
-      var data = []
-      console.log("user props", this.props.user)
-      if (this.props.user && this.props.user.length > 0) {
-        for (let i = 0; i < this.props.user.length; i++) {
-                data.push(
-                            <Card border="info" style={{ width: '40%' }}><Card.Body> 
-                              <a style={{ cursor: 'pointer' }} href={"/oneEventView/" + this.props.user[i]._id}>
-                                <Card.Title><b>{this.props.user[i].name}</b></Card.Title>
-                              </a>
-                            <Card.Text><b> Description: </b> {this.props.user[i].description}</Card.Text>
-                            <Card.Text><b> Date: </b> {this.props.user[i].date}</Card.Text>
-                            <Card.Text><b> Time: </b> {this.props.user[i].time}</Card.Text>
-                            <Card.Text><b> Location: </b> {this.props.user[i].location}</Card.Text>
-                            <Card.Text><b> Trending Hashtags: </b> {this.props.user[i].hashtags}</Card.Text>
-                            <Card.Text> </Card.Text>
-                        </Card.Body></Card>)
+    //   var data = []
+    //   console.log("user props", this.props.user)
+    //   if (this.props.user && this.props.user.length > 0) {
+    //     for (let i = 0; i < this.props.user.length; i++) {
+    //             data.push(
+    //                         <Card border="info" style={{ width: '40%' }}><Card.Body> 
+    //                           <a style={{ cursor: 'pointer' }} href={"/oneEventView/" + this.props.user[i]._id}>
+    //                             <Card.Title><b>{this.props.user[i].name}</b></Card.Title>
+    //                           </a>
+    //                         <Card.Text><b> Description: </b> {this.props.user[i].description}</Card.Text>
+    //                         <Card.Text><b> Date: </b> {this.props.user[i].date}</Card.Text>
+    //                         <Card.Text><b> Time: </b> {this.props.user[i].time}</Card.Text>
+    //                         <Card.Text><b> Location: </b> {this.props.user[i].location}</Card.Text>
+    //                         <Card.Text><b> Trending Hashtags: </b> {this.props.user[i].hashtags}</Card.Text>
+    //                         <Card.Text> </Card.Text>
+    //                     </Card.Body></Card>)
             
-        }
-    }
+    //     }
+    // }
 
     let paginationElement = (
       <ReactPaginate
@@ -112,12 +109,12 @@ class EventView extends Component {
       <div>
         {/* {data} */}
         <div className="panel">
-                                    {paginationElement}
-                                            <div className="panel-body">
-                                              <div>{testResult}</div> 
-                                            </div>
-                                    </div>
-
+          
+            <div className="panel-body">
+              <div>{testResult}</div> 
+            </div>
+            {paginationElement}
+        </div>
       </div>
        
      )

@@ -16,6 +16,7 @@ class RestaurantProfile extends Component {
       fileText : "ChooseImage.."
     };
     this.getRestaurantInfo();
+    // this.props.getRestaurant();
   } 
 
   onImageUpload = (e) => {
@@ -61,8 +62,6 @@ onUserUpload = (e) => {
             cuisine: response.data.updatedList.cuisine
         });
     });
-
-
   }
   render() {
     var imgsrc = `${backendServer}/restaurants/${this.state.restaurantId}/viewProfileImage`;

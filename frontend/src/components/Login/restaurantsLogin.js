@@ -12,6 +12,12 @@ class RestaurantsLogin extends Component{
         super(props);
         this.state = {};
       } 
+
+    // componentWillReceiveProps(props){
+    // this.setState({
+    //     token: props.user.updatedList.token
+    // })
+    // }
       onChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value

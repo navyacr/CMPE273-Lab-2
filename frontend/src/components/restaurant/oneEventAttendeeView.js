@@ -39,8 +39,6 @@ class OneEventAttendeeView extends Component {
   }
 }
 
-// export default OneEventAttendeeView;
-
 
 OneEventAttendeeView.propTypes = {
   oneEventAttendeeView: PropTypes.func.isRequired,
