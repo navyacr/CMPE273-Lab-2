@@ -22,6 +22,8 @@ import RestaurantViewOrders from './restaurant/restaurantViewOrders';
 import AllCustomers from './restaurant/allCustomers';
 import ViewRegisteredEvents from './customer/viewRegisteredEvents';
 import RestaurantsLogin from './Login/restaurantsLogin';
+import oneCustomerView from './restaurant/oneCustomerView';
+import messageTab from './customer/messageTab';
 
 class Main extends Component {
   render() {
@@ -50,6 +52,8 @@ class Main extends Component {
         <Route path="/viewRegisteredEvents" component={ViewRegisteredEvents} />
         <Route path="/restaurantsLogin" component={RestaurantsLogin} />
         <Route path="/allCustomers" component={AllCustomers} />
+        <Route path="/oneCustomerView/:cusid" component={oneCustomerView} />        
+        <Route path="/messageTab" component={messageTab} />        
       </div>
     );
   }

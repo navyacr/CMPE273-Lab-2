@@ -7,6 +7,10 @@ import { connect } from 'react-redux';
 import { customersView , getMessages } from '../../actions/allCustomersActions';
 import ReactPaginate from 'react-paginate';
 import './pagination.css';
+import 'react-chat-widget/lib/styles.css';
+import axios from 'axios';
+import backendServer from '../../config';
+
 
 class CustomersView extends Component {
   constructor(props) {
@@ -32,7 +36,9 @@ class CustomersView extends Component {
       pageCount: Math.ceil(this.state.events.length / this.state.perPage)
       
     }
-   );	
+   );
+   console.log("PageCount:", this.state.pageCount)	
+   console.log("OutputMessages:", this.state.outputMessages)	
   }
 
   handlePageClick = e => {
@@ -66,6 +72,12 @@ class CustomersView extends Component {
 
   }
 
+  
+
+  useEffect = (() => {
+    
+  })
+
   render() {
 
     let chatModal = (
@@ -91,7 +103,10 @@ class CustomersView extends Component {
           
           <Card border="info" style={{ width: '40%' }}><Card.Body> 
                               {/* <a style={{ cursor: 'pointer' }} href={"/oneEventView/" + item._id}> */}
-                                <Card.Title><b>{item.name}</b></Card.Title>
+                                {/* <Card.Title><b>{item.name}</b></Card.Title> */}
+                                <a style={{ cursor: 'pointer' }} href={"/oneCustomerView/" + item._id}>
+                              <Card.Title><b>{item.name}</b></Card.Title>
+                            </a>
                               {/* </a> */}
                             {/* <Card.Text><b> Description: </b> {item.description}</Card.Text>
                             <Card.Text><b> Date: </b> {item.date}</Card.Text>
@@ -102,7 +117,8 @@ class CustomersView extends Component {
                             {/* <button class="btn btn-primary" value={this.props.user._id}  onClick={this.register}>Chat</button> */}
                             <div className="g-menu-image">
                                 <button className="btn btn-success" data-toggle="modal" data-target="#chatModal"
-                                onClick={() => this.getMessages(item._id)}>Chat with Restaurant</button>
+                                onClick={() => this.getMessages(item._id)}>Chat</button>
+                                
                                 {/* {this.props.messages[0].message} */}
                           </div>
                           

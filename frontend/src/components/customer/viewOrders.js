@@ -77,6 +77,7 @@ handleClick = (name) => {
     this.setState({
       ...this.state,
       orders : props.user,
+      allorders : props.user,
       // pageCount: Math.ceil(this.state.orders.length / this.state.perPage)
       
     }
@@ -88,7 +89,7 @@ handleClick = (name) => {
 
       if (this.state && this.state.orders && this.state.orders.length > 0) {
         for (var i = 0; i < this.state.orders.length; i++) {
-          let imgsrc = `${backendServer}/restaurants/${this.state.orders[i].dishId._id}/dishImage`
+          let imgsrc = `${backendServer}/restaurants/${this.state.orders[i].dishId}/dishImage`
             data.push(<Card border='info' border-width='10px' style={{ width: '50%' , color: 'black' , }}> <Card.Body> 
                           <div class="d-flex">
                           <div class="mx-auto pull-left">

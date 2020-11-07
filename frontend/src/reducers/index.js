@@ -21,6 +21,7 @@ import getRestaurantInfo from './customerHomeReducers';
 import submitReview from './customerHomeReducers';
 import getReviews from './customerHomeReducers';
 import getOrders from './customerHomeReducers';
+import getChatRestaurants from './customerHomeReducers';
 
 export default combineReducers({
   login: loginReducers,
@@ -45,5 +46,5 @@ export default combineReducers({
   submitReview: submitReview,
   getReviews: getReviews,
   getOrders: getOrders,
-  
+  getChatRestaurants: getChatRestaurants
 });

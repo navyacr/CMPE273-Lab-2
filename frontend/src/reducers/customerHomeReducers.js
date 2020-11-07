@@ -5,7 +5,7 @@ import { REGISTERED_EVENT_VIEW } from '../actions/types';
 import { ONE_RESTAURANT_VIEW } from '../actions/types';
 import { CUSTOMER_ADD_REVIEW } from '../actions/types';
 import { GET_RESTAURANT_REVIEW } from '../actions/types';
-import { GET_ORDERS } from '../actions/types';
+import { GET_ORDERS, GET_RESTAURANT_CHAT} from '../actions/types';
 
 const initialState = {
   user: {},
@@ -56,6 +56,12 @@ export default function (state = initialState, action) {
     };
   }
   if (action.type === GET_ORDERS) {
+    return {
+      ...state,
+      user: action.payload,
+    };
+  }
+  if (action.type === GET_RESTAURANT_CHAT) {
     return {
       ...state,
       user: action.payload,

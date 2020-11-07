@@ -30,5 +30,6 @@ app.post('/restaurantsearch', restaurants.search)
 app.post('/:customerId/uploadImage', customersProfile.uploadImage)
 app.get('/:customerId/viewProfileImage', customersProfile.viewProfileImage)
 
+app.get('/:customerId/getChatRestaurants', customers.getChatRestaurants)
 
 module.exports = app;

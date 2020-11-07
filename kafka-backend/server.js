@@ -29,6 +29,7 @@ var AllCustomers = require("./services/allCustomers")
 var GetMessage = require("./services/getMessage")
 var PostMessage = require("./services/postMessage")
 var DishImageUpload = require("./services/dishImageUpload")
+var GetChatRestaurants = require("./services/getChatRestaurants")
 
 const mongoose = require('mongoose');
 
@@ -109,6 +110,7 @@ handleTopicRequest("allcus", AllCustomers)
 handleTopicRequest("getMessage", GetMessage)
 handleTopicRequest("postMessage", PostMessage)
 handleTopicRequest("dishImageUpload", DishImageUpload)
+handleTopicRequest("getChatRestaurants", GetChatRestaurants)
 
 
 

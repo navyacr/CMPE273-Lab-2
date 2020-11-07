@@ -28,6 +28,9 @@ class CustomerNavbar extends Component {
                 <li class="nav-item">
                     <Link class="nav-link" to="/viewRegisteredEvents"> Registered Events</Link>
                 </li> 
+                <li class="nav-item">
+                    <Link class="nav-link" to="/messageTab"> Messages</Link>
+                </li> 
             </ul>
         </div>
         )
