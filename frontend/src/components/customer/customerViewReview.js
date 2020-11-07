@@ -5,23 +5,38 @@ import backendServer from '../../config';
 import { Card } from 'react-bootstrap';
 import CustomerLoginCheck from './customerLoginCheck';
 import StarRatings from 'react-star-ratings';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getReviews } from '../../actions/customerHomeActions';
 
 
 class CustomerViewReview extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      reviews: []
+    };
     this.getReviews();
   } 
 
+  componentWillReceiveProps(props){
+    this.setState({
+      ...this.state,
+      reviews : props.user,
+      
+    }
+   );
+  }
+
   getReviews = () => {
-    axios.get(`${backendServer}/restaurants/${this.props.resid}/info`)
-    .then(response => {
-      console.log(response.data)
-        this.setState({
-            reviews: response.data.updatedList.reviews
-        });
-    });
+    this.props.getReviews(this.props.resid);
+    // axios.get(`${backendServer}/restaurants/${this.props.resid}/info`)
+    // .then(response => {
+    //   console.log(response.data)
+    //     this.setState({
+    //         reviews: response.data.updatedList.reviews
+    //     });
+    // });
   }
 
   render(name) {
@@ -58,4 +73,15 @@ class CustomerViewReview extends Component {
 }
 
 
-export default CustomerViewReview;
+// export default CustomerViewReview;
+CustomerViewReview.propTypes = {
+  getReviews: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
+}
+
+
+const mapStateToProps = state => ({
+  user: state.getReviews.user
+});
+
+export default connect(mapStateToProps, { getReviews })(CustomerViewReview);

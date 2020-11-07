@@ -3,7 +3,10 @@ import '../../App.css';
 import axios from 'axios';
 import { Col, Form, Button, ButtonGroup } from 'react-bootstrap';
 import backendServer from '../../config';
-import DetailsUpdate from './detailsUpdate'
+import DetailsUpdate from './detailsUpdate';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { customerProfileUpdate } from '../../actions/customerHomeActions';
 
 class CustomerProfileUpdate extends Component {
   constructor(props) {
@@ -51,25 +54,27 @@ class CustomerProfileUpdate extends Component {
 update = (e) => {
     e.preventDefault();
     let data = Object.assign({}, this.state);
-    const id = localStorage.getItem('customer_id')
-    axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
-    axios.post(`${backendServer}/customers/${id}/infoUpdate`, data)
-        .then(response => {
-            console.log(response.data)
-            console.log("Status Code : ",response.status);
-            if(response.status === 200){
-                alert("Information updated successfully")
-                this.setState({
-                    authFlag : true,
-                    err: response.data                     
-                })
-            }else{
-                alert("Some error occured. Try again..")
-                this.setState({
-                    authFlag : false
-                })
-            }
-        });
+    this.props.customerProfileUpdate(data);
+    alert("Information updated successfully")
+    
+    // axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
+    // axios.post(`${backendServer}/customers/${id}/infoUpdate`, data)
+    //     .then(response => {
+    //         console.log(response.data)
+    //         console.log("Status Code : ",response.status);
+    //         if(response.status === 200){
+    //             alert("Information updated successfully")
+    //             this.setState({
+    //                 authFlag : true,
+    //                 err: response.data                     
+    //             })
+    //         }else{
+    //             alert("Some error occured. Try again..")
+    //             this.setState({
+    //                 authFlag : false
+    //             })
+    //         }
+    //     });
 }
 
   render() {
@@ -131,5 +136,14 @@ update = (e) => {
   }
 }
 
+CustomerProfileUpdate.propTypes = {
+    customerProfileUpdate: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
+}
 
-export default CustomerProfileUpdate;
+
+const mapStateToProps = state => ({
+    user: state.customerProfileUpdate.user
+});
+
+export default connect(mapStateToProps, { customerProfileUpdate })(CustomerProfileUpdate);

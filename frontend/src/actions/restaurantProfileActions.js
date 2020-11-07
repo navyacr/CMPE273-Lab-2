@@ -5,7 +5,7 @@ import axios from "axios";
 export const getRestaurant = () => dispatch => {
     const id = localStorage.getItem('restaurant_id')
         axios.get(`${backendServer}/restaurants/${id}/info`)
-        .then(response => response.data.updatedList[0])
+        .then(response => response.data.updatedList)
         .then(restaurant => dispatch({
             type: GET_RESTAURANT,
             payload: restaurant

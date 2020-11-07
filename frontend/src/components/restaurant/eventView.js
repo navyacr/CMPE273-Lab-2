@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 import 'react-dropdown/style.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { eventView } from '../../actions/eventViewActions'
+import { eventView } from '../../actions/eventViewActions';
 import ReactPaginate from 'react-paginate';
 import './pagination.css';
 

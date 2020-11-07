@@ -3,6 +3,9 @@ import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
 import StarRatings from 'react-star-ratings';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { submitReview } from '../../actions/customerHomeActions';
 
 class CustomerAddReview extends Component{
     constructor(props){
@@ -32,20 +35,9 @@ class CustomerAddReview extends Component{
             description : this.state.description,
             restaurantId: this.props.resid
         }
-        let cusid = localStorage.getItem('customer_id')
-        axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
-        axios.post(`${backendServer}/customers/${cusid}/reviews`,data)
-            .then(response => {
-                console.log(response.data)
-                console.log("Status Code : ",response.status);
-                if(response.status === 200){
-                    alert("Review added. Thank you.")
-                    
-                }else{
-                    alert('Oops!! something went wrong, Try again.')
-                }
-                
-            });
+        this.props.submitReview(data);
+
+        alert("Review added. Thank you.")
     }
 
     render(){
@@ -78,4 +70,16 @@ class CustomerAddReview extends Component{
     }
 }
 
-export default CustomerAddReview;
+// export default CustomerAddReview;
+
+CustomerAddReview.propTypes = {
+    submitReview: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
+  }
+  
+  
+  const mapStateToProps = state => ({
+    user: state.submitReview.user
+  });
+  
+  export default connect(mapStateToProps, { submitReview })(CustomerAddReview);

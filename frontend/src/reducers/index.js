@@ -13,6 +13,14 @@ import restaurantViewReview from './restaurantViewOrdersReducers';
 import restaurantMenu from './restaurantViewOrdersReducers';
 import customersView from './allCustomersReducers';
 import getMessages from './allCustomersReducers';
+import getRestaurants from './customerHomeReducers';
+import getCustomerInfo from './customerHomeReducers';
+import customerProfileUpdate from './customerHomeReducers';
+import getEvents from './customerHomeReducers';
+import getRestaurantInfo from './customerHomeReducers';
+import submitReview from './customerHomeReducers';
+import getReviews from './customerHomeReducers';
+import getOrders from './customerHomeReducers';
 
 export default combineReducers({
   login: loginReducers,
@@ -29,5 +37,13 @@ export default combineReducers({
   getRestaurant: getRestaurant,
   customersView : customersView,
   getMessages: getMessages,
+  getRestaurants: getRestaurants,
+  getCustomerInfo: getCustomerInfo,
+  customerProfileUpdate: customerProfileUpdate,
+  getEvents: getEvents,
+  getRestaurantInfo: getRestaurantInfo,
+  submitReview: submitReview,
+  getReviews: getReviews,
+  getOrders: getOrders,
   
 });

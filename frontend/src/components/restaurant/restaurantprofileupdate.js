@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../App.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getRestaurant, updateRestaurant } from '../../actions/restaurantProfileActions';
+import { updateRestaurant } from '../../actions/restaurantProfileActions';
 import { Col, Form, Button, ButtonGroup } from 'react-bootstrap';
 import { Multiselect } from 'multiselect-react-dropdown';
 
@@ -185,4 +185,4 @@ const mapStateToProps = state => ({
     user: state.restaurantProfileUpdate.user
 });
 
-export default connect(mapStateToProps, { getRestaurant, updateRestaurant })(RestaurantProfileUpdate);
+export default connect(mapStateToProps, { updateRestaurant })(RestaurantProfileUpdate);

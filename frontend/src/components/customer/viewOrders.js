@@ -3,6 +3,10 @@ import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
 import { Card } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getOrders } from '../../actions/customerHomeActions';
+import ReactPaginate from 'react-paginate';
 
 const buttons = [
   { name: "All", value: "all" },
@@ -56,16 +60,28 @@ handleClick = (name) => {
 };
 
   getOrders = () => {
+    this.props.getOrders();
      
-    const id = localStorage.getItem('customer_id')
-    axios.get(`${backendServer}/customers/${id}/orders`)
-    .then(response => {
-      console.log(response.data)
-        this.setState({
-            allorders: response.data.updatedList,
-            orders: response.data.updatedList
-        });
-    });
+    // const id = localStorage.getItem('customer_id')
+    // axios.get(`${backendServer}/customers/${id}/orders`)
+    // .then(response => {
+    //   console.log(response.data)
+    //     this.setState({
+    //         allorders: response.data.updatedList,
+    //         orders: response.data.updatedList
+    //     });
+    // });
+  }
+
+  componentWillReceiveProps(props){
+    this.setState({
+      ...this.state,
+      orders : props.user,
+      // pageCount: Math.ceil(this.state.orders.length / this.state.perPage)
+      
+    }
+   );	
+  //  console.log("Page count?", this.state.pageCount)
   }
   render(name) {
       var data = []
@@ -113,4 +129,16 @@ handleClick = (name) => {
   }
 }
 
-export default ViewOrders;
+// export default ViewOrders;
+
+ViewOrders.propTypes = {
+  getOrders: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
+}
+
+
+const mapStateToProps = state => ({
+  user: state.getOrders.user
+});
+
+export default connect(mapStateToProps, { getOrders })(ViewOrders);

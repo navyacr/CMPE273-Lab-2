@@ -17,7 +17,6 @@ class MenuUpdate extends Component {
   }
 
   onImageUpload = (e) => {
-    
     this.setState({
         filename: e.target.files[0],
         fileText: e.target.files[0].name

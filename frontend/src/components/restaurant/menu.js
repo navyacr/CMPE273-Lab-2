@@ -63,7 +63,7 @@ class RestaurantMenu extends Component {
       <div class="row">
         
         <Card border="info" style={{ width: '40%' }}><Card.Body> 
-                          {/* <Card.Img variant="top" class="dish-image" src={imgsrc}></Card.Img> */}
+                          {/* <Card.Img variant="top" class="dish-image" src={${backendServer}/restaurants/${item._id}/dishImage}></Card.Img> */}
                           <Card.Title><b>{item.name}</b></Card.Title>
                           
                           <Card.Text><b> Category: </b> {item.category}</Card.Text>

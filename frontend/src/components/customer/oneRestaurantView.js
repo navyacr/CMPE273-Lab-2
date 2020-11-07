@@ -7,6 +7,9 @@ import OneRestaurantMenuView from './oneRestaurantMenuView';
 import CustomerAddReview from './customerAddReview';
 import CustomerViewReview from './customerViewReview';
 import Dropdown from 'react-dropdown';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getRestaurantInfo } from '../../actions/customerHomeActions';
 
 
 class OneRestaurantView extends Component {
@@ -17,34 +20,42 @@ class OneRestaurantView extends Component {
   } 
 
   getRestaurantInfo = () => {
+
+    this.props.getRestaurantInfo(this.props.match.params.resid);
      
-    axios.get(`${backendServer}/restaurants/${this.props.match.params.resid}/info`)
-    .then(response => {
-        let values = response.data.updatedList
-        this.setState({
-            name: values.name,
-            email: values.email,
-            restaurantId: values.id,
-            description: values.description,
-            contact: values.contact,
-            timings: values.timings,
-            location: values.location,
-            deliverymode: values.deliverymode
-
-        });
-    });
-
-    // axios.get(`${backendServer}/restaurants/${this.props.match.params.resid}/profile`)
+    // axios.get(`${backendServer}/restaurants/${this.props.match.params.resid}/info`)
     // .then(response => {
+    //     let values = response.data.updatedList
     //     this.setState({
-    //         description: response.data.description,
-    //         contact: response.data.contact,
-    //         timings: response.data.timings,
-    //         location: response.data.location,
-    //         deliverymode: response.data.deliverymode
+    //         name: values.name,
+    //         email: values.email,
+    //         restaurantId: values.id,
+    //         description: values.description,
+    //         contact: values.contact,
+    //         timings: values.timings,
+    //         location: values.location,
+    //         deliverymode: values.deliverymode
+
     //     });
     // });
 
+  }
+
+  componentWillReceiveProps(props){
+    this.setState({
+      ...this.state,
+      name: props.user.name,
+      email: props.user.email,
+      restaurantId: props.user.id,
+      description: props.user.description,
+      contact: props.user.contact,
+      timings: props.user.timings,
+      location: props.user.location,
+      deliverymode: props.user.deliverymode
+
+    }
+   );	
+  //  console.log("Page count?", this.state.pageCount)
   }
   _onSelect = (val) => {
     this.setState({
@@ -83,4 +94,16 @@ class OneRestaurantView extends Component {
 }
 
 
-export default OneRestaurantView;
+// export default OneRestaurantView;
+
+OneRestaurantView.propTypes = {
+  getRestaurantInfo: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
+}
+
+
+const mapStateToProps = state => ({
+  user: state.getRestaurantInfo.user
+});
+
+export default connect(mapStateToProps, { getRestaurantInfo })(OneRestaurantView);

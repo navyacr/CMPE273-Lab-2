@@ -7,6 +7,9 @@ import CustomerLoginCheck from './customerLoginCheck';
 import AggregateReview from './aggregateReview';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getRestaurants } from '../../actions/customerHomeActions';
 // import MapContainer from './mapComponent'
 
 const buttons = [
@@ -21,11 +24,14 @@ class CustomerHome extends Component {
     super(props);
     this.state = {
       qty: 0,
-      count: 0
+      count: 0,
+      offset: 0,
+      perPage: 4,
+      currentPage: 0,
+      pageCount: 1,
+      restaurants: []
     };
     this.getRestaurants();
-    // this.search = this.search.bind(this);
-    // this.setCount = this.setCount.bind(this);
   } 
 
   componentDidMount() {
@@ -33,7 +39,26 @@ class CustomerHome extends Component {
       all: this.state.restaurants
     });
   }
-
+  
+  componentWillReceiveProps(props){
+    this.setState({
+      ...this.state,
+      all : props.user,
+      restaurants: props.user,
+      allrestaurants: props.user,
+      pageCount: Math.ceil(this.state.restaurants.length / this.state.perPage)
+    }
+   );
+  }
+  handlePageClick = e => {
+    const selectedPage = e.selected;
+    const offset = selectedPage * this.state.perPage;
+    this.setState({
+        currentPage: selectedPage,
+        offset: offset
+    }
+    );
+  };
   handleClick = (name) => {
     console.log(name)
     var re = new RegExp(name, 'gi');
@@ -112,17 +137,17 @@ this.setState({
   }
 }
   getRestaurants = () => {
-     
-    console.log("Making axios call")
-    axios.get(`${backendServer}/restaurants/info`)
-    .then(response => {
-        console.log("Response is:", response.data.updatedList)
-        this.setState({
-            restaurants: response.data.updatedList,
-            allrestaurants : response.data.updatedList
-        });
-    });
-    console.log("State:", this.state)
+    this.props.getRestaurants();
+    // console.log("Making axios call")
+    // axios.get(`${backendServer}/restaurants/info`)
+    // .then(response => {
+    //     console.log("Response is:", response.data.updatedList)
+    //     this.setState({
+    //         restaurants: response.data.updatedList,
+    //         allrestaurants : response.data.updatedList
+    //     });
+    // });
+    // console.log("State:", this.state)
   }
 
   setCount = (count) => {
@@ -130,7 +155,7 @@ this.setState({
       qty: count
     })
   }
-  render(name) {
+  render() {
     const options = [
       {value: 'cuisine', label: 'Cuisine'},
       {value: 'deliverymode', label: 'Mode of Delivery'},
@@ -223,4 +248,16 @@ this.setState({
 }
 
 
-export default CustomerHome;
+// export default CustomerHome;
+
+CustomerHome.propTypes = {
+  getRestaurants: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
+}
+
+
+const mapStateToProps = state => ({
+  user: state.getRestaurants.user
+});
+
+export default connect(mapStateToProps, { getRestaurants })(CustomerHome);

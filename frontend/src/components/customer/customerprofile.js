@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import '../../App.css';
 import axios from 'axios';
 import backendServer from '../../config';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getCustomerInfo } from '../../actions/customerHomeActions';
 
 class CustomerProfile extends Component {
   constructor(props) {
@@ -13,37 +16,52 @@ class CustomerProfile extends Component {
   getCustomerInfo = () => {
      
     const id = localStorage.getItem('customer_id')
-    // axios.get(`${backendServer}/customers/${id}/info`)
+    this.props.getCustomerInfo();
+    // axios.get(`${backendServer}/customers/${id}/profile`)
     // .then(response => {
     //     this.setState({
-    //         name: response.data.updatedListname,
-    //         email: response.data.email,
-    //         customerId: response.data._id
+    //         name: response.data.updatedList.name,
+    //         email: response.data.updatedList.email,
+    //         customerId: response.data.updatedList._id,
+    //         dob: response.data.updatedList.dob,
+    //         city: response.data.updatedList.city,
+    //         state: response.data.updatedList.state,
+    //         country: response.data.updatedList.country,
+    //         nickname: response.data.updatedList.nickname,
+    //         headline: response.data.updatedList.headline,
+    //         yelpsince: response.data.updatedList.yelpsince.split('T')[0],
+    //         thingsilove: response.data.updatedList.thingsilove,
+    //         findmein: response.data.updatedList.findmein,
+    //         website: response.data.updatedList.website,
+    //         phonenumber: response.data.updatedList.phonenumber,
+    //         customerId: response.data.updatedList._id
     //     });
     // });
-
-    axios.get(`${backendServer}/customers/${id}/profile`)
-    .then(response => {
-        this.setState({
-            name: response.data.updatedList.name,
-            email: response.data.updatedList.email,
-            customerId: response.data.updatedList._id,
-            dob: response.data.updatedList.dob,
-            city: response.data.updatedList.city,
-            state: response.data.updatedList.state,
-            country: response.data.updatedList.country,
-            nickname: response.data.updatedList.nickname,
-            headline: response.data.updatedList.headline,
-            yelpsince: response.data.updatedList.yelpsince.split('T')[0],
-            thingsilove: response.data.updatedList.thingsilove,
-            findmein: response.data.updatedList.findmein,
-            website: response.data.updatedList.website,
-            phonenumber: response.data.updatedList.phonenumber,
-            customerId: response.data.updatedList._id
-        });
-    });
-
   }
+
+  componentWillReceiveProps(props){
+    this.setState({
+      ...this.state,
+      name: props.user.name,
+      email: props.user.email,
+      customerId: props.user._id,
+      dob: props.user.dob,
+      city: props.user.city,
+      state: props.user.state,
+      country: props.user.country,
+      nickname: props.user.nickname,
+      headline: props.user.headline,
+      yelpsince: props.user.yelpsince.split('T')[0],
+      thingsilove: props.user.thingsilove,
+      findmein: props.user.findmein,
+      website: props.user.website,
+      phonenumber: props.user.phonenumber,
+      customerId: props.user._id
+      
+    }
+   );
+  }
+
   render() {
     const id = localStorage.getItem('customer_id')
     var imgsrc = `${backendServer}/customers/${id}/viewProfileImage`;
@@ -75,4 +93,16 @@ class CustomerProfile extends Component {
 }
 
 
-export default CustomerProfile;
+// export default CustomerProfile;
+
+CustomerProfile.propTypes = {
+  getCustomerInfo: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
+}
+
+
+const mapStateToProps = state => ({
+  user: state.getCustomerInfo.user
+});
+
+export default connect(mapStateToProps, { getCustomerInfo })(CustomerProfile);
