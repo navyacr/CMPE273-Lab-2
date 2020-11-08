@@ -15,7 +15,6 @@ class RestaurantProfile extends Component {
     this.state = {
       fileText : "ChooseImage.."
     };
-    // this.getRestaurantInfo();
     this.props.getRestaurant();
   } 
 
@@ -62,23 +61,7 @@ onUserUpload = (e) => {
           console.log("Error");
       });
 }
-  // getRestaurantInfo = () => {
-     
-  //   const id = localStorage.getItem('restaurant_id')
-  //   axios.get(`${backendServer}/restaurants/${id}/info`)
-  //   .then(response => {
-  //       this.setState({
-  //           name: response.data.updatedList.name,
-  //           email: response.data.updatedList.email,
-  //           restaurantId: response.data.updatedList._id,
-  //           description: response.data.updatedList.description,
-  //           contact: response.data.updatedList.contact,
-  //           timings: response.data.updatedList.timings,
-  //           location: response.data.updatedList.location,
-  //           cuisine: response.data.updatedList.cuisine
-  //       });
-  //   });
-  // }
+
   render() {
     var imgsrc = `${backendServer}/restaurants/${this.state.restaurantId}/viewProfileImage`;
 
@@ -117,7 +100,6 @@ onUserUpload = (e) => {
     )
   }
 }
-// export default RestaurantProfile;
 
 RestaurantProfile.propTypes = {
   getRestaurant: PropTypes.func.isRequired,

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { oneEventAttendeeView } from '../../actions/oneEventAttendeeViewActions';
 import axios from "axios";
 import { Widget, addResponseMessage, addUserMessage } from 'react-chat-widget';
-import { getMessages } from '../../actions/allCustomersActions';
+import { getMessages, sendMessages } from '../../actions/allCustomersActions';
 
 
 class OneCustomerView extends Component {
@@ -30,13 +30,18 @@ class OneCustomerView extends Component {
     
     console.log(`New message incoming! ${newMessage} ${this.state.customerId} ${this.state.restaurantId}`);
     var payload = {"customerId": this.state.customerId, "restaurantId": this.state.restaurantId, "message": newMessage, "senderType": "restaurant"}
-    axios.post(`${backendServer}/restaurants/message`, payload)
-    .then((response) => {
-      console.log("Updated", response)
-    })
-    .catch((error) => {
-     console.log("Error updating:", error )
-    });
+    this.props.sendMessages(payload);
+    // this.props.getMessages({
+    //   customerId: this.state.customerId,
+    //   restaurantId: this.state.restaurantId
+    // })
+    // axios.post(`${backendServer}/restaurants/message`, payload)
+    // .then((response) => {
+    //   console.log("Updated", response)
+    // })
+    // .catch((error) => {
+    //  console.log("Error updating:", error )
+    // });
     // Now send the message throught the backend API
   };
 
@@ -59,6 +64,8 @@ class OneCustomerView extends Component {
     return (
         <div>
           <Widget
+            subtitle = ""
+            title={this.props.user.name }
             handleNewUserMessage={this.handleNewUserMessage}
           />
           <RestaurantLoginCheck/>
@@ -87,14 +94,17 @@ OneCustomerView.propTypes = {
   oneEventAttendeeView: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   getMessages: PropTypes.func.isRequired,
+  sendMessages: PropTypes.func.isRequired,
   messages: PropTypes.array.isRequired,
+  // sent: PropTypes.array.isRequired
 
 }
 
 
 const mapStateToProps = state => ({
   user: state.oneEventAttendeeView.user,
-  messages : state.getMessages.messages
+  messages : state.getMessages.messages,
+  // sent: state.sendMessages.sent
 });
 
-export default connect(mapStateToProps, { oneEventAttendeeView, getMessages })(OneCustomerView);
+export default connect(mapStateToProps, { oneEventAttendeeView, getMessages, sendMessages })(OneCustomerView);

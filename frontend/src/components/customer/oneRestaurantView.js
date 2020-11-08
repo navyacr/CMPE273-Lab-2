@@ -16,12 +16,13 @@ class OneRestaurantView extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.getRestaurantInfo();
+    // this.getRestaurantInfo();
+    this.props.getRestaurantInfo(this.props.match.params.resid);
   } 
 
   getRestaurantInfo = () => {
 
-    this.props.getRestaurantInfo(this.props.match.params.resid);
+    
      
     // axios.get(`${backendServer}/restaurants/${this.props.match.params.resid}/info`)
     // .then(response => {
@@ -42,21 +43,29 @@ class OneRestaurantView extends Component {
   }
 
   componentWillReceiveProps(props){
+    console.log("received props: ", props)
     this.setState({
-      ...this.state,
-      name: props.user.name,
-      email: props.user.email,
-      restaurantId: props.user.id,
-      description: props.user.description,
-      contact: props.user.contact,
-      timings: props.user.timings,
-      location: props.user.location,
-      deliverymode: props.user.deliverymode
+      
+      name: props.resInfo.name,
+      email: props.resInfo.email,
+      restaurantId: props.resInfo.id,
+      description: props.resInfo.description,
+      contact: props.resInfo.contact,
+      timings: props.resInfo.timings,
+      location: props.resInfo.location,
+      deliverymode: props.resInfo.deliverymode
 
     }
    );	
   //  console.log("Page count?", this.state.pageCount)
   }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log("props print:", nextProps)
+  //   return nextProps.email != this.props.email;
+    
+  // }
+
   _onSelect = (val) => {
     this.setState({
       selectedDm : val.value
@@ -79,6 +88,7 @@ class OneRestaurantView extends Component {
                     <p> <b>Email:</b> {this.state.email} </p>
                     <p> <b>Our Address:</b> {this.state.location}</p>
                     <p> <b>Timings:</b> {this.state.timings} </p>
+                    <p> <b>Delivery Modes offered:</b> {this.state.deliverymode} </p>
                 </div>
                 <div>
                   <h4 style={{color: "maroon"}}> <b> Menu: </b></h4>
@@ -98,12 +108,12 @@ class OneRestaurantView extends Component {
 
 OneRestaurantView.propTypes = {
   getRestaurantInfo: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+  resInfo: PropTypes.array.isRequired
 }
 
 
 const mapStateToProps = state => ({
-  user: state.getRestaurantInfo.user
+  resInfo: state.getRestaurantInfo.resInfo
 });
 
 export default connect(mapStateToProps, { getRestaurantInfo })(OneRestaurantView);

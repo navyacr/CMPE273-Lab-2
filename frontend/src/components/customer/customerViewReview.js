@@ -76,7 +76,7 @@ class CustomerViewReview extends Component {
 // export default CustomerViewReview;
 CustomerViewReview.propTypes = {
   getReviews: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.array.isRequired
 }
 
 

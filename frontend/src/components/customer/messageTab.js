@@ -86,10 +86,11 @@ class messageTab extends Component {
       qty: count
     })
   }
-  sendData = (resId) =>{
-    console.log("ResiD:", resId)
+  sendData = (resId, resName) =>{
+    console.log("ResiD:", resId, resName)
     this.setState({
-      restaurantId : resId
+      restaurantId : resId,
+      resName: resName
     })
     var payload = {"customerId": localStorage.getItem("customer_id"), "restaurantId": resId }
     axios.post(`${backendServer}/restaurants/getMessage`, payload)
@@ -127,7 +128,7 @@ class messageTab extends Component {
                             <div class="mx-auto pull-left">
                             <img class="profile-photo" src={imgsrc}></img>
                             </div>
-                            <div class="mx-auto pull-right" onClick={this.sendData.bind(this, this.state.restaurants[i]._id)}>
+                            <div class="mx-auto pull-right" onClick={this.sendData.bind(this, this.state.restaurants[i]._id, this.state.restaurants[i].name)}>
                             {/* <a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i]._id}> */}
                               <Card.Title><b>{this.state.restaurants[i].name}</b></Card.Title>
                             {/* </a> */}
@@ -146,6 +147,8 @@ class messageTab extends Component {
       <div>
         <CustomerLoginCheck />
         <Widget
+        title= {this.state.resName}
+        subtitle=""
         handleNewUserMessage={this.handleNewUserMessage}
         />
        

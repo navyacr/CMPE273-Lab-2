@@ -253,8 +253,8 @@ exports.aggReview = (req, res) => {
       } else {
         res.status(404).send({"error": "err occurred"})
       }
-  })
-};
+    })
+  };
 
 exports.viewProfileImage = (req, res) =>{
   const restaurantId = req.params.restaurantId;

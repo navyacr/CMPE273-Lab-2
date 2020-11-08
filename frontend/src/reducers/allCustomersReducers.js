@@ -1,8 +1,9 @@
-import { CUSTOMERS_VIEW, GET_MESSAGE} from '../actions/types';
+import { CUSTOMERS_VIEW, GET_MESSAGE, SEND_MESSAGE} from '../actions/types';
 
 const initialState = {
   user: {},
-  messages: {}
+  messages: {},
+  sent: {}
 };
 
 export default function (state = initialState, action) {
@@ -17,6 +18,12 @@ export default function (state = initialState, action) {
     return {
       ...state,
       messages: action.payload,
+    };
+  }
+  if (action.type === SEND_MESSAGE) {
+    return {
+      ...state,
+      sent: action.payload,
     };
   }
   return state;

@@ -6,7 +6,7 @@ import { REGISTERED_EVENT_VIEW } from './types';
 import { ONE_RESTAURANT_VIEW } from './types';
 import { CUSTOMER_ADD_REVIEW } from './types';
 import { GET_RESTAURANT_REVIEW } from './types';
-import { GET_ORDERS, GET_RESTAURANT_CHAT} from './types';
+import { GET_ORDERS, GET_RESTAURANT_CHAT, GET_RESTAURANT_MENU} from './types';
 
 import backendServer from '../config'
 const id = localStorage.getItem('customer_id');
@@ -84,7 +84,6 @@ export const getEvents = () => (dispatch) => {
 
 export const getRestaurantInfo = (resId) => (dispatch) => {
   axios.defaults.withCredentials = true;
-  axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
   axios.get(`${backendServer}/restaurants/${resId}/info`)
     .then((response) => dispatch({
       type: ONE_RESTAURANT_VIEW,
@@ -155,6 +154,7 @@ export const getOrders = () => (dispatch) => {
 
 export const getChatRestaurants = () => (dispatch) => {
   axios.defaults.withCredentials = true;
+  axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
   axios.get(`${backendServer}/customers/${id}/getChatRestaurants`)
     .then((response) => dispatch({
       type: GET_RESTAURANT_CHAT,
@@ -164,6 +164,23 @@ export const getChatRestaurants = () => (dispatch) => {
       if (error.response && error.response.data) {
         return dispatch({
           type: GET_RESTAURANT_CHAT,
+          payload: error.response.data,
+        });
+      }
+    });
+};
+
+export const getRestaurantMenu = (resId) => (dispatch) => {
+  axios.defaults.withCredentials = true;
+  axios.get(`${backendServer}/restaurants/${resId}/dishes`)
+    .then((response) => dispatch({
+      type: GET_RESTAURANT_MENU,
+      payload: response.data.updatedList,
+    }))
+    .catch((error) => {
+      if (error.response && error.response.data) {
+        return dispatch({
+          type: GET_RESTAURANT_MENU,
           payload: error.response.data,
         });
       }

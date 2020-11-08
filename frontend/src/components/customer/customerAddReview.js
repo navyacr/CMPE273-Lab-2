@@ -74,7 +74,7 @@ class CustomerAddReview extends Component{
 
 CustomerAddReview.propTypes = {
     submitReview: PropTypes.func.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.array.isRequired
   }
   
   

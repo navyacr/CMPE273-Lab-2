@@ -30,6 +30,9 @@ class CustomerNavbar extends Component {
                 </li> 
                 <li class="nav-item">
                     <Link class="nav-link" to="/messageTab"> Messages</Link>
+                </li>
+                <li class="nav-item">
+                        <Link class="nav-link" to="/allCustomers">Users</Link>
                 </li> 
             </ul>
         </div>

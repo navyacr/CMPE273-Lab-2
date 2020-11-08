@@ -5,10 +5,13 @@ import { REGISTERED_EVENT_VIEW } from '../actions/types';
 import { ONE_RESTAURANT_VIEW } from '../actions/types';
 import { CUSTOMER_ADD_REVIEW } from '../actions/types';
 import { GET_RESTAURANT_REVIEW } from '../actions/types';
-import { GET_ORDERS, GET_RESTAURANT_CHAT} from '../actions/types';
+import { GET_ORDERS, GET_RESTAURANT_CHAT, GET_RESTAURANT_MENU} from '../actions/types';
 
 const initialState = {
   user: {},
+  resInfo:{},
+  menu: {}
+
 };
 
 export default function (state = initialState, action) {
@@ -40,7 +43,7 @@ export default function (state = initialState, action) {
   if (action.type === ONE_RESTAURANT_VIEW) {
     return {
       ...state,
-      user: action.payload,
+      resInfo: action.payload,
     };
   }
   if (action.type === CUSTOMER_ADD_REVIEW) {
@@ -65,6 +68,12 @@ export default function (state = initialState, action) {
     return {
       ...state,
       user: action.payload,
+    };
+  }
+  if (action.type === GET_RESTAURANT_MENU) {
+    return {
+      ...state,
+      menu: action.payload,
     };
   }
   return state;

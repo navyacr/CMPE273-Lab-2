@@ -173,7 +173,7 @@ exports.findAll = (req, res) => {
   exports.cancelOrder = (req, res) => {
 
     req.body.orderId = req.params.orderId;
-    req.body.status = "cancelled";
+    req.body.status = "Cancelled";
     kafka.make_request('cusCancelOrder',req.body, function(err,results){
       if (err){
           res.json({

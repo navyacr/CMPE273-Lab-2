@@ -116,8 +116,8 @@ class CustomersView extends Component {
                             <Card.Text> 
                             {/* <button class="btn btn-primary" value={this.props.user._id}  onClick={this.register}>Chat</button> */}
                             <div className="g-menu-image">
-                                <button className="btn btn-success" data-toggle="modal" data-target="#chatModal"
-                                onClick={() => this.getMessages(item._id)}>Chat</button>
+                                {/* <button className="btn btn-success" data-toggle="modal" data-target="#chatModal"
+                                onClick={() => this.getMessages(item._id)}>Chat</button> */}
                                 
                                 {/* {this.props.messages[0].message} */}
                           </div>
@@ -153,11 +153,12 @@ class CustomersView extends Component {
     return (
       <div>
         {/* {data} */}
-        <div className="panel">
-          {paginationElement}
-          <div className="panel-body">
+        
             {/* <div>{chatModal}</div> */}
             <div>{testResult}</div> 
+            <div className="panel">
+          {paginationElement}
+        <div className="panel-body">
           </div>
         </div>
 

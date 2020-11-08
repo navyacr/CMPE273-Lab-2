@@ -4,6 +4,7 @@ import backendServer from '../config'
 
 export const oneEventView = (eventid) => (dispatch) => {
   axios.defaults.withCredentials = true;
+  axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
   axios.get(`${backendServer}/events/${eventid}/attendees`)
     .then((response) => dispatch({
       type: ONE_EVENT_VIEW,

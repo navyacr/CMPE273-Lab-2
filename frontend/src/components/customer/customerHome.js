@@ -10,6 +10,8 @@ import 'react-dropdown/style.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getRestaurants } from '../../actions/customerHomeActions';
+import ReactPaginate from 'react-paginate';
+import '../restaurant/pagination.css';
 // import MapContainer from './mapComponent'
 
 const buttons = [
@@ -82,7 +84,7 @@ class CustomerHome extends Component {
     console.log(params)
     axios.post(`${backendServer}/customers/restaurantsearch`, params)
     .then(response => {
-        console.log("Response: ", response.data)
+        console.log("Show Response: ", response)
         this.setState({
             restaurants: response.data.updatedList
         });
@@ -138,16 +140,6 @@ this.setState({
 }
   getRestaurants = () => {
     this.props.getRestaurants();
-    // console.log("Making axios call")
-    // axios.get(`${backendServer}/restaurants/info`)
-    // .then(response => {
-    //     console.log("Response is:", response.data.updatedList)
-    //     this.setState({
-    //         restaurants: response.data.updatedList,
-    //         allrestaurants : response.data.updatedList
-    //     });
-    // });
-    // console.log("State:", this.state)
   }
 
   setCount = (count) => {
@@ -155,6 +147,16 @@ this.setState({
       qty: count
     })
   }
+
+  handlePageClick = e => {
+    const selectedPage = e.selected;
+    const offset = selectedPage * this.state.perPage;
+    this.setState({
+        currentPage: selectedPage,
+        offset: offset
+    }
+    );
+  };
   render() {
     const options = [
       {value: 'cuisine', label: 'Cuisine'},
@@ -166,36 +168,82 @@ this.setState({
     ]
     const defaultOption = options[4]
 
-      var data = []
+    const count = this.state.restaurants.length;
+    console.log('restaurants: ', this.props.user)
+    const slice = this.state.restaurants.slice(this.state.offset, this.state.offset + this.state.perPage);
+    const testResult = slice.map((item,key)=>
+      
+      <div class="row">
+        
+        <Card border='info' border-width='10px' style={{ width: '100%' , color: 'black' , }}><Card.Body> 
+          <div class="d-flex">
+            <div class="mx-auto pull-left">
+              <Card.Img variant="top" class="dish-image" src={backendServer+"/restaurants/"+item._id+"/viewProfileImage"}></Card.Img>
+            </div>
+          <div class="mx-auto pull-right">
+          <a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + item._id}>
+            <Card.Title><b>{item.name}</b></Card.Title>
+          </a>
+              <AggregateReview resid={item._id}/>
+              
+              <Card.Text><b> Delivery modes: </b> {item.deliverymode}</Card.Text>
+              <Card.Text><b> Cuisine: </b> {item.cuisine}</Card.Text>
+              <Card.Text><b> Description: </b> {item.description}</Card.Text>
+          </div>
+        </div>
+        </Card.Body>
+        </Card>
+        <br/>
+        <br/>
+        <br/>
+      </div> 
+    );
+    let paginationElement = (
+      <ReactPaginate
+        previousLabel={"← Previous"}
+        nextLabel={"Next →"}
+        breakLabel={<span className="gap">...</span>}
+        pageCount={Math.ceil(this.state.restaurants.length / this.state.perPage) > 1 ? Math.ceil(this.state.restaurants.length / this.state.perPage) : 10}
+        onPageChange={this.handlePageClick}
+        forcePage={this.state.currentPage}
+        containerClassName={"pagination"}
+        previousLinkClassName={"previous_page"}
+        nextLinkClassName={"next_page"}
+        disabledClassName={"disabled"}
+        activeClassName={"active"}
+      />
+    );
 
-      if (this.state && this.state.restaurants && this.state.restaurants.length > 0) {
-        console.log("All restaurants list:",this.state.restaurants)
-        for (let i = 0; i < this.state.restaurants.length; i++) {
+    //   var data = []
+
+    //   if (this.state && this.state.restaurants && this.state.restaurants.length > 0) {
+    //     console.log("All restaurants list:",this.state.restaurants)
+    //     for (let i = 0; i < this.state.restaurants.length; i++) {
           
-            if (this.state.restaurants[i]) {
-                console.log(this.state.restaurants[i])
-                var imgsrc = `${backendServer}/restaurants/${this.state.restaurants[i]._id}/viewProfileImage`;
-                data.push(
-                          <Card border="info" style={{ width: '100%' }}><Card.Body> 
-                            <div class="d-flex">
-                            <div class="mx-auto pull-left">
-                            <img class="profile-photo" src={imgsrc}></img>
-                            </div>
-                            <div class="mx-auto pull-right">
-                            <a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i]._id}>
-                              <Card.Title><b>{this.state.restaurants[i].name}</b></Card.Title>
-                            </a>
+    //         if (this.state.restaurants[i]) {
+    //             console.log(this.state.restaurants[i])
+    //             var imgsrc = `${backendServer}/restaurants/${this.state.restaurants[i]._id}/viewProfileImage`;
+    //             data.push(
+    //                       <Card border="info" style={{ width: '100%' }}><Card.Body> 
+    //                         <div class="d-flex">
+    //                         <div class="mx-auto pull-left">
+    //                         <img class="profile-photo" src={imgsrc}></img>
+    //                         </div>
+    //                         <div class="mx-auto pull-right">
+    //                         <a style={{ cursor: 'pointer' }} href={"/oneRestaurantView/" + this.state.restaurants[i]._id}>
+    //                           <Card.Title><b>{this.state.restaurants[i].name}</b></Card.Title>
+    //                         </a>
                           
-                          <AggregateReview resid={this.state.restaurants[i]._id}/>
-                          <Card.Text><b> Delivery modes:  </b> {this.state.restaurants[i].deliverymode}</Card.Text>
-                          <Card.Text><b> Cuisine:  </b> {this.state.restaurants[i].cuisine}</Card.Text>
-                          <Card.Text><b> Description: </b> {this.state.restaurants[i].description}</Card.Text>
-                          </div>
-                          </div>
-                          </Card.Body></Card>)
-            }
-        }
-    }
+    //                       <AggregateReview resid={this.state.restaurants[i]._id}/>
+    //                       <Card.Text><b> Delivery modes:  </b> {this.state.restaurants[i].deliverymode}</Card.Text>
+    //                       <Card.Text><b> Cuisine:  </b> {this.state.restaurants[i].cuisine}</Card.Text>
+    //                       <Card.Text><b> Description: </b> {this.state.restaurants[i].description}</Card.Text>
+    //                       </div>
+    //                       </div>
+    //                       </Card.Body></Card>)
+    //         }
+    //     }
+    // }
     return (
       <div>
         <CustomerLoginCheck />
@@ -235,7 +283,14 @@ this.setState({
         </div>
         <div class="header_menu">
           <div class="links">
-            {data}
+            {/* {data} */}
+            <div className="panel">
+          
+            <div className="panel-body">
+              <div>{testResult}</div> 
+            </div>
+            {paginationElement}
+        </div>
           </div>
           <div class="social_media">
           {/* <MapContainer restaurants={this.state.restaurants}/> */}

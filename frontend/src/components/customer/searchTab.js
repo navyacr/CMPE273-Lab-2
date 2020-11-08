@@ -30,9 +30,9 @@ class CustomerSearch extends Component {
         console.log(params)
     axios.post(`${backendServer}/customers/restaurantsearch`, params)
     .then(response => {
-        console.log("Response: ", response)
+        console.log("show Response: ", response)
         this.setState({
-            restaurants: response.data
+            restaurants: response.data.updatedList
         });
     });
   }
@@ -47,7 +47,6 @@ class CustomerSearch extends Component {
         type: e.value
     });
      console.log("Priting e: ", e)
-    //  this.state.data = <Dropdown options={'check'} placeholder="Select" />
      if (e && e.value === 'deliverymode'){
         this.setState({  
             secondoptions: [
@@ -64,7 +63,8 @@ class CustomerSearch extends Component {
             secondoptions: [
                 {value: 'Random', label: 'French'},
                 {value: 'mexican', label: 'Mexican'},
-                {value: 'mediterranean', label: 'Mediterranean'}
+                {value: 'mediterranean', label: 'Mediterranean'},
+                {value: 'indian', label: 'Indian'}
             ],
             
             

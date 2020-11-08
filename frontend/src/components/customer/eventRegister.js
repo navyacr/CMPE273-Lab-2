@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { eventView } from '../../actions/eventViewActions';
 import ReactPaginate from 'react-paginate';
 import '../restaurant/pagination.css';
+import _ from 'lodash'
 
 class EventRegister extends Component {
   constructor(props) {
@@ -59,6 +60,14 @@ class EventRegister extends Component {
             alert('Oops!! something went wrong, Try again.')
         }
       })
+  }
+
+  sortEvents = (e) =>{
+    this.setState({
+      events: _.sortBy(this.state.events, "date"),
+      direction: 'ascending',
+    })
+    this.props.eventView();
   }
 
   getEvents = () => {
@@ -141,11 +150,7 @@ class EventRegister extends Component {
       />
     );
 
-
     return (
-      
-      
-
       <div>
         < CustomerLoginCheck />
 
@@ -156,6 +161,9 @@ class EventRegister extends Component {
             </td>
             <td>
             <button class="icon" onClick={this.search}><i class="glyphicon glyphicon-search"></i></button>
+            </td>
+            <td>
+            <button class="btn btn-primary" value={1}  onClick={this.sortEvents}>Sort</button>
             </td>
           </tr>
         </table>

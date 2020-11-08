@@ -1,11 +1,10 @@
 const Model = require('../models/restaurants.model');
 const dishesModel = require('../models/dishes.model');
-const { model } = require('../models/dishes.model');
 
 function handle_request(msg, callback){
   if (msg.type === 'dishname'){
       // var condition =  { name : { [Op.like]: `%${value}%` } }
-      dishesModel.find({ name : msg.value})
+      dishesModel.find({ name : new RegExp(msg.value, 'i')})
       .populate("restaurantId")
       .then(function(output) {
         if (output) {

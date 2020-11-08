@@ -1,6 +1,6 @@
 import { EVENT_VIEW } from '../actions/types';
 import { ONE_EVENT_VIEW } from '../actions/types';
-import { ONE_ATTENDEE_VIEW } from '../actions/types';
+import { ONE_CUSTOMER_VIEW } from '../actions/types';
 
 
 
@@ -22,7 +22,7 @@ export default function (state = initialState, action) {
       user: action.payload,
     };
   }
-  if (action.type === ONE_ATTENDEE_VIEW){
+  if (action.type === ONE_CUSTOMER_VIEW){
     return {
       ...state,
       user: action.payload,

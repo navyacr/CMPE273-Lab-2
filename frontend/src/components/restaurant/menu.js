@@ -19,7 +19,6 @@ class RestaurantMenu extends Component {
       pageCount: 1,
       dishes: []
     };
-    // this.getRestaurantMenu();
     this.props.restaurantMenu();
   } 
 
@@ -44,38 +43,30 @@ class RestaurantMenu extends Component {
   };
 
 
-  // getRestaurantMenu = () => {
-  //   const id = localStorage.getItem('restaurant_id')
-  //   axios.get(`${backendServer}/restaurants/${id}/dishes`)
-  //   .then(response => {
-  //       this.setState({
-  //           dishes: response.data.updatedList
-  //       });
-  //   });
-  // }
-
   render() {
     const count = this.state.dishes.length;
     console.log('Dishes: ', this.props.user)
     const slice = this.state.dishes.slice(this.state.offset, this.state.offset + this.state.perPage);
-    // let imgsrc = `${backendServer}/restaurants/${this.state.dishes[i]._id}/dishImage`
     const testResult = slice.map((item,key)=>
       
       <div class="row">
         
-        <Card border="info" style={{ width: '40%' }}><Card.Body> 
-                          <Card.Img variant="top" class="dish-image" src={backendServer+"/restaurants/"+item._id+"/dishImage"}></Card.Img>
-                          <Card.Title><b>{item.name}</b></Card.Title>
-                          
-                          <Card.Text><b> Category: </b> {item.category}</Card.Text>
-                          <Card.Text><b> Ingredients: </b> {item.ingredients}</Card.Text>
-                          <Card.Text><b> Description: </b> {item.description}</Card.Text>
-                          <Card.Text><b> Price: </b> {item.price}</Card.Text>
-                          
-                          <Card.Text> </Card.Text>
-                      </Card.Body>
+        <Card border='info' border-width='10px' style={{ width: '60%' , color: 'black' , }}><Card.Body> 
+          <div class="d-flex">
+            <div class="mx-auto pull-left">
+              <Card.Img variant="top" class="dish-image" src={backendServer+"/restaurants/"+item._id+"/dishImage"}></Card.Img>
+            </div>
+          <div class="mx-auto pull-right">
+              <Card.Title><b>{item.name}</b></Card.Title>
+              
+              <Card.Text><b> Category: </b> {item.category}</Card.Text>
+              <Card.Text><b> Ingredients: </b> {item.ingredients}</Card.Text>
+              <Card.Text><b> Description: </b> {item.description}</Card.Text>
+              <Card.Text><b> Price: </b> {item.price} USD</Card.Text>
+          </div>
+        </div>
+        </Card.Body>
         </Card>
-        {/* <div className="col-sm-6" >{item.description}</div> */}
         <br/>
         <br/>
         <br/>
