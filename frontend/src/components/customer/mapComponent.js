@@ -26,7 +26,8 @@ export class MapContainer extends Component {
   initialise = () => {
 
     for (let restaurant of this.props.restaurants) {
-      let name = restaurant.restaurant.name;
+      console.log('Restaurants list in maps:', this.props.restaurants)
+      let name = restaurant.name;
     Geocode.fromAddress(restaurant.location).then(
       response => {
            
@@ -64,12 +65,12 @@ export class MapContainer extends Component {
     return (
       <Map
         google={this.props.google}
-        zoom={5}
+        zoom={11}
         style={mapStyles}
         initialCenter={
         {
-            lat: 48.85837009999999,
-            lng: 2.2944813
+            lat: 37.368,
+            lng: -122.03
           }
         }
       >

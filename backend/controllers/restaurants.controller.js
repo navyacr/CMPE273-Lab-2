@@ -215,6 +215,7 @@ exports.aggReview = (req, res) => {
               msg:"System Error, Try Again."
           })
       }else{
+        console.log("This is the result from search:", results)
               res.json({
                   updatedList:results
               });

@@ -1,27 +1,24 @@
 const Model = require('../models/restaurants.model');
 const dishesModel = require('../models/dishes.model');
+const mongoose = require('mongoose');
 
 function handle_request(msg, callback){
+  console.log("Msg type is:", msg.type)
   if (msg.type === 'dishname'){
-      // var condition =  { name : { [Op.like]: `%${value}%` } }
-      dishesModel.find({ name : new RegExp(msg.value, 'i')})
-      .populate("restaurantId")
-      .then(function(output) {
-        if (output) {
-          console.log("search by dish name:", output)
-          var returnVal =[]; 
-          for (var i in output){
-            returnVal.push(output[i].restaurantId)
-          }
-          console.log("returnVal:", returnVal)
-          callback(null, returnVal)
+    dishesModel.find({ name: msg.value })
+    .populate('restaurantId')
+    .then(function(output) {
+      if (output) {
+        var returnThis = []
+        for (var i in output) {
+          returnThis.push(output[i].restaurantId)
         }
-      });
+        callback(null, returnThis)  
+      }
+  });
   }
   if (msg.type === 'restaurantname'){
-    // var condition =  { name : { [Op.like]: `%${value}%` } }
     Model.restaurantsModel.find({ name : new RegExp(msg.value, 'i')})
-    // .populate("restaurantId")
     .then(function(output) {
       if (output) {
         console.log("search by res name:", output)
@@ -31,9 +28,7 @@ function handle_request(msg, callback){
   }
 
   if (msg.type === 'location'){
-    // var condition =  { name : { [Op.like]: `%${value}%` } }
     Model.restaurantsModel.find({ location : new RegExp(msg.value, 'i')})
-    // .populate("restaurantId")
     .then(function(output) {
       if (output) {
         console.log("search by location:", output)
@@ -42,95 +37,15 @@ function handle_request(msg, callback){
     });
   }
 
+  if (msg.type === "cuisine" || msg.type === "deliverymode") {
   Model.restaurantsModel.find({[msg.type] : new RegExp(msg.value, 'i')})
-    // .populate("restaurantId")
     .then(function(output) {
       if (output) {
         console.log("search by cuisine or deliverymode:", output)
         callback(null, output)  
       }
     });
-
+  }
 }
 
 exports.handle_request = handle_request;
-
-// var type = req.body.type
-    // var value = req.body.value
-    // if (type === 'dishname'){
-    //   var condition =  { name : { [Op.like]: `%${value}%` } }
-    //   dishes.findAll({
-    //   where: condition,
-    //   include: [{
-    //       model: restaurants,
-    //       where: {}
-    //   }]
-    // }).then((data) => {
-    //       res.send(data)
-    //       console.log("*********************\n\n\n\n\n",data);
-    // })
-    // .catch(err => {
-    //   res.status(500).send({
-    //     message:
-    //       err.message || "Some error occurred while updating the restaurantProfile."
-    //   });
-    // });
-    // }
-
-    // if (type === 'restaurantname'){
-    //   var condition =  { name : { [Op.like]: `%${value}%` } }
-    //   restaurantsProfile.findAll({
-    //   // where: condition,
-    //   include: [{
-    //       model: restaurants,
-    //       where: condition
-    //   }]
-    // }).then((data) => {
-    //       res.send(data)
-    //       console.log("*********************\n\n\n\n\n",data);
-    // })
-    // .catch(err => {
-    //   res.status(500).send({
-    //     message:
-    //       err.message || "Some error occurred while searching the restaurantProfile."
-    //   });
-    // });
-    // }
-
-    // if (type === 'location'){
-    //   var condition =  { location : { [Op.like]: `%${value}%` } }
-    //   restaurantsProfile.findAll({
-    //   where: condition,
-    //   include: [{
-    //       model: restaurants,
-    //       where: {}
-    //   }]
-    // }).then((data) => {
-    //       res.send(data)
-    //       console.log("*********************\n\n\n\n\n",data);
-    // })
-    // .catch(err => {
-    //   res.status(500).send({
-    //     message:
-    //       err.message || "Some error occurred while updating the restaurantProfile."
-    //   });
-    // });
-
-
-    // var condition =  { [type] : { [Op.eq]: `${value}` } }
-    // restaurantsProfile.findAll({
-    //   where: condition,
-    //   include: [{
-    //       model: restaurants,
-    //       where: {}
-    //   }]
-    // }).then((data) => {
-    //       res.send(data)
-    //       console.log("*********************\n\n\n\n\n",data);
-    // })
-    // .catch(err => {
-    //   res.status(500).send({
-    //     message:
-    //       err.message || "Some error occurred while updating the restaurantProfile."
-    //   });
-    // });

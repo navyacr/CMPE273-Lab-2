@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { getRestaurants } from '../../actions/customerHomeActions';
 import ReactPaginate from 'react-paginate';
 import '../restaurant/pagination.css';
-// import MapContainer from './mapComponent'
+import MapContainer from './mapComponent'
 
 const buttons = [
   { name: "All", value: "all" },
@@ -293,7 +293,7 @@ this.setState({
         </div>
           </div>
           <div class="social_media">
-          {/* <MapContainer restaurants={this.state.restaurants}/> */}
+          <MapContainer restaurants={this.state.restaurants}/>
           </div>
           <div class="clearfix"></div>
       </div>

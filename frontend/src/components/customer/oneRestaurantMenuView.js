@@ -8,6 +8,7 @@ import '../restaurant/pagination.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getRestaurantMenu } from '../../actions/customerHomeActions';
+import { placeOrder } from '../../actions/customerHomeActions';
 
 class OneRestaurantMenuView extends Component {
   constructor(props) {
@@ -24,43 +25,45 @@ class OneRestaurantMenuView extends Component {
 
   getRestaurantMenu = () => {
      console.log("Res id is", this.props)
-    //  this.props.getRestaurantMenu(this.props.resid)
-    axios.get(`${backendServer}/restaurants/${this.props.resid}/dishes`)
-    .then(response => {
-        this.setState({
-            dishes: response.data.updatedList
-        });
-        console.log("Dishes received:", this.state.dishes)
-    });
+     this.props.getRestaurantMenu(this.props.resid)
+    // axios.get(`${backendServer}/restaurants/${this.props.resid}/dishes`)
+    // .then(response => {
+    //     this.setState({
+    //         dishes: response.data.updatedList
+    //     });
+    //     console.log("Dishes received:", this.state.dishes)
+    // });
   }
   placeOrder = () => {
     let customerId = localStorage.getItem("customer_id")
     console.log("Dishes list: ", this.state.dishes)
     console.log("customerId: ", customerId)
-    axios.post(`${backendServer}/customers/${customerId}/orders`, {dishes: this.state.dishes, dm: this.props.dm})
-    .then(response => {
-      console.log(response)
-      console.log(this.props.dm)
-      alert("Order placed successfully", response)
-    })
-    .catch(err => {
-      alert("Error occured. Try again", err)
-    })
+    this.props.placeOrder({dishes: this.state.dishes, dm: this.props.dm});
+    alert("Order placed successfully")
+    // axios.post(`${backendServer}/customers/${customerId}/orders`, {dishes: this.state.dishes, dm: this.props.dm})
+    // .then(response => {
+    //   console.log(response)
+    //   console.log(this.props.dm)
+    //   alert("Order placed successfully", response)
+    // })
+    // .catch(err => {
+    //   alert("Error occured. Try again", err)
+    // })
   }
-  // componentWillReceiveProps(props){
-  //   console.log("props:", props.menu)
-  //   this.setState({
-  //     ...this.state,
-  //     dishes : props.menu,
-  //     // allorders : props.user,
-  //     pageCount: Math.ceil(this.state.dishes.length / this.state.perPage)
+  componentWillReceiveProps(props){
+    console.log("props:", props.menu)
+    this.setState({
+      ...this.state,
+      dishes : props.menu,
+      // allorders : props.user,
+      pageCount: Math.ceil(this.state.dishes.length / this.state.perPage)
       
-  //   }
-  //  );	
-  //  console.log("PProps received?", props.menu)
-  //  console.log("Dishes?", this.state.dishes)
-  //  console.log("Page count?", this.state.pageCount)
-  // }
+    }
+   );	
+   console.log("PProps received?", props.menu)
+   console.log("Dishes?", this.state.dishes)
+   console.log("Page count?", this.state.pageCount)
+  }
 
   render() {
 
@@ -96,7 +99,7 @@ class OneRestaurantMenuView extends Component {
                     }}>
                       +
                   </button>
-                  {(item.qty)}
+                  {(item.qty? item.qty: 0)}
                   <button
                     onClick={() => {
                       item.qty > 0 ? item.qty -= 1: item.qty = 0;
@@ -198,15 +201,18 @@ class OneRestaurantMenuView extends Component {
 }
 
 
-export default OneRestaurantMenuView;
-// OneRestaurantMenuView.propTypes = {
-//   getRestaurantMenu: PropTypes.func.isRequired,
-//   menu: PropTypes.array.isRequired
-// }
+// export default OneRestaurantMenuView;
+OneRestaurantMenuView.propTypes = {
+  placeOrder: PropTypes.func.isRequired,
+  getRestaurantMenu: PropTypes.func.isRequired,
+  order: PropTypes.array.isRequired,
+  menu: PropTypes.array.isRequired
+}
 
 
-// const mapStateToProps = state => ({
-//   menu: state.getRestaurantMenu.menu
-// });
+const mapStateToProps = state => ({
+  order: state.placeOrder.order,
+  menu: state.getRestaurantMenu.menu
+});
 
-// export default connect(mapStateToProps, { getRestaurantMenu })(OneRestaurantMenuView);
+export default connect(mapStateToProps, { placeOrder, getRestaurantMenu })(OneRestaurantMenuView);

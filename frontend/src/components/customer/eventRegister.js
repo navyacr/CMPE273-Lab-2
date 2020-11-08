@@ -21,7 +21,8 @@ class EventRegister extends Component {
         perPage: 5,
         currentPage: 0,
         pageCount: null,
-        events: []
+        events: [],
+        order: "123"
     };
     this.getEvents();
     this.register = this.register.bind(this);
@@ -62,12 +63,29 @@ class EventRegister extends Component {
       })
   }
 
+  sortJSON(arr, key, way) {
+    return arr.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        if (way === '123') { return ((x < y) ? -1 : ((x > y) ? 1 : 0)); }
+        if (way === '321') { return ((x > y) ? -1 : ((x < y) ? 1 : 0)); }
+    });
+  }
+
   sortEvents = (e) =>{
-    this.setState({
-      events: _.sortBy(this.state.events, "date"),
-      direction: 'ascending',
-    })
-    this.props.eventView();
+    console.log("Unsorted:", this.state.events)
+    
+    if (this.state.order === "321") {
+      this.state.order = "123"
+    } else {
+      this.state.order = "321"
+    }
+    this.state.events = this.sortJSON(this.state.events,'date', this.state.order);
+    // this.setState({
+    //   events: _.sortBy(this.state.events, "description"),
+    //   direction: 'descending',
+    // })
+    console.log("Sorted:", this.state.events)
+    this.forceUpdate()
   }
 
   getEvents = () => {

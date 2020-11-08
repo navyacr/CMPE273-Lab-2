@@ -4,13 +4,14 @@ import { CUSTOMER_PROFILE_UPDATE } from '../actions/types';
 import { REGISTERED_EVENT_VIEW } from '../actions/types';
 import { ONE_RESTAURANT_VIEW } from '../actions/types';
 import { CUSTOMER_ADD_REVIEW } from '../actions/types';
-import { GET_RESTAURANT_REVIEW } from '../actions/types';
+import { GET_RESTAURANT_REVIEW, ORDER_PLACED } from '../actions/types';
 import { GET_ORDERS, GET_RESTAURANT_CHAT, GET_RESTAURANT_MENU} from '../actions/types';
 
 const initialState = {
   user: {},
   resInfo:{},
-  menu: {}
+  menu: {},
+  order: {}
 
 };
 
@@ -74,6 +75,12 @@ export default function (state = initialState, action) {
     return {
       ...state,
       menu: action.payload,
+    };
+  }
+  if (action.type === ORDER_PLACED) {
+    return {
+      ...state,
+      order: action.payload,
     };
   }
   return state;

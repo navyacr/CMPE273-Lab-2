@@ -5,7 +5,7 @@ import { CUSTOMER_PROFILE_UPDATE } from './types';
 import { REGISTERED_EVENT_VIEW } from './types';
 import { ONE_RESTAURANT_VIEW } from './types';
 import { CUSTOMER_ADD_REVIEW } from './types';
-import { GET_RESTAURANT_REVIEW } from './types';
+import { GET_RESTAURANT_REVIEW, ORDER_PLACED } from './types';
 import { GET_ORDERS, GET_RESTAURANT_CHAT, GET_RESTAURANT_MENU} from './types';
 
 import backendServer from '../config'
@@ -181,6 +181,24 @@ export const getRestaurantMenu = (resId) => (dispatch) => {
       if (error.response && error.response.data) {
         return dispatch({
           type: GET_RESTAURANT_MENU,
+          payload: error.response.data,
+        });
+      }
+    });
+};
+
+export const placeOrder = (orderData) => (dispatch) => {
+  axios.defaults.withCredentials = true;
+  axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
+  axios.get(`${backendServer}/customers/${id}/orders`, orderData)
+    .then((response) => dispatch({
+      type: ORDER_PLACED,
+      payload: response.data.updatedList,
+    }))
+    .catch((error) => {
+      if (error.response && error.response.data) {
+        return dispatch({
+          type: ORDER_PLACED,
           payload: error.response.data,
         });
       }
