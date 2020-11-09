@@ -9,7 +9,7 @@ import { GET_RESTAURANT_REVIEW, ORDER_PLACED } from './types';
 import { GET_ORDERS, GET_RESTAURANT_CHAT, GET_RESTAURANT_MENU} from './types';
 
 import backendServer from '../config'
-const id = localStorage.getItem('customer_id');
+const cusid = localStorage.getItem('customer_id');
 
 export const getRestaurants = () => (dispatch) => {
   axios.defaults.withCredentials = true;
@@ -31,7 +31,7 @@ export const getRestaurants = () => (dispatch) => {
 export const getCustomerInfo = () => (dispatch) => {
   axios.defaults.withCredentials = true;
   axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
-  axios.get(`${backendServer}/customers/${id}/profile`)
+  axios.get(`${backendServer}/customers/${cusid}/profile`)
     .then((response) => dispatch({
       type: GET_CUSTOMER_INFO,
       payload: response.data.updatedList,
@@ -49,7 +49,7 @@ export const getCustomerInfo = () => (dispatch) => {
 export const customerProfileUpdate = (data) => (dispatch) => {
   axios.defaults.withCredentials = true;
   axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
-  axios.post(`${backendServer}/customers/${id}/infoUpdate`, data)
+  axios.post(`${backendServer}/customers/${cusid}/infoUpdate`, data)
     .then((response) => dispatch({
       type: CUSTOMER_PROFILE_UPDATE,
       payload: response.data.updatedList,
@@ -67,7 +67,7 @@ export const customerProfileUpdate = (data) => (dispatch) => {
 export const getEvents = () => (dispatch) => {
   axios.defaults.withCredentials = true;
   axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
-  axios.get(`${backendServer}/events/${id}/eventList`)
+  axios.get(`${backendServer}/events/${cusid}/eventList`)
     .then((response) => dispatch({
       type: REGISTERED_EVENT_VIEW,
       payload: response.data.updatedList,
@@ -102,7 +102,7 @@ export const getRestaurantInfo = (resId) => (dispatch) => {
 export const submitReview = (data) => (dispatch) => {
   axios.defaults.withCredentials = true;
   axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
-  axios.post(`${backendServer}/customers/${id}/reviews`,data)
+  axios.post(`${backendServer}/customers/${cusid}/reviews`,data)
     .then((response) => dispatch({
       type: CUSTOMER_ADD_REVIEW,
       payload: response.data.updatedList,
@@ -137,7 +137,8 @@ export const getReviews = (resId) => (dispatch) => {
 export const getOrders = () => (dispatch) => {
   axios.defaults.withCredentials = true;
   axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
-  axios.get(`${backendServer}/customers/${id}/orders`)
+  console.log("Actions customer ID:", localStorage.getItem('customer_id'))
+  axios.get(`${backendServer}/customers/${localStorage.getItem('customer_id')}/orders`)
     .then((response) => dispatch({
       type: GET_ORDERS,
       payload: response.data.updatedList,
@@ -155,7 +156,7 @@ export const getOrders = () => (dispatch) => {
 export const getChatRestaurants = () => (dispatch) => {
   axios.defaults.withCredentials = true;
   axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
-  axios.get(`${backendServer}/customers/${id}/getChatRestaurants`)
+  axios.get(`${backendServer}/customers/${cusid}/getChatRestaurants`)
     .then((response) => dispatch({
       type: GET_RESTAURANT_CHAT,
       payload: response.data.updatedList,
@@ -190,7 +191,7 @@ export const getRestaurantMenu = (resId) => (dispatch) => {
 export const placeOrder = (orderData) => (dispatch) => {
   axios.defaults.withCredentials = true;
   axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
-  axios.get(`${backendServer}/customers/${id}/orders`, orderData)
+  axios.post(`${backendServer}/customers/${cusid}/orders`, orderData)
     .then((response) => dispatch({
       type: ORDER_PLACED,
       payload: response.data.updatedList,

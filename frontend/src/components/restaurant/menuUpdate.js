@@ -26,12 +26,14 @@ class MenuUpdate extends Component {
   onUserUpload = (e) => {
     const formData = new FormData();
     formData.append("image", this.state.filename);
+    console.log("Image upload")
+    console.log("filename", this.state.filename, "id", this.props.user._id)
     const uploadConfig = {
         headers: {
             "content-type": "multipart/form-data"
         }
     };
-    axios.post(`${backendServer}/restaurants/${this.props.user._id}/dishImage`, formData, uploadConfig)
+    axios.post(`${backendServer}/restaurants/${this.state.dishId}/dishImage`, formData, uploadConfig)
         .then(response => {
             alert("Image uploaded successfully!");
             this.setState({
@@ -62,6 +64,13 @@ submitUpdate = (e) => {
         restaurantId: localStorage.getItem("restaurant_id")
     }
     this.props.menuUpdate(data);
+    alert("Updated successfully")
+}
+componentWillReceiveProps(prop) {
+    console.log("Received prop", prop)
+    this.setState({
+        dishId: prop.user._id
+    })
 }
 
   render() {

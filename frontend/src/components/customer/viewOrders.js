@@ -97,6 +97,7 @@ handleClick = (name) => {
     }
    );	
    console.log("Page count?", this.state.pageCount)
+   console.log("Getting orders?", props.user)
   }
   render() {
 
@@ -110,7 +111,7 @@ handleClick = (name) => {
         <Card border='info' border-width='10px' style={{ width: '60%' , color: 'black' , }}><Card.Body> 
           <div class="d-flex">
             <div class="mx-auto pull-left">
-              <Card.Img variant="top" class="dish-image" src={backendServer+"/restaurants/"+item.dishId+"/dishImage"}></Card.Img>
+              <Card.Img variant="top" class="dish-image" src={backendServer+"/restaurants/"+item.dishId._id+"/dishImage"}></Card.Img>
             </div>
           <div class="mx-auto pull-right">
               <Card.Title><b>{item.name}</b></Card.Title>
@@ -206,7 +207,7 @@ handleClick = (name) => {
 
 ViewOrders.propTypes = {
   getOrders: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.array.isRequired
 }
 
 

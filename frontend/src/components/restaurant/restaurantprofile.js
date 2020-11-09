@@ -23,7 +23,7 @@ class RestaurantProfile extends Component {
       ...this.state,
       name: props.user.name,
       email: props.user.email,
-      restaurantId: props.user._id,
+      restaurantId: localStorage.getItem("restaurant_id"),
       description: props.user.description,
       contact: props.user.contact,
       timings: props.user.timings,

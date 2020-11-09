@@ -38,6 +38,7 @@ class OneRestaurantMenuView extends Component {
     let customerId = localStorage.getItem("customer_id")
     console.log("Dishes list: ", this.state.dishes)
     console.log("customerId: ", customerId)
+    console.log("dm in placeOrder: ", this.props.dm)
     this.props.placeOrder({dishes: this.state.dishes, dm: this.props.dm});
     alert("Order placed successfully")
     // axios.post(`${backendServer}/customers/${customerId}/orders`, {dishes: this.state.dishes, dm: this.props.dm})
@@ -60,7 +61,7 @@ class OneRestaurantMenuView extends Component {
       
     }
    );	
-   console.log("PProps received?", props.menu)
+   console.log("Props received from placed order?", props.menu)
    console.log("Dishes?", this.state.dishes)
    console.log("Page count?", this.state.pageCount)
   }
@@ -206,7 +207,7 @@ OneRestaurantMenuView.propTypes = {
   placeOrder: PropTypes.func.isRequired,
   getRestaurantMenu: PropTypes.func.isRequired,
   order: PropTypes.array.isRequired,
-  menu: PropTypes.array.isRequired
+  menu: PropTypes.object.isRequired
 }
 
 
