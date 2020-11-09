@@ -2,8 +2,8 @@
 
 ## Instructions to run the Web application locally:
 #### 1. Clone the repository into the location where the application has to be deployed
-#### 2. Run Kafka server and Zookeeper server properties.
-#### 3. Create the topics mentioned in the folder Kafka->topics
+#### 2. Run Kafka server and Zookeeper server properties
+#### 3. Create the topics required for the services
 #### 4. Run this command in backend, frontend and Kafka-Backend to install all the packages and dependencies required
 ```sh
  npm install
